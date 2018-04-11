@@ -2,13 +2,23 @@
   "name": "vuelectron-music",
   "version": "1.0.0",
   "description": "A desktop music player made using Vue and Electron",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "build": {
+    "appId": "com.voltra.vuelectron-music",
+    "productName": "Vuelectron Music",
+    "directories": {
+      "output": "release",
+      "app": "."
+    },
+    "buildDependenciesFromSource": true,
+    "buildVersion": "0.0.1"
+  },
   "scripts": {
     "setup": "npm i && npm up",
-	"start": "electron .",
-	"build-e": "cross-env NODE_ENV=dev webpack --config electron.webpack.config.js --progress --colors",
-	"prodBuild-e": "cross-env NODE_ENV=prod webpack --config electron.webpack.config.js --progress --colors",
-	"watch-e": "cross-env NODE_ENV=prod webpack --config electron.webpack.config.js --progress --colors",
+    "start": "electron dist",
+    "build-e": "cross-env NODE_ENV=dev webpack --config electron.webpack.config.js --progress --colors",
+    "prodBuild-e": "cross-env NODE_ENV=prod webpack --config electron.webpack.config.js --progress --colors",
+    "watch-e": "cross-env NODE_ENV=prod webpack --config electron.webpack.config.js --progress --colors",
     "build": "cross-env NODE_ENV=dev webpack --config app.webpack.config.js --progress --colors",
     "prodBuild": "cross-env NODE_ENV=prod webpack --config app.webpack.config.js --progress --colors",
     "watch": "cross-env NODE_ENV=dev webpack --config app.webpack.config.js --progress --colors --watch"
@@ -38,6 +48,7 @@
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "electron": "^1.8.4",
+    "electron-builder": "^20.8.1",
     "file-loader": "^1.1.11",
     "img-loader": "^2.0.1",
     "mixin-loader": "^2.0.3",

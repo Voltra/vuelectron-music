@@ -22,6 +22,7 @@ const config = {};
     config.plugins = [];
 	config.module = {};
 		config.module.rules = [];
+	config.mode = dev ? "development" : "production";
 	
 
 
@@ -64,7 +65,7 @@ config.entry["index"] = "@js/index.js";
 	OUTPUTS
 \**************************************************************************/
 config.output["path"] = path.resolve(thisPath, "assets/js");
-config.output["filename"] = dev ? "[name].[chunkhash:8].bundle.js" : "[name].bundle.js";
+config.output["filename"] = dev ? "[name].bundle.js" : "[name].[chunkhash:8].bundle.js";//dev ? "[name].[chunkhash:8].bundle.js" : "[name].bundle.js";
 config.output["publicPath"] = "/assets/js";
 
 

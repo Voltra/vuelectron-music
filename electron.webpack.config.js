@@ -22,13 +22,14 @@ const config = {};
     config.plugins = [];
 	config.module = {};
 		config.module.rules = [];
+	config.mode = dev ? "development" : "production";
 	
 
 
 /**************************************************************************\
 	TARGET
 \**************************************************************************/
-config.target = "node";
+config.target = "electron-main";
 
 
 
@@ -54,7 +55,8 @@ config.entry["index"] = "@js/index.js";
 	OUTPUTS
 \**************************************************************************/
 config.output["path"] = path.resolve(thisPath, "dist");
-config.output["filename"] = dev ? "[name].[chunkhash:8].bundle.js" : "[name].bundle.js";
+config.output["filename"] = "index.js";
+//config.output["filename"] = dev ? "[name].bundle.js" : "[name].[chunkhash:8].bundle.js";//dev ? "[name].[chunkhash:8].bundle.js" : "[name].bundle.js";
 //config.output["publicPath"] = "/assets/js";
 
 
