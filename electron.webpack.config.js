@@ -30,6 +30,10 @@ const config = {};
 	TARGET
 \**************************************************************************/
 config.target = "electron-main";
+config.node = {
+	__dirname: false,
+	__filename: false
+}
 
 
 

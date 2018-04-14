@@ -16,6 +16,8 @@
   "scripts": {
     "setup": "npm i && npm up",
     "start": "electron dist",
+    "build-g": "npm run build-e && npm run build",
+    "prodBuild-g": "npm run prodBuild-e && npm run prodBuild",
     "build-e": "cross-env NODE_ENV=dev webpack --config electron.webpack.config.js --progress --colors",
     "prodBuild-e": "cross-env NODE_ENV=prod webpack --config electron.webpack.config.js --progress --colors",
     "watch-e": "cross-env NODE_ENV=prod webpack --config electron.webpack.config.js --progress --colors",
@@ -65,10 +67,13 @@
   },
   "dependencies": {
     "@voltra/json": "^1.2.0",
+    "db.js": "^0.15.0",
     "express": "^4.16.3",
     "fetch-ponyfill": "^6.0.1",
+    "liquidjs": "^3.1.2",
     "promisify-node": "^0.4.0",
     "spinner-lord": "^0.2.6",
+    "store": "^2.0.12",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   }

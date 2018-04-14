@@ -37,13 +37,14 @@ config.target = "web";
 	ALIASES
 \**************************************************************************/
 config.resolve.alias["@js"] = path.resolve(thisPath, "src/js/");
-config.resolve.alias["@components"] = path.resolve(thisPath, "src/vue/");
-//config.resolve.alias["@vplugins"] = path.resolve(thisPath, "src/vue-plugins/");
+config.resolve.alias["@components"] = path.resolve(thisPath, "src/vue/components/");
+config.resolve.alias["@vplugins"] = path.resolve(thisPath, "src/vue/plugins/");
 config.resolve.alias["@css"] = path.resolve(thisPath, "src/sass/");
 config.resolve.alias["@img"] = path.resolve(thisPath, "src/rsc/img");
 
 config.resolve.alias["$vue"] = "vue/dist/vue.min.js";
 config.resolve.alias["$es-vue"] = "vue/dist/vue.esm.js";
+config.resolve.alias["$store"] = "store/dist/store.modern.min.js";
 
 config.resolve.extensions.push(".js");
 config.resolve.extensions.push(".esm");
