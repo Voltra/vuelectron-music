@@ -1,12 +1,25 @@
 /*************************************************\
-	Imports (and functions)
+	Imports
 \*************************************************/
-const promisify = require("promisify-node");
-const fs = promisify("fs");
-const { ncp } = promisify("ncp");
+//const promisify = require("promisify-node");
+const {promisify} = require("util");
+const fs = require("fs");//promisify("fs");
+/*const*/let { ncp } = require("ncp");//promisify("ncp");
 const merge = require("lodash.merge");
 const toKebabCase = require("dashify");
 
+/*************************************************\
+	Promisify
+\*************************************************/
+fs.readFile = promisify(fs.readFile);
+fs.writeFile = promisify(fs.writeFile);
+fs.rename = promisify(fs.rename);
+ncp = promisify(ncp);
+
+
+/*************************************************\
+	Functions
+\*************************************************/
 const grabJSON = uri => fs.readFile(uri, "utf-8").then(JSON.parse);
 
 

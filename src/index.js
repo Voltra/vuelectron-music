@@ -14,7 +14,10 @@ const createWindow = (function(app){
 		height: 400,
 		frame: false,
 		icon: fromRoot("/icon.ico"),
-		hasShadow: true
+		hasShadow: true,
+		webPreferences: {
+			webSecurity: false
+		}
 	});
 	
 	window.loadURL(url.format({

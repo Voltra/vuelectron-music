@@ -1,0 +1,15 @@
+.ddt{
+	width: 100vw;
+	height: 100vh;
+	
+	& .dropzone{
+		width: 100vw;
+		height: 90vh;
+	}
+	
+	& .path{
+		display: block;
+		width: 100vw;
+		height: 10vh;
+	}
+}

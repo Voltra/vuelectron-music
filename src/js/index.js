@@ -2,6 +2,7 @@ import {json} from "@js/urls"
 import Vue from "$vue"
 import Plugins from "@vplugins/plugins"
 import {$json} from "@voltra/json"
+import DragDropTest from "@components/DragDropTest"
 
 (()=>{
 	Promise.all([
@@ -14,10 +15,13 @@ import {$json} from "@voltra/json"
 		
 		return Promise.resolve([dbConfig]);
 	}).then(()=>{
+		const components = {DragDropTest};
+		
 		const setup = ()=>{			
 			const $vm = new Vue({
 				el: "#app",
-				template: "<p></p>"
+				//template: "<p></p>",
+				components
 			});
 			window.$vm = $vm;
 		};

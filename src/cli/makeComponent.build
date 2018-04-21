@@ -1,4 +1,4 @@
-../../node_modules/.bin/pkg -c ../../package.json -t node6-win,node6-linux -o ../../makeComponent  makeComponent.js
+../../node_modules/.bin/pkg -t node8-win,node8-linux -o ../../makeComponent  makeComponent.js -c ../../package.json
 pushd .
 cd ../..
 mv makeComponent-linux makeComponent
