@@ -2,7 +2,7 @@ import {json} from "@js/urls"
 import Vue from "$vue"
 import Plugins from "@vplugins/plugins"
 import {$json} from "@voltra/json"
-import DragDropTest from "@components/DragDropTest"
+import components from "@js/components"
 
 (()=>{
 	Promise.all([
@@ -14,9 +14,7 @@ import DragDropTest from "@components/DragDropTest"
 		factories["indexedDBFactory"](Vue, dbConfig);
 		
 		return Promise.resolve([dbConfig]);
-	}).then(()=>{
-		const components = {DragDropTest};
-		
+	}).then(()=>{		
 		const setup = ()=>{			
 			const $vm = new Vue({
 				el: "#app",

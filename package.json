@@ -4,10 +4,10 @@
   "description": "A desktop music player made using Vue and Electron",
   "main": "dist/index.js",
   "pkg": {
-	"assets": [
-		"node_modules/ncp/*",
-		"node_modules/promisify-node/*"
-	]
+    "assets": [
+      "node_modules/ncp/*",
+      "node_modules/promisify-node/*"
+    ]
   },
   "build": {
     "appId": "com.voltra.vuelectron-music",
@@ -56,7 +56,7 @@
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "electron": "^1.8.4",
-    "electron-builder": "^20.8.1",
+    "electron-builder": "^20.10.0",
     "file-loader": "^1.1.11",
     "img-loader": "^2.0.1",
     "mixin-loader": "^2.0.3",
@@ -69,9 +69,9 @@
     "vue-loader": "^14.2.2",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14",
-    "webpack-manifest-plugin": "^2.0.0"
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-manifest-plugin": "^2.0.1"
   },
   "dependencies": {
     "@voltra/json": "^1.2.0",

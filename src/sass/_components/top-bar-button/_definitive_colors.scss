@@ -1,0 +1,43 @@
+.topbar__btn{
+    background-color: $default;
+    color: $white;
+
+    box-shadow: $leftShadow;
+
+    transition: all 0.3s ease-in-out;
+
+    &:hover{
+        background-color: $defaultDark;
+        box-shadow: $heavyLeftShadow;
+    }
+
+    &.accent{
+        background-color: $accent;
+        
+        &:hover{
+            background-color: $accentDark;
+        }
+    }
+
+    &.nobg{
+        background-color: transparent;
+
+        &:hover{
+            background-color: $bgDark;
+        }
+    }
+
+    &.left{
+        box-shadow: $rightShadow;
+
+        &:hover{
+            box-shadow: $heavyRightShadow;
+        }
+    }
+
+    &.noshadow{
+        &, &:hover{
+            box-shadow: none;
+        }
+    }
+}

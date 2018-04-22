@@ -1,6 +1,9 @@
 import express from "express"
 import path from "path"
 import Liquid from "liquidjs"
+// const express = require("express")
+// const path = require("path")
+// const Liquid = require("liquidjs")
 
 const thisPath = __dirname; //corresponds to /assets/js/
 const server = express();

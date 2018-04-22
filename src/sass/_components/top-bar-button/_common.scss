@@ -1,0 +1,13 @@
+.topbar__btn{
+    width: $topBarButtonWidth;
+    height: $topBarButtonHeight;
+
+    float: left;
+    cursor: pointer;
+
+    & .btnText{
+        font-size: $topBarButtonFontSize;
+        @include margin-horizontal($topBarButtonMarginH);
+        @include margin-vertical($topBarButtonMarginV);
+    }
+}

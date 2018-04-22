@@ -1,1 +1,27 @@
+/*****************************************************\
+    Globals
+\*****************************************************/
 $breakpoint: 768px;
+$fullWidth: 100vw;
+$fullHeight: 100vh;
+$floorIndex: 0;
+$topIndex: 1;
+
+
+
+/*****************************************************\
+    Top Bar
+\*****************************************************/
+$topBarWidth: $fullWidth;
+$topBarHeight: 40px; //3vmax;
+$topBarDragHandleWidth: calc(#{$topBarWidth} - (4 * #{$topBarHeight}));
+$topBarDragHandleHeight: $topBarHeight;
+
+/*****************************************************\
+    Top Bar Buttons
+\*****************************************************/
+$topBarButtonWidth: $topBarHeight;
+$topBarButtonHeight: $topBarButtonWidth;
+$topBarButtonFontSize: $topBarHeight / 2;
+$topBarButtonMarginH: calc((#{$topBarButtonWidth} - #{$topBarButtonFontSize}) / 2);
+$topBarButtonMarginV: calc((#{$topBarButtonHeight} - #{$topBarButtonFontSize}) / 2);

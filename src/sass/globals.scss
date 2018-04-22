@@ -1,6 +1,11 @@
-//@import "~@css/_mixins";
+@import "~@css/_mixins";
 @import "~@css/_variables";
 
-body{
-	-webkit-app-region: drag;
+body, #app{
+	width: $fullWidth;
+	height: $fullHeight;
+	overflow: hidden;
+
+	background-color: $bg;
+	color: $white;
 }

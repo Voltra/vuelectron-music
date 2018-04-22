@@ -123,18 +123,18 @@ config.module.rules.push({
     use: styleLoaders
 });
 
-const sassLoaders = [...styleLoaders, "sass-loader", "mixin-loader"];
+const sassLoaders = [...styleLoaders, "sass-loader"/*, "mixin-loader"*/];
 
 config.module.rules.push({
     test: /\.scss$/,
     use: sassLoaders
 });
 
-config.module.rules.push({
-    test: /\.scss$/,
-    enforce: "pre",
-    loader: "mixin-loader"
-});
+// config.module.rules.push({
+//     test: /\.scss$/,
+//     enforce: "pre",
+// 	loader: "mixin-loader"	
+// });
 
 config.module.rules.push({
 	test: /\.vue$/,
@@ -158,6 +158,14 @@ config.plugins.push(new CleanWebpackPlugin(["assets/js"], {
 	verbose: true,
 	dry: false,
 	exclude: ["globals", "globals/*", "globals/*.*"]
+}));
+config.plugins.push(new webpack.LoaderOptionsPlugin({
+	test: /\.scss$/,
+	options: {
+		sassLoader: {
+			includePaths: [path.resolve(thisPath, './node_modules/compass-mixins/lib')]
+		}
+	}
 }));
 
 if(!dev)
