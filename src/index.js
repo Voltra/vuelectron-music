@@ -11,7 +11,9 @@ const createWindow = (function(app){
 	const window = new BrowserWindow({
 		title: "Vuelectron Music",
 		width: 700,
-		height: 400,
+		height: 600,
+		minWidth: 600,
+		minHeight: 600,
 		frame: false,
 		icon: fromRoot("/icon.ico"),
 		hasShadow: true,
