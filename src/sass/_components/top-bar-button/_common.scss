@@ -6,6 +6,7 @@
     cursor: pointer;
 
     & .btnText{
+		user-select: none;
         font-size: $topBarButtonFontSize;
         @include margin-horizontal($topBarButtonMarginH);
         @include margin-vertical($topBarButtonMarginV);
