@@ -1,0 +1,6 @@
+../../node_modules/.bin/pkg -t node8-win,node8-linux -o ../../makeComponent  makeComponent.js -c ../../package.json
+pushd .
+cd ../..
+mv makeComponent-linux makeComponent
+mv makeComponent-win.exe makeComponent.exe
+popd

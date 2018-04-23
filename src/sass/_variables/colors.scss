@@ -1,0 +1,65 @@
+/*****************************************************\
+    Globals
+\*****************************************************/
+$palette: (
+    bg: #0d121a,
+    default: #192433,
+    accent: #0e8a80,
+    secondary: #25364d,
+
+    whiteColor: white,
+    blackColor: black,
+);
+
+$darkPalette: (
+    bg: darkenColor("bg"),
+    default: darkenColor("default"),
+    accent: darkenColor("accent"),
+    secondary: darkenColor("secondary")
+);
+
+
+
+/*****************************************************\
+    Palette
+\*****************************************************/
+$bg: var(--bg, getColor("bg"));
+$default: var(--default, getColor("default"));
+$accent: var(--accent, getColor("accent"));
+$secondary: var(--secondary, getColor("secondary"));
+
+$bgDark: var(--bg-dark, getColor("bg", $darkPalette));
+$defaultDark: var(--default-dark, getColor("default", $darkPalette));
+$accentDark: var(--accent-dark, getColor("accent", $darkPalette));
+$secondaryDark: var(--secondary-dark, getColor("secondary", $darkPalette));
+
+
+
+/*****************************************************\
+    Additionals
+\*****************************************************/
+$white: var(--white, getColor("whiteColor"));
+$black: var(--black, getColor("blackColor"));
+
+
+
+/*****************************************************\
+    External bonuses
+\*****************************************************/
+$fbWhite: #e9ebee;
+$fbBlue: #3b5998;
+
+
+
+/*****************************************************\
+    Shadows
+\*****************************************************/
+$shadow: shadow();//0 0 0.2vh 0.4vh rgba(getColor("blackColor"), 0.15);
+$leftShadow: shadow(-2px, 0, 2px, 0, 0.35); //-1px 0 0.2vh 0.1vh rgba(getColor("blackColor"), 0.15);
+$rightShadow: shadow(2px, 0, 2px, 0, 0.35); //-1px 0 0.2vh 0.1vh rgba(getColor("blackColor"), 0.15);
+$regularShadow: shadow(0, 1px, 2px, 0, 0.35);
+
+$heavyShadow: shadow(0, 0, 0.2vh, 0.4vh, 0.69);
+$heavyLeftShadow: shadow(-2px, 0, 2px, 0, 0.69);
+$heavyRightShadow: shadow(2px, 0, 2px, 0, 0.69);
+$heavyRegularShadow: shadow(0, 1px, 2px, 0, 0.69);

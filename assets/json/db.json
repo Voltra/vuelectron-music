@@ -1,0 +1,13 @@
+{
+	"server": "vuelectron-music",
+	"version": 1,
+	"schema": {
+		"test": {
+			"key": { "keyPath": "id", "autoIncrement": true },
+			"indexes": {
+				"key": {"unique": true},
+				"value": {}
+			}
+		}
+	}
+}
