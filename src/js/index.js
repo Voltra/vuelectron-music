@@ -3,7 +3,10 @@ import Vue from "$vue"
 import Plugins from "@vplugins/plugins"
 import {$json} from "@voltra/json"
 import components from "@js/components"
+<<<<<<< HEAD
 import PerfectScrollbar from "perfect-scrollbar"
+=======
+>>>>>>> c5a222ab85a6e690922c26171bbd8fb25387b5e0
 
 (()=>{
 	Promise.all([
@@ -19,6 +22,7 @@ import PerfectScrollbar from "perfect-scrollbar"
 		const setup = ()=>{			
 			const $vm = new Vue({
 				el: "#app",
+<<<<<<< HEAD
 				components,
 				mounted(){
 					const {map} = Array.prototype;
@@ -31,6 +35,10 @@ import PerfectScrollbar from "perfect-scrollbar"
 					::map(makeScrollbar)
 					.forEach(e => e.update());
 				}
+=======
+				//template: "<p></p>",
+				components
+>>>>>>> c5a222ab85a6e690922c26171bbd8fb25387b5e0
 			});
 			window.$vm = $vm;
 		};

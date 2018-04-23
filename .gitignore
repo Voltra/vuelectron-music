@@ -1,5 +1,12 @@
-#### GIT Backups
+####    DIST
+dist/
+assets/js/
+
+
+
+####    GIT Backups
 .git.bkp/
+
 
 
 ####	VS Code
