@@ -10,23 +10,55 @@ body, #app{
 	color: $white;
 }
 
-::-webkit-scrollbar{
+.container{
+	height: calc(#{$fullHeight} - #{$topBarHeight});
+}
+
+.ps{
 	position: relative;
-	z-index: 2;
-	background-color: transparent;
-	width: 10px;
+	width: $fullWidth;
+	//height: $fullHeight;
+	overflow: hidden;
+
+	&__rail-y{
+		position: absolute;
+		right: $scrollbarSpacing;
 	
-	&-button, &-corner, ::-webkit-resizer{
-		display: none;
-	}
+		@include margin-vertical($scrollbarSpacing);
+		width: $scrollbarWidth;
+		height: $scrollbarHeight;
 	
-	&-track{
 		background-color: $secondary;
-		border-radius: 5px;
-	}
 	
-	&-thumb{
-		background-color: $accent;
-		border-radius: 5px;
+		& > .ps__thumb-y{
+			position: relative;
+			right: $scrollbarThumbSpacing;
+	
+			width: $scrollbarThumbWidth;
+			background-color: $accent;
+	
+			border-radius: 100vw;
+		}
 	}
 }
+
+// ::-webkit-scrollbar{
+// 	position: relative;
+// 	z-index: 2;
+// 	background-color: transparent;
+// 	width: 10px;
+	
+// 	&-button, &-corner, ::-webkit-resizer{
+// 		display: none;
+// 	}
+	
+// 	&-track{
+// 		background-color: $secondary;
+// 		border-radius: 5px;
+// 	}
+	
+// 	&-thumb{
+// 		background-color: $accent;
+// 		border-radius: 5px;
+// 	}
+// }

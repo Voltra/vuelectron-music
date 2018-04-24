@@ -4,8 +4,15 @@
 $breakpoint: 768px;
 $fullWidth: 100vw;
 $fullHeight: 100vh;
+
 $floorIndex: 0;
 $topIndex: 1;
+
+$scrollbarWidth: 5px;
+$scrollbarSpacing: 10px;
+$scrollbarHeight: calc(100% - (2 * #{$scrollbarSpacing}));
+    $scrollbarThumbWidth: 2 * $scrollbarWidth;
+    $scrollbarThumbSpacing: calc((#{$scrollbarThumbWidth} - #{$scrollbarWidth}) / 2);
 
 
 

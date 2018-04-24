@@ -1,8 +1,4 @@
 <script>
-	//import promisify from "promisify-node"
-	//const fs = promisify("fs");
-	
-
 	export default {
 		name: "drag-drop-test",
 		data(){
@@ -31,7 +27,7 @@
 					e.dataTransfer.clearData();
 			}
 		},
-		render(){
+		render(){ // data-scrollbar
 			return (
 				<div class="ddt">
 					<form class="dropzone" ref="form">
@@ -52,7 +48,7 @@
 			);
 		},
 		mounted(){
-			this.fs = window.require("fs");
+			this.fs = this.$bridge.require("fs");
 		
 			['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(e=>{
 				this.$refs.form.addEventListener(e, function(ev){

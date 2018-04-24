@@ -1,15 +1,22 @@
 .ddt{
-	width: 100vw;
-	height: 100vh;
+	position: relative;
+	width: $fullWidth;
+	height: 80vh;
 	
 	& .dropzone{
-		width: 100vw;
-		height: 90vh;
+		width: $fullWidth;
+		height: 50%;
 	}
 	
 	& .path{
 		display: block;
-		width: 100vw;
-		height: 10vh;
+		width: $fullWidth;
+		height: 10%;
+	}
+
+	& .files{
+		display: block;
+		width: $fullWidth;
+		//height: 40%;
 	}
 }
