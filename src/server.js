@@ -8,7 +8,7 @@ import Liquid from "liquidjs"
 const thisPath = __dirname; //corresponds to /assets/js/
 const server = express();
 
-const fromRoot = uri => path.resolve(thisPath, `..${uri}`);
+const fromRoot = uri => path.resolve(thisPath, `.${uri}`);
 
 server.use(//Use the public folder as web root
 	"/",

@@ -1,6 +1,11 @@
 @import "~@css/_mixins";
 @import "~@css/_variables";
 
+*:not(.material-icons){
+	box-sizing: border-box;
+	font-family: r;
+}
+
 body, #app{
 	width: $fullWidth;
 	height: $fullHeight;

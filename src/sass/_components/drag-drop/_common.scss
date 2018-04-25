@@ -1,0 +1,45 @@
+.dragdrop{
+    position: relative;
+    width: $dragDropWidth;
+    height: $dragDropHeight;
+
+    & > .wrapper{
+        position: relative;
+        width: $dragDropWrapperWidth;
+        height: $dragDropWrapperHeight;
+
+        @include margin-vertical($dragDropWrapperSpacingV);
+        @include margin-horizontal($dragDropWrapperSpacingH);
+
+        & > .inner{
+            position: relative;
+            width: $dragDropInnerWidth;
+            max-height: $dragDropInnerHeight;
+
+            //@include margin-vertical($dragDropInnerSpacingV);
+            //@include margin-horizontal($dragDropInnerSpacingH);
+
+            @include lr($dragDropInnerSpacingH);
+            top: 50%;
+            transform: translateY(-50%);
+
+            & > .icon, & > .text{
+                user-select: none;
+                text-align: center;
+                display: block;
+            }
+    
+            & > .icon{
+                font-size: $dragDropIconFontSize;
+                // height: $dragDropIconHeight;
+                // @include padding-vertical($dragDropIconSpacingV);
+            }
+    
+            & > .text{
+                font-size: $dragDropFontSize;
+                // height: $dragDropTextHeight;
+                // @include padding-vertical($dragDropTextSpacingV);
+            }
+        }
+    }
+}

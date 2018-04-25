@@ -1,0 +1,38 @@
+.dragdrop{
+    background-color: $bg;
+
+    & > .wrapper{
+        background-color: $bg;
+        color: $accent;
+
+        border-color: currentColor;
+        border-width: $dragDropBorderSize;
+        border-style: dashed;
+        border-radius: $dragDropBorderRadius;
+
+        transition-property: background-color;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+
+        & > .inner{
+            & > .icon, & > .text{
+                transition: margin 0.3s ease-in-out;
+            }
+        }
+        
+        &.dragging{
+            background-color: $bgDark;
+
+            & > .inner{
+                $space: 3rem;
+                & > .icon{
+                    margin-bottom: $space;
+                }
+
+                & > .text{
+                    margin-top: $space;
+                }
+            }
+        }
+    }
+}

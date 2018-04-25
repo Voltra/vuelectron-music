@@ -17,3 +17,18 @@
     margin-top: $size;
     margin-bottom: $size;
 }
+
+@mixin tb($size: 0){
+    top: $size;
+    bottom: $size;
+}
+
+@mixin lr($size: 0){
+    left: $size;
+    right: $size;
+}
+
+@mixin trbl($size: 0){
+    @include tb($size);
+    @include lr($size);
+}

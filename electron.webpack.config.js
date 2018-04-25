@@ -58,7 +58,7 @@ config.entry["index"] = "@js/index.js";
 /**************************************************************************\
 	OUTPUTS
 \**************************************************************************/
-config.output["path"] = path.resolve(thisPath, "dist");
+config.output["path"] = path.resolve(thisPath, "."); //dist
 config.output["filename"] = "index.js";
 //config.output["filename"] = dev ? "[name].bundle.js" : "[name].[chunkhash:8].bundle.js";//dev ? "[name].[chunkhash:8].bundle.js" : "[name].bundle.js";
 //config.output["publicPath"] = "/assets/js";

@@ -34,7 +34,7 @@
 		},
 		computed: {
 			classes(){
-				const c = ["topbar__btn", "material-icons"];
+				const c = ["topbar__btn"];
 
 				if(this.$props.accent)
 					c.push("accent");
@@ -55,7 +55,7 @@
 		render(){
 			return (
 				<div class={this.classes} onClick={this.$props.action}>
-					<div class="btnText">{this.$props.text}</div>
+					<div class="btnText material-icons">{this.$props.text}</div>
 				</div>
 			);
 		}

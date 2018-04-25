@@ -8,7 +8,7 @@ $fullHeight: 100vh;
 $floorIndex: 0;
 $topIndex: 1;
 
-$scrollbarWidth: 5px;
+$scrollbarWidth: 6px;
 $scrollbarSpacing: 10px;
 $scrollbarHeight: calc(100% - (2 * #{$scrollbarSpacing}));
     $scrollbarThumbWidth: 2 * $scrollbarWidth;
@@ -24,6 +24,8 @@ $topBarHeight: 40px; //3vmax;
 $topBarDragHandleWidth: calc(#{$topBarWidth} - (4 * #{$topBarHeight}));
 $topBarDragHandleHeight: $topBarHeight;
 
+
+
 /*****************************************************\
     Top Bar Buttons
 \*****************************************************/
@@ -32,3 +34,49 @@ $topBarButtonHeight: $topBarButtonWidth;
 $topBarButtonFontSize: $topBarHeight / 2;
 $topBarButtonMarginH: calc((#{$topBarButtonWidth} - #{$topBarButtonFontSize}) / 2);
 $topBarButtonMarginV: calc((#{$topBarButtonHeight} - #{$topBarButtonFontSize}) / 2);
+
+
+
+/*****************************************************\
+    View
+\*****************************************************/
+$viewWidth: $fullWidth;
+$viewHeight: calc(#{$fullHeight} - #{$topBarHeight});
+
+
+
+/*****************************************************\
+    DragDrop
+\*****************************************************/
+$dragDropWidth: $viewWidth;
+$dragDropHeight: $viewHeight;
+    $dragDropWrapperFactor: 0.9;
+    $dragDropWrapperWidth: calc(#{$dragDropWrapperFactor} * #{$dragDropWidth});
+    $dragDropWrapperHeight: calc(#{$dragDropWrapperFactor} * #{$dragDropHeight});
+
+    $dragDropWrapperSpacingFactor: (1 - $dragDropWrapperFactor) / 2;
+    $dragDropWrapperSpacingV: calc(#{$dragDropHeight} * #{$dragDropWrapperSpacingFactor});
+    $dragDropWrapperSpacingH: calc(#{$dragDropWidth} * #{$dragDropWrapperSpacingFactor});
+
+    $dragDropBorderSize: 3px;
+    $dragDropBorderRadius: 10vh;
+
+        $dragDropInnerFactor: $dragDropWrapperFactor;
+        $dragDropInnerWidth: calc(#{$dragDropWrapperWidth} * #{$dragDropInnerFactor});
+        $dragDropInnerHeight: calc(#{$dragDropWrapperHeight} * #{$dragDropInnerFactor});
+
+        $dragDropInnerSpacingFactor: (1 - $dragDropInnerFactor) / 2;
+        $dragDropInnerSpacingV: calc(#{$dragDropWrapperWidth} * #{$dragDropInnerSpacingFactor});
+        $dragDropInnerSpacingH: calc(#{$dragDropWrapperHeight} * #{$dragDropInnerSpacingFactor});
+
+            $dragDropIconHeightFactor: 0.8;
+            $dragDropTextHeightFactor: 1 - $dragDropIconHeightFactor;
+            $dragDropIconHeight: calc(#{$dragDropInnerHeight} * #{$dragDropIconHeightFactor});
+            $dragDropTextHeight: calc(#{$dragDropInnerHeight} * #{$dragDropTextHeightFactor});
+
+            
+            $dragDropFontSize: 5vmin;
+            $dragDropIconFontSize: calc(#{$dragDropIconHeight} / 2);
+
+            $dragDropIconSpacingV: calc(#{$dragDropIconFontSize} / 2);
+            $dragDropTextSpacingV: calc(#{$dragDropFontSize} / 2);

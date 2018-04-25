@@ -3,10 +3,8 @@ import Vue from "$vue"
 import Plugins from "@vplugins/plugins"
 import {$json} from "@voltra/json"
 import components from "@js/components"
-<<<<<<< HEAD
+import {router} from "@js/router"
 import PerfectScrollbar from "perfect-scrollbar"
-=======
->>>>>>> c5a222ab85a6e690922c26171bbd8fb25387b5e0
 
 (()=>{
 	Promise.all([
@@ -15,30 +13,33 @@ import PerfectScrollbar from "perfect-scrollbar"
 		const {plugins, factories} = Plugins;
 		
 		plugins.forEach(::Vue.use);
-		factories["indexedDBFactory"](Vue, dbConfig);
-		
-		return Promise.resolve([dbConfig]);
+		return factories["indexedDBFactory"](Vue, dbConfig)
+		.then(_ =>{
+			Music.$db = Vue.prototype.$db
+			return Promise.resolve([dbConfig]);
+		});
 	}).then(()=>{		
 		const setup = ()=>{			
 			const $vm = new Vue({
 				el: "#app",
-<<<<<<< HEAD
+				router,
 				components,
 				mounted(){
+					this.$router.push({name: "drag'n'drop"});
+
 					const {map} = Array.prototype;
-					const makeScrollbar = e => new PerfectScrollbar(e, {
+					const makeScrollbarY = e => new PerfectScrollbar(e, {
 						suppressScrollX: true,
 						maxScrollbarLength: 40
 					});
 
-					document.querySelectorAll("[data-scrollbar]")
-					::map(makeScrollbar)
-					.forEach(e => e.update());
+					document.querySelectorAll("[data-scrollbar-y]")
+					::map(makeScrollbarY)
+					.forEach(e => 
+						["resize", "orientationchange"]
+						.forEach(event => window.addEventListener(event, ::e.update))
+					);
 				}
-=======
-				//template: "<p></p>",
-				components
->>>>>>> c5a222ab85a6e690922c26171bbd8fb25387b5e0
 			});
 			window.$vm = $vm;
 		};

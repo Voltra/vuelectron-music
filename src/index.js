@@ -5,7 +5,7 @@ import path from "path"
 import { server, httpServer } from "@js/server"
 
 const thisPath = __dirname;
-const fromRoot = uri => path.resolve(thisPath, `..${uri}`);
+const fromRoot = uri => path.resolve(thisPath, `${uri}`);
 
 const createWindow = (function(app){
 	const window = new BrowserWindow({
