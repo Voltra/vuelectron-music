@@ -1,7 +1,7 @@
 <script>
-	import {Music} from "@js/models/Music"
-
-	self.Music = Music;
+	import { mapGetters } from "vuex"
+	import { Getters } from "@js/store.getters"
+	import { Routes } from "@js/router.routes"
 
 	export default {
 		name: "drag-drop",
@@ -15,13 +15,18 @@
 			};
 		},
 		computed: {
-			wrapperClasses(){
-				const c = ["wrapper"];
+			...mapGetters({
+				music: Getters.MUSIC
+			}),
+			...{
+				wrapperClasses(){
+					const c = ["wrapper"];
 
-				if(this.dragging)
-					c.push("dragging");
+					if(this.dragging)
+						c.push("dragging");
 
-				return c;
+					return c;
+				}
 			}
 		},
 		render(){
@@ -43,6 +48,7 @@
 				if(!e)
 					return;
 
+				console.log(e);
 				e.stopPropagation();
 				e.preventDefault();
 			},
@@ -55,9 +61,9 @@
 				this.toggleDragging(e);
 				const files = this.getFilesFromDropEvent(e);
 				this.addFiles(files);
-				console.log("this: ", this);
-				console.log("dropped: ", files);
-				console.log("event: ", e);
+				// console.log("this: ", this);
+				// console.log("dropped: ", files);
+				// console.log("event: ", e);
 				this.cleanUpAfterDrop(e);
 			},
 			cleanUpAfterDrop(e){
@@ -102,24 +108,25 @@
 						return Promise.reject("No suitable audio files found :x");
 
 					return Promise.all(
-						combos.map(({path, meta}) => Music.from(path, meta))
+						combos.map(({path, meta}) => this.music.from(path, meta))
 					);
 				}).then(musics => Promise.all(
 					musics.map(music => music.insert())
-				)).then(console.log)
+				)).then(musics => {
+					this.$routes.push({name: Routes.PLAYER})
+				})//.then(console.log)
 				.catch(console.error);
 			}
 		},
 		mounted(){
-			Music.setDb(this.$db);
-
+			const dragDropEvents = ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'];
 			const {dropzone} = this.$refs;
-
-			['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop']
-			.forEach(event => dropzone.addEventListener(event, ::this.cleanUpEvent));
+			//dragDropEvents.forEach(event => dropzone.addEventListener(event, ::this.cleanUpEvent));
 
 			this.fs = this.$require("promisify-node")("fs");
 			this.mm = this.$require("music-metadata");
+
+			self.$$$ = this;
 		}
 	};
 </script>

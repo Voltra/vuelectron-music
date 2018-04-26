@@ -3,13 +3,23 @@
     width: $dragDropWidth;
     height: $dragDropHeight;
 
+    -webkit-app-region: drag;
+
+    & *{
+        -webkit-app-region: no-drag;
+    }
+
+    padding: $dragDropWrapperSpacingV $dragDropWrapperSpacingH;
+
     & > .wrapper{
         position: relative;
         width: $dragDropWrapperWidth;
         height: $dragDropWrapperHeight;
 
-        @include margin-vertical($dragDropWrapperSpacingV);
-        @include margin-horizontal($dragDropWrapperSpacingH);
+        // @include margin-vertical($dragDropWrapperSpacingV);
+        // @include margin-horizontal($dragDropWrapperSpacingH);
+
+        cursor: pointer;
 
         & > .inner{
             position: relative;

@@ -1,31 +1,43 @@
 import {json} from "@js/urls"
 import Vue from "$vue"
 import Plugins from "@vplugins/plugins"
-import {$json} from "@voltra/json"
 import components from "@js/components"
 import {router} from "@js/router"
+import {store} from "@js/store"
+import {Mutations} from "@js/store.mutations"
+
+
+import {$json} from "@voltra/json"
 import PerfectScrollbar from "perfect-scrollbar"
 
+import {Music} from "@js/models/Music"
+
 (()=>{
+	self.Music = Music;
+
 	Promise.all([
 		$json.get(json("/db.json"))
 	]).then(([dbConfig])=>{
 		const {plugins, factories} = Plugins;
 		
-		plugins.forEach(::Vue.use);
+		[...plugins, ...components].forEach(::Vue.use);
 		return factories["indexedDBFactory"](Vue, dbConfig)
-		.then(_ =>{
-			Music.$db = Vue.prototype.$db
-			return Promise.resolve([dbConfig]);
-		});
-	}).then(()=>{		
+		.then(_ => Promise.resolve([dbConfig]));
+	}).then(([dbConfig])=>{		
 		const setup = ()=>{			
 			const $vm = new Vue({
 				el: "#app",
 				router,
+				store,
 				components,
 				mounted(){
-					this.$router.push({name: "drag'n'drop"});
+					store.commit(Mutations.SET_DB, this.$db);
+					store.commit(
+						Mutations.SET_SCHEMA,
+						Object.entries(dbConfig.schema)
+						.map(([table, schema])=>({table, columns: Object.keys(schema)}))
+						.reduce((schema, {table, columns})=>({...schema, ...{[table]: columns}}))
+					);
 
 					const {map} = Array.prototype;
 					const makeScrollbarY = e => new PerfectScrollbar(e, {
@@ -49,5 +61,5 @@ import PerfectScrollbar from "perfect-scrollbar"
 		else
 			document.addEventListener("DOMContentLoaded", setup);
 		
-	}).catch(console.error)
+	}).catch(console.error);
 })();

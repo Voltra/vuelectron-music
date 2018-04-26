@@ -51,7 +51,6 @@ class Music{
         .query()
         .all()
         .execute();
-
     }
 
     static doesNotExist(path){
@@ -114,7 +113,7 @@ class Music{
                 if(!result || !result[this.constructor.id])
                     return Promise.reject(this.msg.NOT_FOUND_OR_DUPLICATE);
 
-                return Promise.resolve(result);
+                return Promise.resolve(fromDbResult(result));
             });
     }
 
@@ -202,7 +201,8 @@ class Music{
         .then(item => {
             this[Music.tmp_id] = item[Music.id];
             this.__inserted = true;
-            return item;
+            //return item;
+            return this;
         });
     }
 

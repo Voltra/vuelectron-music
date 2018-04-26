@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/Voltra/vuelectron-music#readme",
   "devDependencies": {
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.2",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -50,13 +50,14 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-do-expressions": "^6.22.0",
     "babel-plugin-transform-function-bind": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.19",
     "compass-mixins": "^0.12.10",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
-    "electron": "^1.8.4",
+    "electron": "^1.8.5",
     "electron-builder": "^20.10.0",
     "file-loader": "^1.1.11",
     "img-loader": "^2.0.1",
@@ -89,7 +90,9 @@
     "spinner-lord": "^0.2.6",
     "store": "^2.0.12",
     "vue": "^2.5.16",
+    "vue-async-computed": "^3.3.1",
     "vue-router": "^3.0.1",
+    "vue-tables-2": "^1.4.31",
     "vuex": "^3.0.1"
   }
 }
