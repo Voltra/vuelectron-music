@@ -1,6 +1,6 @@
 {
 	"server": "vuelectron-music",
-	"version": 3,
+	"version": 1,
 	"schema": {
 		"musics": {
 			"key": {"keyPath": "id", "autoIncrement": true},
@@ -14,13 +14,6 @@
 				"genre": {},
 				"date_added": {},
 				"plays": {}
-			}
-		},
-		"test": {
-			"key": { "keyPath": "id", "autoIncrement": true },
-			"indexes": {
-				"key": {"unique": true},
-				"value": {}
 			}
 		}
 	}
