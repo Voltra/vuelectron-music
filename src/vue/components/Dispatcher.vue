@@ -22,11 +22,11 @@
 			},
 			goPlayer(){
 				console.log("going player");
-				this.$router.push(Routes.PLAYER);
+				this.$router.push({name: Routes.PLAYER});
 			},
 			goDragDrop(){
 				console.log("going drag'n'drop");
-				this.$router.push(Routes.DRAG_N_DROP);
+				this.$router.push({name: Routes.DRAG_N_DROP});
 			}
 		},
 		mounted(){
