@@ -20,7 +20,7 @@
     "buildVersion": "0.0.1"
   },
   "scripts": {
-    "setup": "npm i && npm up",
+    "setup": "npm i && npm up && npm run build-g",
     "start": "electron .",
     "build-g": "npm run build-e && npm run build",
     "prodBuild-g": "npm run prodBuild-e && npm run prodBuild",
@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/Voltra/vuelectron-music#readme",
   "devDependencies": {
-    "babel-core": "^6.26.2",
+    "babel-core": "^6.26.3",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -58,7 +58,7 @@
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "electron": "^1.8.6",
-    "electron-builder": "^20.10.0",
+    "electron-builder": "^20.11.1",
     "file-loader": "^1.1.11",
     "img-loader": "^2.0.1",
     "mixin-loader": "^2.0.3",
