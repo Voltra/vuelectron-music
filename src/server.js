@@ -25,6 +25,17 @@ const engine = Liquid({
 	root: views,
 	extname: ".twig"
 });
+engine.registerTag("script", {
+	// {% script "index.bundle.js" %}  => <script async src="index.bundle.js"></script>
+
+	parse(tagToken, remainTokens){
+		this.src = tagToken.args;
+	},
+	render(scope, hash){
+		const src = Liquid.evalValue(this.src, scope);
+		return Promise.resolve(`<script async src="${src}"></script>`);
+	}
+});
 server.engine("liquid", engine.express());
 server.engine(".twig", engine.express());
 server.set("views", views);

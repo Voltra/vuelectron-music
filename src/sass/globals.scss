@@ -1,6 +1,11 @@
 @import "~@css/_mixins";
 @import "~@css/_variables";
 
+@import "~@css/_spinner-lord";
+
+//$animationDuration: 0.3s;
+//@import "~vue2-animate/src/sass/vue2-animate";
+
 *:not(.material-icons){
 	box-sizing: border-box;
 	font-family: r;
@@ -13,10 +18,6 @@ body, #app{
 
 	background-color: $bg;
 	color: $white;
-}
-
-.container{
-	height: calc(#{$fullHeight} - #{$topBarHeight});
 }
 
 .ps{
@@ -46,24 +47,3 @@ body, #app{
 		}
 	}
 }
-
-// ::-webkit-scrollbar{
-// 	position: relative;
-// 	z-index: 2;
-// 	background-color: transparent;
-// 	width: 10px;
-	
-// 	&-button, &-corner, ::-webkit-resizer{
-// 		display: none;
-// 	}
-	
-// 	&-track{
-// 		background-color: $secondary;
-// 		border-radius: 5px;
-// 	}
-	
-// 	&-thumb{
-// 		background-color: $accent;
-// 		border-radius: 5px;
-// 	}
-// }

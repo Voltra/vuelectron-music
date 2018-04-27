@@ -2,4 +2,12 @@
     width: $fullWidth;
     height: $fullHeight;
     overflow: hidden;
+
+    & {
+        -webkit-app-region: drag;
+
+        & > *{
+            -webkit-app-region: no-drag;
+        }
+    }
 }

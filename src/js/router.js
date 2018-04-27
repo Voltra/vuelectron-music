@@ -15,10 +15,10 @@ const router = new VueRouter({
     routes
 });
 
-router.beforeEach((to, from, next)=>{
-    console.log("from: ", from);
-    console.log("to: ", to);
-    next();
-});
+// router.beforeEach((to, from, next)=>{
+//     console.log("from: ", from);
+//     console.log("to: ", to);
+//     next();
+// });
 
 export { routes, router };

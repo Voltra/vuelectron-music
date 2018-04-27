@@ -11,6 +11,9 @@ import {$json} from "@voltra/json"
 import PerfectScrollbar from "perfect-scrollbar"
 
 import {Music} from "@js/models/Music"
+import removeSpinnerLord from "@js/helpers/removeSpinnerLord"
+
+import "vue2-animate/dist/vue2-animate.min.css"
 
 (()=>{
 	self.Music = Music;
@@ -20,7 +23,7 @@ import {Music} from "@js/models/Music"
 	]).then(([dbConfig])=>{
 		const {plugins, factories} = Plugins;
 		
-		[...plugins, ...components].forEach(::Vue.use);
+		[...plugins, ...components].forEach(e => Vue.use(e));
 		return factories["indexedDBFactory"](Vue, dbConfig)
 		.then(_ => Promise.resolve([dbConfig]));
 	}).then(([dbConfig])=>{		
@@ -35,12 +38,19 @@ import {Music} from "@js/models/Music"
 					this.$store.commit(
 						Mutations.SET_SCHEMA,
 						Object.entries(dbConfig.schema)
-						.map(([table, schema])=>({table, columns: Object.keys(schema)}))
-						.reduce((schema, {table, columns})=>({...schema, ...{[table]: columns}}))
+						.map(([table, schema])=>({table, columns: Object.keys(schema.indexes)}))
+						.reduce((schema, {table, columns})=>{
+							//({...schema, ...{[table]: columns}})
+							if(!schema[table])
+								schema[table] = [];
+
+							schema[table] = [...schema[table], ...columns];
+							return schema;
+						}, {})
 					);
 				},
 				mounted(){
-					const {map} = Array.prototype;
+					const {map} = [];//Array.prototype;
 					const makeScrollbarY = e => new PerfectScrollbar(e, {
 						suppressScrollX: true,
 						maxScrollbarLength: 40
@@ -52,6 +62,8 @@ import {Music} from "@js/models/Music"
 						["resize", "orientationchange"]
 						.forEach(event => window.addEventListener(event, ::e.update))
 					);
+
+					removeSpinnerLord();
 				}
 			});
 			window.$vm = $vm;

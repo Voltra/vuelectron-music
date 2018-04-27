@@ -79,6 +79,7 @@
     "@voltra/json": "^1.2.0",
     "dashify": "^1.0.0",
     "db.js": "^0.15.0",
+    "events": "^2.0.0",
     "express": "^4.16.3",
     "fetch-ponyfill": "^6.0.2",
     "liquidjs": "^3.1.2",
@@ -93,6 +94,7 @@
     "vue-async-computed": "^3.3.1",
     "vue-router": "^3.0.1",
     "vue-tables-2": "^1.4.31",
+    "vue2-animate": "^2.0.0",
     "vuex": "^3.0.1"
   }
 }

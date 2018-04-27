@@ -23,7 +23,7 @@ const store = new Store({
     },
     getters: {
         [Getters.COLUMNS](state){
-            return Object.keys(state.dbSchema);
+            return state.dbSchema;
         },
         [Getters.MUSIC](state){
             return state.musicModel;

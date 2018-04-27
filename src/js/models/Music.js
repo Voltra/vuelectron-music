@@ -1,4 +1,18 @@
+//import EventSource from "events"
+
+const MusicEvents = {
+    UPDATE: "update",
+    INSERT: "insert",
+    REMOVE: "remove"
+}
+
 class Music{
+    static listeners = Object.values(MusicEvents)
+    .reduce((acc, event)=>{
+        acc[event] = [];
+        return acc;
+    }, {});
+
     static defaults = {
         string: "N/A",
         number: 0,
@@ -21,6 +35,39 @@ class Music{
     static unique = "path";
     static table = "musics";
 
+    static on(event, listener){
+        if(!this.listeners[event])
+            this.listeners[event] = [];
+
+        this.listeners[event].push(listener);
+    }
+
+    static off(event, listener){
+        if(listener === undefined){
+            if(!this.listeners[event])
+                return;
+
+            this.listeners[event] = [];
+            return;
+        }
+
+        if(!this.listeners[event])
+            return;
+
+        if(!this.listeners[event].includes(listener))
+            return;
+
+        const index = this.listeners[event].indexOf(listener);
+        this.listeners.splice(index, 1);
+    }
+
+    static trigger(event, ...args){
+        if(!this.listeners[event])
+            return;
+
+        this.listeners[event].forEach(listener => listener(...args));
+    }
+
     static setDb(db){
         this.$db = db;
     }
@@ -29,11 +76,18 @@ class Music{
         return this.$db != null;
     }
 
+    static getTable(){
+        // if(!this.hasDb())
+        //     throw new Error(Music.msg.NO_DB);
+
+        return this.$db[this.table];
+    }
+
     static hasData(){
         if(!this.hasDb())
             return Promise.reject(Music.msg.NO_DB);
 
-        return this.$db[this.table]
+        return this.getTable()
         .count()
         .then(count => {
             if(count < 1)
@@ -47,7 +101,7 @@ class Music{
         if(!this.hasDb())
             return Promise.reject(this.msg.NO_DB);
 
-        return this.$db[this.table]
+        return this.getTable()
         .query()
         .all()
         .execute();
@@ -57,7 +111,7 @@ class Music{
         if(!Music.hasDb())
             return Promise.reject(this.msg.NO_DB);
 
-        return this.$db[this.table].query()
+        return this.getTable().query()
         .filter(this.unique, path)
         .execute()
         .then(results => {
@@ -95,7 +149,7 @@ class Music{
         };
 
         if(isPath)
-            return this.$db[this.table].query()
+            return this.getTable().query()
             .filter(this.unique, id)
             .execute()
             .then(results => {
@@ -107,11 +161,10 @@ class Music{
                 return Promise.reject(this.msg.NOT_FOUND_OR_DUPLICATE);
             });
         else
-            return this.$db[this.table]
+            return this.getTable()
             .get(id)
             .then(result => {
-                console.log(result);
-                if(!result || !result[this.constructor.id])
+                if(!result || !result[Music.id])
                     return Promise.reject(this.msg.NOT_FOUND_OR_DUPLICATE);
 
                 return Promise.resolve(fromDbResult(result));
@@ -123,11 +176,17 @@ class Music{
         .then(_ => new Music(path, meta));
     }
 
-    static removeFromId(id){
+    static removeFromId(id, shouldTriggerEvents=true){
         if(!this.hasDb())
             return Promise.reject(this.msg.NO_DB);
 
-        return this.$db[this.table].remove(id);
+        return this.getTable().remove(id)
+        .then((...args) => {
+            if(shouldTriggerEvents)
+                Music.trigger(MusicEvents.REMOVE);
+
+            return Promise.resolve(...args);
+        });
 
     }
 
@@ -135,16 +194,18 @@ class Music{
         if(!this.hasDb())
             return Promise.reject(this.msg.NO_DB);
 
-        this.$db[this.table].query()
+        this.getTable().query()
         .all()
         .execute()
         .then(results => results.map(result => result.id))
         .then(ids => Promise.all(
-            ids.map(id => this.removeFromId(id))
-        ));
+            ids.map(id => this.removeFromId(id, false))
+        )).then(_ => Music.trigger(MusicEvents.REMOVE))
     }
 
     constructor(path, meta){ //Do not use directly
+        //super();
+
         const common = meta.common || Music.defaults.object;
         const format = meta.format || Music.defaults.object;
 
@@ -176,7 +237,8 @@ class Music{
             album,
             genre,
             date_added,
-            plays
+            plays,
+            year
         } = this;
 
         return {
@@ -187,7 +249,8 @@ class Music{
             album,
             genre,
             date_added,
-            plays
+            plays,
+            year
         };
     }
 
@@ -202,6 +265,8 @@ class Music{
         .then(item => {
             this[Music.tmp_id] = item[Music.id];
             this.__inserted = true;
+            Music.trigger(MusicEvents.INSERT);
+
             //return item;
             return this;
         });
@@ -214,7 +279,11 @@ class Music{
         if(!Music.hasDb())
             return Promise.reject(Music.msg.NO_DB);
 
-        return Music.$db.update(this.getData());
+        return Music.$db.update(this.getData())
+        .then((...args)=>{
+            Music.trigger(MusicEvents.UPDATE);
+            return Promise.resolve(...args);
+        });
     }
 
     remove(){
@@ -228,8 +297,9 @@ class Music{
         .then(_ => {
             this[Music.tmp_id] = null;
             this.__inserted = false;
+            Music.trigger(MusicEvents.REMOVE);
         });
     }
 }
 
-export {Music}
+export {Music, MusicEvents}

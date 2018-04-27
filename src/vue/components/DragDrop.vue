@@ -32,7 +32,7 @@
 		render(){
 			return (
 				<div class="dragdrop">
-					<div class={this.wrapperClasses} ref="dropzone" onDrop={::this.onDrop} onDragenter={::this.toggleDragging} onDragleave={::this.toggleDragging}>
+					<div class={this.wrapperClasses} ref="dropzone" onClick={::this.onClick} onDrop={::this.onDrop} onDragenter={::this.toggleDragging} onDragleave={::this.toggleDragging}>
 						<div class="inner">
 							<p class="icon material-icons">{this.iconText}</p>
 							<p class="text">
@@ -54,6 +54,39 @@
 			toggleDragging(e){
 				this.cleanUpEvent(e);
 				this.dragging = !this.dragging;
+			},
+			onClick(e){
+				this.cleanUpEvent(e);
+				this.dragging = true;
+
+
+				const paths = this.$bridge.dialog.showOpenDialog({
+					title: "Select music files",
+					filters: [
+						{
+							name: "Music files",
+							extensions: [
+								"mp3",
+								"flac",
+								"wav",
+								"aac",
+								"ogg"
+							]
+						}
+					],
+					properties: [
+						"openFile",
+						"multiSelections",
+						"createDirectory"
+					]
+				});
+
+				this.dragging = false;
+
+				if(paths instanceof Array){
+					const files = paths.map(path => ({path}));
+					this.addFiles(files);
+				}
 			},
 			onDrop(e){
 				this.cleanUpEvent(e);
