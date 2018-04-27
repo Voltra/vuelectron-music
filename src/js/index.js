@@ -30,15 +30,16 @@ import {Music} from "@js/models/Music"
 				router,
 				store,
 				components,
-				mounted(){
-					store.commit(Mutations.SET_DB, this.$db);
-					store.commit(
+				created(){
+					this.$store.commit(Mutations.SET_DB, this.$db);
+					this.$store.commit(
 						Mutations.SET_SCHEMA,
 						Object.entries(dbConfig.schema)
 						.map(([table, schema])=>({table, columns: Object.keys(schema)}))
 						.reduce((schema, {table, columns})=>({...schema, ...{[table]: columns}}))
 					);
-
+				},
+				mounted(){
 					const {map} = Array.prototype;
 					const makeScrollbarY = e => new PerfectScrollbar(e, {
 						suppressScrollX: true,

@@ -17,21 +17,21 @@
 		methods: {
 			mount(){
 				this.music.hasData()
-				.then(_ => this.$router.push({name: Routes.PLAYER}))
-				.catch(_ => this.$router.push({name: Routes.DRAG_N_DROP}));
+				.then(::this.goPlayer)
+				.catch(::this.goDragDrop);
+			},
+			goPlayer(){
+				console.log("going player");
+				this.$router.push(Routes.PLAYER);
+			},
+			goDragDrop(){
+				console.log("going drag'n'drop");
+				this.$router.push(Routes.DRAG_N_DROP);
 			}
 		},
 		mounted(){
-			// if(false)//already has music
-			// 	next({name: "player"});
-			// else
-			// 	next({name: "drag'n'drop"});
-			
 			this.mount();
-		}/*,
-		beforeRouteEnter(to, from, next){
-			next(vm => vm.mount());
-		}*/
+		}
 	};
 </script>
 <style lang="scss" scoped>

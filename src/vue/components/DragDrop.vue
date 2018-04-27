@@ -47,8 +47,7 @@
 			cleanUpEvent(e){
 				if(!e)
 					return;
-
-				console.log(e);
+					
 				e.stopPropagation();
 				e.preventDefault();
 			},
@@ -113,15 +112,15 @@
 				}).then(musics => Promise.all(
 					musics.map(music => music.insert())
 				)).then(musics => {
-					this.$routes.push({name: Routes.PLAYER})
-				})//.then(console.log)
+					this.$router.push({name: Routes.PLAYER})
+				}).then(console.log)
 				.catch(console.error);
 			}
 		},
 		mounted(){
 			const dragDropEvents = ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'];
 			const {dropzone} = this.$refs;
-			//dragDropEvents.forEach(event => dropzone.addEventListener(event, ::this.cleanUpEvent));
+			dragDropEvents.forEach(event => dropzone.addEventListener(event, ::this.cleanUpEvent));
 
 			this.fs = this.$require("promisify-node")("fs");
 			this.mm = this.$require("music-metadata");

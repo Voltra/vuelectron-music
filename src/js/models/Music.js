@@ -3,7 +3,7 @@ class Music{
         string: "N/A",
         number: 0,
         object: {},
-        date: "00/00/0000",
+        date: "dd/mm/yyyy",
         year: 0
     };
 
@@ -39,7 +39,7 @@ class Music{
             if(count < 1)
                 return Promise.reject(this.msg.NO_DATA);
 
-            return Promise.resolve(results);
+            return Promise.resolve(count);
         });
     }
 
@@ -110,6 +110,7 @@ class Music{
             return this.$db[this.table]
             .get(id)
             .then(result => {
+                console.log(result);
                 if(!result || !result[this.constructor.id])
                     return Promise.reject(this.msg.NOT_FOUND_OR_DUPLICATE);
 

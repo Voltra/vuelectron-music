@@ -12,18 +12,39 @@
 				</div>
 			);
 		},
+		data(){
+			return {
+				//musics: []
+			};
+		},
 		computed: mapGetters({
 			music: Getters.MUSIC
 		}),
-		asyncComputed: {
-			musics(){
-				return this.music.all()
+		methods: {
+			updateMusic(){
+				this.music.all()
 				.then(musics => Promise.all(
 					musics.map(music => music.id)
 					.map(id => this.music.fromDB(id))
-				));
+				)).then(musics => this.musics = musics)
+				.catch(console.error);
 			}
-		}
+		},
+		asyncComputed: {
+			musics: {
+				get(){
+					return this.music.all()
+					.then(musics => Promise.all(
+						musics.map(music => music.id)
+						.map(id => this.music.fromDB(id))
+					));
+				},
+				default: []
+			}
+		},
+		/*mounted(){
+			this.updateMusic();
+		}*/
 	};
 </script>
 <style lang="scss" scoped>

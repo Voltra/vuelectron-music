@@ -31,7 +31,8 @@ server.set("views", views);
 server.set("view engine", "liquid");
 //server.set("view options", {layout: false});
 
-server.get("/", (rq, res)=>res.render("index.twig"));
+// server.get("/", (rq, res)=>res.render("index.twig"));
+server.get("*", (rq, res)=>res.render("index.twig"));
 
 const httpServer = server.listen(4096);
 
