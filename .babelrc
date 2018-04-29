@@ -8,6 +8,7 @@
 		"transform-vue-jsx",
         "transform-function-bind",
 		"transform-class-properties",
-		"transform-object-rest-spread"
+		"transform-object-rest-spread",
+		"jsx-v-model"
     ]
 }

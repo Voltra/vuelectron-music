@@ -23,7 +23,12 @@ const store = new Store({
     },
     getters: {
         [Getters.COLUMNS](state){
-            return state.dbSchema;
+            return Object.entries(state.dbSchema)
+            .map(([table, columns]) => ({table, columns}))
+            .reduce((acc, {table, columns})=>{
+                acc[table] = columns;
+                return acc;
+            }, {});
         },
         [Getters.MUSIC](state){
             return state.musicModel;

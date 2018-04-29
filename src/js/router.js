@@ -1,5 +1,5 @@
 import VueRouter from "vue-router"
-import components from "@js/components"
+import { components } from "@js/components"
 import { Routes } from "@js/router.routes"
 
 const { DragDrop, DesktopPlayer, Dispatcher } = components;

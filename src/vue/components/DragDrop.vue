@@ -2,6 +2,8 @@
 	import { mapGetters } from "vuex"
 	import { Getters } from "@js/store.getters"
 	import { Routes } from "@js/router.routes"
+	import { setTimeout } from 'timers'
+	import sassMetaVariables from "@css/_variables/metas"
 
 	export default {
 		name: "drag-drop",
@@ -60,33 +62,35 @@
 				this.dragging = true;
 
 
-				const paths = this.$bridge.dialog.showOpenDialog({
-					title: "Select music files",
-					filters: [
-						{
-							name: "Music files",
-							extensions: [
-								"mp3",
-								"flac",
-								"wav",
-								"aac",
-								"ogg"
-							]
-						}
-					],
-					properties: [
-						"openFile",
-						"multiSelections",
-						"createDirectory"
-					]
-				});
+				setTimeout(()=>{
+					const paths = this.$bridge.dialog.showOpenDialog({
+						title: "Select music files",
+						filters: [
+							{
+								name: "Music files",
+								extensions: [
+									"mp3",
+									"flac",
+									"wav",
+									"aac",
+									"ogg"
+								]
+							}
+						],
+						properties: [
+							"openFile",
+							"multiSelections",
+							"createDirectory"
+						]
+					});
 
-				this.dragging = false;
+					this.dragging = false;
 
-				if(paths instanceof Array){
-					const files = paths.map(path => ({path}));
-					this.addFiles(files);
-				}
+					if(paths instanceof Array){
+						const files = paths.map(path => ({path}));
+						this.addFiles(files);
+					}
+				}, parseFloat(sassMetaVariables.transitionDuration) * 1000);
 			},
 			onDrop(e){
 				this.cleanUpEvent(e);

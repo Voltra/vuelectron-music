@@ -18,6 +18,16 @@ $darkPalette: (
     secondary: darkenColor("secondary")
 );
 
+:root{
+    @each $var, $color in $palette{
+        --#{$var}: #{$color};
+    }
+
+    @each $var, $color in $darkPalette{
+        --#{$var}-dark: #{$color};
+    }
+}
+
 
 
 /*****************************************************\

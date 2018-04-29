@@ -1,4 +1,6 @@
 import { ClientTable } from "vue-tables-2"
+import Modal from "vue-js-modal"
+import { Photoshop as PhotoshopColorPicker } from "vue-color"
 
 import App from "@components/App"
 import TopBar from "@components/TopBar"
@@ -9,8 +11,10 @@ import DesktopPlayer from "@components/DesktopPlayer"
 
 import "@css/globals"
 
-export default {
+const components = {
     ClientTable,
+    Modal,
+    PhotoshopColorPicker,
 
     App,
     TopBar,
@@ -18,3 +22,7 @@ export default {
     DragDrop,
     DesktopPlayer
 };
+
+const componentsArray = Object.values(components);
+
+export {components, componentsArray};

@@ -1,7 +1,7 @@
 import {json} from "@js/urls"
 import Vue from "$vue"
 import Plugins from "@vplugins/plugins"
-import components from "@js/components"
+import {components, componentsArray} from "@js/components"
 import {router} from "@js/router"
 import {store} from "@js/store"
 import {Mutations} from "@js/store.mutations"
@@ -23,7 +23,7 @@ import "vue2-animate/dist/vue2-animate.min.css"
 	]).then(([dbConfig])=>{
 		const {plugins, factories} = Plugins;
 		
-		[...plugins, ...components].forEach(e => Vue.use(e));
+		[...plugins, ...componentsArray].forEach(e => Vue.use(e));
 		return factories["indexedDBFactory"](Vue, dbConfig)
 		.then(_ => Promise.resolve([dbConfig]));
 	}).then(([dbConfig])=>{		
@@ -66,7 +66,9 @@ import "vue2-animate/dist/vue2-animate.min.css"
 					removeSpinnerLord();
 				}
 			});
+
 			window.$vm = $vm;
+			window.Vue = Vue;
 		};
 		
 		if(["complete", "loaded"].includes(document.readyState))

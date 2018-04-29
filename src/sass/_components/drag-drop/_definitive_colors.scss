@@ -11,12 +11,12 @@
         border-radius: $dragDropBorderRadius;
 
         transition-property: background-color;
-        transition-duration: 0.3s;
+        transition-duration: $transitionDuration;
         transition-timing-function: ease-in-out;
 
         & > .inner{
             & > .icon, & > .text{
-                transition: margin 0.3s ease-in-out;
+                transition: margin $transitionDuration ease-in-out;
             }
         }
         
