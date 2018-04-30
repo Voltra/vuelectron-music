@@ -41,6 +41,7 @@ config.node = {
 	ALIASES
 \**************************************************************************/
 config.resolve.alias["@js"] = path.resolve(thisPath, "src/");
+config.resolve.alias["@css"] = path.resolve(thisPath, "src/sass/");
 
 config.resolve.extensions.push(".js");
 config.resolve.extensions.push(".esm");

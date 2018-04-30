@@ -4,11 +4,14 @@ import url from "url"
 import path from "path"
 import { server, httpServer } from "@js/server"
 
+import sassVariables from "@css/_variables/exports.scss"
+
 const thisPath = __dirname;
 const fromRoot = uri => path.resolve(thisPath, `.${uri}`);
 
 const createWindow = (function(app){
 	const window = new BrowserWindow({
+		backgroundColor: sassVariables.colors.bg,
 		title: "Vuelectron Music",
 		width: 700,
 		height: 600,
