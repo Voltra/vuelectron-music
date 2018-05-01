@@ -1,6 +1,8 @@
 /*****************************************************\
     Globals
 \*****************************************************/
+$darkenAmount: 4;//4;
+
 $palette: (
     bg: #0d121a,
     default: #192433,
@@ -73,3 +75,8 @@ $heavyShadow: shadow(0, 0, 0.2vh, 0.4vh, 0.69);
 $heavyLeftShadow: shadow(-2px, 0, 2px, 0, 0.69);
 $heavyRightShadow: shadow(2px, 0, 2px, 0, 0.69);
 $heavyRegularShadow: shadow(0, 1px, 2px, 0, 0.69);
+
+$dropShadow: dropShadow();
+$leftDropShadow: dropShadow(-2px, 0, 2px, 0.35);
+$rightDropShadow: dropShadow(2px, 0, 2px, 0.35);
+$regularDropShadow: dropShadow(0, 1px, 2px, 0.35);

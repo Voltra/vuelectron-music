@@ -50,7 +50,7 @@ import "vue2-animate/dist/vue2-animate.min.css"
 					);
 				},
 				mounted(){
-					const {map} = [];//Array.prototype;
+					/*const {map} = [];//Array.prototype;
 					const makeScrollbarY = e => new PerfectScrollbar(e, {
 						suppressScrollX: true,
 						maxScrollbarLength: 40
@@ -61,7 +61,7 @@ import "vue2-animate/dist/vue2-animate.min.css"
 					.forEach(e => 
 						["resize", "orientationchange"]
 						.forEach(event => window.addEventListener(event, ::e.update))
-					);
+					);*/
 
 					removeSpinnerLord();
 				}

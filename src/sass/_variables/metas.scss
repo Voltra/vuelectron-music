@@ -1,5 +1,8 @@
+@import "~@css/_variables/colors";
+
 $transitionDuration: 0.3s;
 
 :export{
     transitionDuration: $transitionDuration;
+    darkenAmount: $darkenAmount;
 }

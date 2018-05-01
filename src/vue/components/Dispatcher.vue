@@ -17,8 +17,8 @@
 		methods: {
 			mount(){
 				this.music.hasData()
-				.then(::this.goPlayer)
-				.catch(::this.goDragDrop);
+				.then(::this.goPlayer)//If there's data, go to the player
+				.catch(::this.goDragDrop);//Otherwise show the drag'n'drop view
 			},
 			goPlayer(){
 				console.log("going player");

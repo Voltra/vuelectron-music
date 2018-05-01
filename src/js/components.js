@@ -7,6 +7,8 @@ import TopBar from "@components/TopBar"
 import Dispatcher from "@components/Dispatcher"
 import DragDrop from "@components/DragDrop"
 import DesktopPlayer from "@components/DesktopPlayer"
+import ColorChanger from "@components/ColorChanger"
+import SettingsMenu from "@components/SettingsMenu"
 
 
 import "@css/globals"
@@ -20,7 +22,8 @@ const components = {
     TopBar,
     Dispatcher,
     DragDrop,
-    DesktopPlayer
+    DesktopPlayer,
+    ColorChanger
 };
 
 const componentsArray = Object.values(components);

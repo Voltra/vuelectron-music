@@ -1,5 +1,6 @@
 <script>
 	import TopBarButton from "@components/TopBarButton"
+	import SettingsMenu from './SettingsMenu.vue';
 
 	export default {
 		name: "top-bar",
@@ -9,7 +10,8 @@
 				maximizeText: "web_asset",
 				minimizeText: "remove",
 				menuText: "menu",
-				window: null
+				window: null,
+				settingsOpened: false
 			}
 		},
 		mounted(){
@@ -27,13 +29,31 @@
 					this.window.unmaximize();
 				else
 					this.window.maximize();
+			},
+			showSettings(){
+				this.settingsOpened = true;
+			},
+			hideSettings(){
+				this.settingsOpened = false;
+			}
+		},
+		computed: {
+			menu(){
+				if(this.settingsOpened)
+					return (
+						<transition name="fade">
+							<SettingsMenu onExit={::this.hideSettings}/>
+						</transition>
+					);
+				else
+					return "";
 			}
 		},
 		render(){
 			return (
 				<div class="topbar">
 					<div class="left">
-						<TopBarButton text={this.menuText} nobg={true} left={true} noshadow={true}/>
+						<TopBarButton text={this.menuText} action={::this.showSettings} nobg={true} left={true} noshadow={true}/>
 					</div>
 					<div class="dragHandle"></div>
 					<div class="right">
@@ -41,6 +61,8 @@
 						<TopBarButton text={this.maximizeText} action={::this.toggleMaximize}/>
 						<TopBarButton text={this.closeText} accent={true} action={::this.close}/>
 					</div>
+
+					{this.menu}
 				</div>
 			);
 		}

@@ -18,7 +18,8 @@
 		},
 		computed: {
 			...mapGetters({
-				music: Getters.MUSIC
+				music: Getters.MUSIC,
+				sass: Getters.SASS
 			}),
 			...{
 				wrapperClasses(){
@@ -90,7 +91,7 @@
 						const files = paths.map(path => ({path}));
 						this.addFiles(files);
 					}
-				}, parseFloat(sassMetaVariables.transitionDuration) * 1000);
+				}, parseFloat(this.sass.transitionDuration) * 1000);
 			},
 			onDrop(e){
 				this.cleanUpEvent(e);

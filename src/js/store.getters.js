@@ -1,6 +1,7 @@
 const Getters = {
     COLUMNS: "COLUMNS",
-    MUSIC: "MUSIC"
+    MUSIC: "MUSIC",
+    SASS: "SASS"
 };
 
 export {Getters}

@@ -9,12 +9,23 @@ import JsonClientPlugin from "@vplugins/json"
 import ElectronBridgePlugin from "@vplugins/bridge"
 import RequirePlugin from "@vplugins/require"
 import CssVarPlugin from "@vplugins/cssvar"
+import ScrollBarY_Plugin from "@vplugins/scrollbar-y"
 
 //FACTORY-BASED PLUGINS
 import indexedDBFactory from "@vplugins/indexedDBFactory"
 
 
 export default {
-	plugins: [VueRouterPlugin, Vuex, AsyncComputedPlugin, LocalStoragePlugin, JsonClientPlugin, ElectronBridgePlugin, RequirePlugin, CssVarPlugin],
+	plugins: [
+		VueRouterPlugin,
+		Vuex,
+		AsyncComputedPlugin,
+		LocalStoragePlugin,
+		JsonClientPlugin,
+		ElectronBridgePlugin,
+		RequirePlugin,
+		CssVarPlugin,
+		ScrollBarY_Plugin,
+	],
 	factories: {indexedDBFactory}
 }

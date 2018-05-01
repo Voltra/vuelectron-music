@@ -4,14 +4,12 @@ import url from "url"
 import path from "path"
 import { server, httpServer } from "@js/server"
 
-import sassVariables from "@css/_variables/exports.scss"
-
 const thisPath = __dirname;
 const fromRoot = uri => path.resolve(thisPath, `.${uri}`);
 
 const createWindow = (function(app){
 	const window = new BrowserWindow({
-		backgroundColor: sassVariables.colors.bg,
+		backgroundColor: "#0d121a",
 		title: "Vuelectron Music",
 		width: 700,
 		height: 600,
@@ -34,16 +32,6 @@ const createWindow = (function(app){
 	window.webContents.openDevTools();
 	
 	window.once("ready-to-show", ::window.show);
-	
-	/*const res = dialog.showOpenDialog({
-		title: "Select your music folder",
-		filters: [
-			{name: "Music", extensions: ["mp3", "flac", "wav", "aac", "ogg"]}
-		],
-		properties: ["openDirectory", "multiSelection"]
-	});
-	
-	console.log(res);*/
 }).bind(null, app);
 
 app.on("ready", createWindow);

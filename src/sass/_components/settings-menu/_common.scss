@@ -1,0 +1,19 @@
+.settings{
+    position: absolute;
+    @include lr(0);
+    top: 0;
+
+    width: $settingsMenuWidth;
+    height: $settingsMenuHeight;
+
+    overflow: hidden;
+
+    & .wrapper{
+        position: relative;
+        width: $settingsMenuWidth;
+        height: $settingsMenuHeight;
+
+        overflow: hidden;
+        //overflow-y: auto;
+    }
+}

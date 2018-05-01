@@ -110,7 +110,7 @@ config.module.rules.push({
 	test: /\.(woff2?|eot|ttf|otf)$/,
 	loader: "file-loader"
 });
-
+*/
 const styleLoaders = ["style-loader", "css-loader"];
 
 config.module.rules.push({
@@ -118,19 +118,19 @@ config.module.rules.push({
     use: styleLoaders
 });
 
-const sassLoaders = [...styleLoaders, "sass-loader", "mixin-loader"];
+const sassLoaders = [...styleLoaders, "sass-loader"/*, "mixin-loader"*/];
 
 config.module.rules.push({
     test: /\.scss$/,
     use: sassLoaders
 });
 
+/*
 config.module.rules.push({
     test: /\.scss$/,
     enforce: "pre",
     loader: "mixin-loader"
 });
-
 config.module.rules.push({
 	test: /\.vue$/,
 	//exclude: libsRegex,

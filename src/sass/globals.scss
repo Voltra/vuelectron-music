@@ -2,6 +2,7 @@
 @import "~@css/_variables";
 
 @import "~@css/_spinner-lord";
+@import "~@css/_scrollbar";
 
 //$animationDuration: 0.3s;
 //@import "~vue2-animate/src/sass/vue2-animate";
@@ -20,30 +21,4 @@ body, #app{
 	color: $white;
 }
 
-.ps{
-	position: relative;
-	width: $fullWidth;
-	//height: $fullHeight;
-	overflow: hidden;
 
-	&__rail-y{
-		position: absolute;
-		right: $scrollbarSpacing;
-	
-		@include margin-vertical($scrollbarSpacing);
-		width: $scrollbarWidth;
-		height: $scrollbarHeight;
-	
-		background-color: $secondary;
-	
-		& > .ps__thumb-y{
-			position: relative;
-			right: $scrollbarThumbSpacing;
-	
-			width: $scrollbarThumbWidth;
-			background-color: $accent;
-	
-			border-radius: 100vw;
-		}
-	}
-}

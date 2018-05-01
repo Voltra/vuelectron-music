@@ -73,11 +73,12 @@
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.6.0",
-    "webpack-cli": "^2.1.0",
+    "webpack-cli": "^2.1.2",
     "webpack-manifest-plugin": "^2.0.2"
   },
   "dependencies": {
     "@voltra/json": "^1.2.0",
+    "color": "^3.0.0",
     "dashify": "^1.0.0",
     "db.js": "^0.15.0",
     "events": "^2.0.0",

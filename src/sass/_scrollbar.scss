@@ -1,0 +1,30 @@
+.ps{
+	position: relative;
+	overflow: hidden;
+
+	&__rail-y{
+		position: absolute;
+		right: $scrollbarSpacing;
+	
+		@include margin-vertical($scrollbarSpacing);
+		width: $scrollbarWidth;
+		height: $scrollbarHeight !important;
+		left: unset !important;
+	
+        background-color: $secondary;
+        
+        box-shadow: $regularShadow;
+	
+		& > .ps__thumb-y{
+			position: relative;
+			right: $scrollbarThumbSpacing;
+	
+			width: $scrollbarThumbWidth;
+			background-color: $accent;
+	
+            border-radius: 100vw;
+            
+            filter: drop-shadow($regularDropShadow);
+		}
+	}
+}
