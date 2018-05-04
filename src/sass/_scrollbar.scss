@@ -4,12 +4,13 @@
 
 	&__rail-y{
 		position: absolute;
-		right: $scrollbarSpacing;
+		//right: $scrollbarSpacing;
 	
 		@include margin-vertical($scrollbarSpacing);
 		width: $scrollbarWidth;
 		height: $scrollbarHeight !important;
-		left: unset !important;
+		//left: unset !important;
+		left: $scrollbarLeft !important;
 	
         background-color: $secondary;
         
@@ -26,9 +27,52 @@
 			width: $scrollbarThumbWidth;
 			background-color: $accent;
 	
-            border-radius: 100vw;
+            border-radius: $fullWidth;
             
             filter: drop-shadow($regularDropShadow);
+		}
+	}
+
+	&__rail-x{
+		position: absolute;
+		//bottom: $scrollbarSpacing;
+
+		@include margin-horizontal($scrollbarSpacing);
+		//top: unset !important;
+		top: $scrollbarTop !important;
+
+		background-color: $secondary;
+		box-shadow: $regularShadow;
+
+		height: $scrollbarWidth;
+
+		&, & > .ps__thumb-x{
+			cursor: pointer;
+		}
+
+		& > .ps__thumb-x{
+			position: relative;
+			bottom: $scrollbarThumbSpacing;
+			height: $scrollbarThumbWidth;
+
+			background-color: $accent;
+			border-radius: $fullWidth;
+			
+            filter: drop-shadow($regularDropShadow);
+		}
+	}
+}
+
+.ps{
+	&[data-scrollbar-no-x]{
+		& > .ps__rail-x{
+			display: none !important;
+		}
+	}
+
+	&[data-scrollbar-no-y]{
+		& > .ps__rail-y{
+			display: none !important;
 		}
 	}
 }

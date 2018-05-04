@@ -1,0 +1,13 @@
+@import "~@css/globals";
+
+@import "./_common";
+
+@media all and (min-width: $breakpoint){
+    @import "./_main";
+}
+
+@media all and (max-width: $breakpoint), all and (orientation: portrait){
+    @import "./_mobile";
+}
+
+@import "./_definitive_colors";

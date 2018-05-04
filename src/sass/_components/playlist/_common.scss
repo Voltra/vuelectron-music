@@ -1,0 +1,32 @@
+.playlist{
+    //position: relative;
+    display: block;
+
+    width: $playlistWidth;
+    height: $playlistHeight;
+
+    & table{
+        position: relative;
+        width: $playlistTableWidth;
+        height: $playlistTableHeight;
+
+        & .head, & .body{
+            display: block;
+        }
+    
+        & .head{
+            width: $playlistHeadWidth;
+            height: $playlistHeadHeight;
+
+            & tr{
+                @include playlistSharedTrStyles;
+            }
+        }
+    
+        & .body{
+            width: $playlistBodyWidth;
+            height: $playlistBodyHeight;
+            //position: relative;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "isNamespace": true,
+    "namespace": "vm",
+    "value": {
+        "isNamespace": true,
+        "namespace": "colors",
+        "value": {
+            "isNamespace": false,
+            "value": [
+                "accent",
+                "bg",
+                "default",
+                "white",
+                "secondary"
+            ]
+        }
+    }
+}

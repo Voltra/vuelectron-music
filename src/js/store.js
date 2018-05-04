@@ -14,7 +14,8 @@ const store = new Store({
     state: {
         dbSchema: {},
         musicModel: Music,
-        sassMetaVariables
+        sassMetaVariables,
+        colorsStorage: null
     },
     mutations: {
         [Mutations.SET_SCHEMA](state, schema){
@@ -22,6 +23,9 @@ const store = new Store({
         },
         [Mutations.SET_DB](state, $db){
             state.musicModel.setDb($db);
+        },
+        [Mutations.SET_COLORS_STORAGE](state, storage){
+            state.colorsStorage = storage;
         }
     },
     getters: {
@@ -38,6 +42,9 @@ const store = new Store({
         },
         [Getters.SASS](state){
             return state.sassMetaVariables;
+        },
+        [Getters.COLORS_STORAGE](state){
+            return state.colorsStorage;
         }
     }
 });

@@ -19,8 +19,8 @@
 		},
 		data(){
 			return {
-				color: this.$cssVar(this.cssVar) || "#fff",
-				backupColor: this.$cssVar(this.cssVar) || "#fff",
+				color: null,
+				backupColor: null,
 				cssVarDark: `${this.$props.cssVar}-dark`
 			};
 		},
@@ -35,7 +35,8 @@
 		},
 		computed: {
 			...mapGetters({
-				sass: Getters.SASS
+				sass: Getters.SASS,
+				localStorage: Getters.COLORS_STORAGE
 			})
 		},
 		methods: {
@@ -48,20 +49,33 @@
 				this.$emit("color", newValue.trim());
 				this.updateCssVar(newValue.trim());
 			},
-			updateCssVar(newValue){
+			updateCssVar(newValue){				
+				const darkened = this.darken(newValue);
+
 				this.$cssVar(this.cssVar, newValue);
-				this.$cssVar(this.cssVarDark, this.darken(newValue));
+				this.$cssVar(this.cssVarDark, darkened);
 			},
 			onOk(){
 				this.backupColor = this.color;
+				this.saveInPersistantStorage(this.color);
 			},
 			onCancel(){
 				this.color = this.backupColor;
+				this.saveInPersistantStorage(this.backupColor);
 			},
 			onInput(newColor){
 				const color = (newColor.a && newColor.a != 1.0) ? newColor.rgba : newColor.hex;
 				this.color = color;
+			},
+			saveInPersistantStorage(value){
+				const darkened = this.darken(value);
+				this.localStorage.set(this.cssVar, value);
+				this.localStorage.set(this.cssVarDark, darkened);
 			}
+		},
+		created(){
+			this.color = this.localStorage.get(this.cssVar) || this.$cssVar(this.cssVar) || "#fff";
+			this.backupColor = this.color;
 		},
 		beforeDestroy(){
 			this.updateCssVar(this.backupColor);

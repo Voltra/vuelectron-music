@@ -12,10 +12,13 @@ import PerfectScrollbar from "perfect-scrollbar"
 
 import {Music} from "@js/models/Music"
 import removeSpinnerLord from "@js/helpers/removeSpinnerLord"
+import installPrototypeExtensions from "@js/helpers/prototypes"
 
 import "vue2-animate/dist/vue2-animate.min.css"
+import "@css/globals.scss"
 
 (()=>{
+	installPrototypeExtensions();
 	self.Music = Music;
 
 	Promise.all([
@@ -47,6 +50,10 @@ import "vue2-animate/dist/vue2-animate.min.css"
 							schema[table] = [...schema[table], ...columns];
 							return schema;
 						}, {})
+					);
+					this.$store.commit(
+						Mutations.SET_COLORS_STORAGE,
+						this.$localStorage.namespace("vm").namespace("colors")
 					);
 				},
 				mounted(){

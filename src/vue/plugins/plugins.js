@@ -10,6 +10,7 @@ import ElectronBridgePlugin from "@vplugins/bridge"
 import RequirePlugin from "@vplugins/require"
 import CssVarPlugin from "@vplugins/cssvar"
 import ScrollBarY_Plugin from "@vplugins/scrollbar-y"
+import ScrollBarX_Plugin from "@vplugins/scrollbar-x"
 
 //FACTORY-BASED PLUGINS
 import indexedDBFactory from "@vplugins/indexedDBFactory"
@@ -26,6 +27,7 @@ export default {
 		RequirePlugin,
 		CssVarPlugin,
 		ScrollBarY_Plugin,
+		ScrollBarX_Plugin,
 	],
 	factories: {indexedDBFactory}
 }

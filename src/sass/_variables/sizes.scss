@@ -9,10 +9,12 @@ $floorIndex: 0;
 $topIndex: 1;
 $overTheTopIndex: 911;
 
-$scrollbarWidth: 6px;
+$scrollbarWidth: 5px; //6px
 $scrollbarSpacing: 10px;
+$scrollbarLeft: calc(100% - #{$scrollbarSpacing} - #{$scrollbarWidth});
+$scrollbarTop: $scrollbarLeft;
 $scrollbarHeight: calc(100% - (2 * #{$scrollbarSpacing}));
-    $scrollbarThumbWidth: 2 * $scrollbarWidth;
+    $scrollbarThumbWidth: $scrollbarWidth + 6px; //2 * $scrollbarWidth;
     $scrollbarThumbSpacing: calc((#{$scrollbarThumbWidth} - #{$scrollbarWidth}) / 2);
 
 
@@ -89,3 +91,29 @@ $dragDropHeight: $viewHeight;
 \*****************************************************/
 $settingsMenuWidth: $fullWidth;
 $settingsMenuHeight: $fullHeight;
+
+
+
+/*****************************************************\
+    Playlist
+\*****************************************************/
+$playlistWidth: $fullWidth;
+$playlistHeight: 80vh; //TODO: Craft the size
+$playlistCellPadding: 1rem;
+@mixin playlistSharedTrStyles(){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & th, & td{
+        flex: 1;
+        text-align: center;
+        padding: $playlistCellPadding;
+    }
+}
+    $playlistTableWidth: $playlistWidth;
+    $playlistTableHeight: $playlistHeight;
+        $playlistHeadWidth: $playlistTableWidth;
+        $playlistHeadHeight: calc(#{$playlistTableHeight} / 10);
+        $playlistBodyWidth: $playlistHeadWidth;
+        $playlistBodyHeight: calc(9 / 10 * #{$playlistTableHeight});

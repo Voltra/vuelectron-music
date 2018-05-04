@@ -1,4 +1,3 @@
-import { ClientTable } from "vue-tables-2"
 import Modal from "vue-js-modal"
 import { Photoshop as PhotoshopColorPicker } from "vue-color"
 
@@ -9,12 +8,13 @@ import DragDrop from "@components/DragDrop"
 import DesktopPlayer from "@components/DesktopPlayer"
 import ColorChanger from "@components/ColorChanger"
 import SettingsMenu from "@components/SettingsMenu"
+import Playlist from "@components/Playlist"
+import PlaylistItem from "@components/PlaylistItem"
 
 
 import "@css/globals"
 
 const components = {
-    ClientTable,
     Modal,
     PhotoshopColorPicker,
 
@@ -23,7 +23,10 @@ const components = {
     Dispatcher,
     DragDrop,
     DesktopPlayer,
-    ColorChanger
+    ColorChanger,
+    SettingsMenu,
+    Playlist,
+    PlaylistItem,
 };
 
 const componentsArray = Object.values(components);
