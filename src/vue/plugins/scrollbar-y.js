@@ -13,12 +13,11 @@ const plugin = {
         Vue.directive("scrollbar-y", {
             bind(el, binding, vnode){
                 const scrollbar = makeScrollbarY(el);
-                el.$scrollbar = scrollbar;
-                console.log(el);
+                el.$scrollbarY = scrollbar;
                 events.forEach(event => el.addEventListener(event, ::scrollbar.update));
             },
             unbind(el, binding, vnode){
-                const scrollbar = el.$scrollbar;
+                const scrollbar = el.$scrollbarY;
                 events.forEach(event => el.removeEventListener(event, ::scrollbar.update));
             }
         });

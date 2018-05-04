@@ -1,0 +1,44 @@
+# Structure:
+# - &name
+#		- accent : #colors
+#		- background : #colors
+#		- default : #colors
+#		- text : #colors
+#		- secondary : #colors
+
+# themes
+---
+- &white_knight
+	- accent : #8f9256
+	- background : #ffffff
+	- default : #a1afbf
+	- text : #000000
+	- secondary : #d9d9d9
+
+- &night_mode
+	- accent : #252752
+	- background : #121212
+	- default : #222121
+	- text : #ffffff
+	- secondary : #13132a
+
+- &fire_dynamo
+	- accent : #7c2727
+	- background : #4d0202
+	- default : #724646
+	- text : #ffffff
+	- secondary : #993c21
+
+- &vue
+	- accent : #42b883
+	- background : #42b883
+	- default : #25495e
+	- text : #ffffff
+	- secondary : #25495e
+
+- &fb
+	- accent : #3b5998
+	- background : #e9ebee
+	- default : #ffffff
+	- text : #000000
+	- secondary : #ffffff

@@ -32,7 +32,7 @@
 			}
 		},
 		mounted(){
-			this.$refs.wrapper.$scrollbar.update();
+			this.$refs.wrapper.$scrollbarY.update();
 		}
 	};
 </script>
