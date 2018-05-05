@@ -221,7 +221,7 @@ class Music{
         this.year = common.year || Music.defaults.year;
         this.genre = (common.genre && common.genre[0]) ? common.genre[0] : Music.defaults.string;
 
-        this.date_added = Date.now();
+        this.date_added = new Date();//Date.now();
         this.plays = Music.defaults.number;
 
         this.__inserted = false;

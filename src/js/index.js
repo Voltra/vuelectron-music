@@ -1,16 +1,16 @@
-import {json} from "@js/urls"
+import { json } from "@js/urls"
 import Vue from "$vue"
 import Plugins from "@vplugins/plugins"
-import {components, componentsArray} from "@js/components"
-import {router} from "@js/router"
-import {store} from "@js/store"
-import {Mutations} from "@js/store.mutations"
+import { components, componentsArray } from "@js/components"
+import { router } from "@js/router"
+import { store } from "@js/store"
+import { Mutations } from "@js/store.mutations"
 
 
-import {$json} from "@voltra/json"
+import { $json } from "@voltra/json"
 import PerfectScrollbar from "perfect-scrollbar"
 
-import {Music} from "@js/models/Music"
+import { Music } from "@js/models/Music"
 import removeSpinnerLord from "@js/helpers/removeSpinnerLord"
 import installPrototypeExtensions from "@js/helpers/prototypes"
 

@@ -8,6 +8,7 @@
 		render(){
 			return (
 				<div class="playlist" ref="container" v-scrollbar-x data-scrollbar-no-y>
+					{/*v-scrollbar-x data-scrollbar-no-y*/}
 					<table>
 						<thead class="head">
 							<tr>
@@ -20,7 +21,7 @@
 						</thead>
 						<tbody class="body" ref="body" v-scrollbar-y data-scrollbar-no-x>
 							{
-								this.rows.map(music => <PlaylistItem key={music.id} music={music} headers={this.headers}/>)
+								this.rows.map(music => <PlaylistItem key={music} music={music} headers={this.headers}/>)
 							}
 						</tbody>
 					</table>
@@ -29,7 +30,7 @@
 		},
 		data(){
 			return {
-				sortingFunction: undefined
+				sortingFunction: (lhs, rhs)=>Object.compare(lhs.title, rhs.title)
 			};
 		},
 		props: {
@@ -47,20 +48,6 @@
 			}),
 			...{
 				headers(){
-					/*const base = ["header"];
-
-					return [
-						{text: "", classes: [...base, "play"]},
-						{text: "title", classes: [...base, "title"]},
-						{text: "duration", classes: [...base, "duration"]},
-						{text: "artist", classes: [...base, "artist"]},
-						{text: "album", classes: [...base, "album"]},
-						{text: "year", classes: [...base, "year"]},
-						{text: "genre", classes: [...base, "genre"]},
-						{text: "date added", classes: [...base, "date"]},
-						{text: "# of plays", classes: [...base, "plays"]},
-					];*/
-
 					const classes = [];
 
 					return [
@@ -85,8 +72,10 @@
 		},
 		methods: {
 			updateScrollbars(){
-				this.$refs.body.$scrollbarY.update();
-				this.$refs.container.$scrollbarX.update();
+				this.$nextTick(()=>{
+					this.$refs.body.$scrollbarY.update();
+					this.$refs.container.$scrollbarX.update();
+				});
 			}
 		},
 		watch: {

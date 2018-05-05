@@ -1,8 +1,33 @@
 .ps{
+	@each $o in (y, x){
+		& > .ps__rail-#{$o}{
+			&, & > .ps__thumb-#{$o}{
+				opacity: 0;
+				transition: opacity $transitionDuration ease-in-out;
+			}
+		}
+	}
+
+	&--active-{
+		@each $o in (y, x){
+			&#{$o}{
+				& > .ps__rail-#{$o}{
+					&, & > .ps__thumb-#{$o}{
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+
+
 	position: relative;
 	overflow: hidden;
 
 	&__rail-y{
+		opacity: 0;
+		transition: opacity $transitionDuration ease-in-out;
+
 		position: absolute;
 		//right: $scrollbarSpacing;
 	
@@ -34,6 +59,9 @@
 	}
 
 	&__rail-x{
+		opacity: 0;
+		transition: opacity $transitionDuration ease-in-out;
+
 		position: absolute;
 		//bottom: $scrollbarSpacing;
 

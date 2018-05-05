@@ -1,5 +1,5 @@
 //LIBS
-import VueRouterPlugin from "vue-router"
+//import VueRouterPlugin from "vue-router"
 import Vuex from "vuex"
 import AsyncComputedPlugin from "vue-async-computed"
 
@@ -18,7 +18,7 @@ import indexedDBFactory from "@vplugins/indexedDBFactory"
 
 export default {
 	plugins: [
-		VueRouterPlugin,
+		//VueRouterPlugin,
 		Vuex,
 		AsyncComputedPlugin,
 		LocalStoragePlugin,
@@ -29,5 +29,7 @@ export default {
 		ScrollBarY_Plugin,
 		ScrollBarX_Plugin,
 	],
-	factories: {indexedDBFactory}
+	factories: {
+		indexedDBFactory,
+	}
 }

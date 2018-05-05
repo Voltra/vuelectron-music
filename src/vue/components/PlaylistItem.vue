@@ -90,6 +90,17 @@
 							entry.text = formattedDuration;
 						}
 
+						if(entry.property === "date_added"){
+							const toStr = num => `${num}`.length >= 2 ? num : `0${num}`;
+
+							const date = entry.text;
+							const day = toStr(date.getDate());
+							const month = toStr(date.getMonth() + 1);
+							const year = toStr(date.getFullYear());
+
+							entry.text = `${day}/${month}/${year}`;
+						}
+
 						return entry;
 					}).map((e, i) => ({...e, classes: this.headers[i].classes}));
 

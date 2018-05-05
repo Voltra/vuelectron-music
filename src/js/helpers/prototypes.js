@@ -14,4 +14,13 @@ export default function install(){
 
         return regex.test(this);
     }
+
+    Object.compare = function(lhs, rhs){
+        if(lhs < rhs)
+            return -1;
+        else if(lhs === rhs)
+            return 0;
+        else
+            return 1;
+    }
 }

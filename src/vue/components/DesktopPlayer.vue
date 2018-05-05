@@ -10,10 +10,10 @@
 		name: "desktop-player",
 		render(){
 			return (
-				<div>
+				<div class="desktopPlayer">
 					<Playlist musics={this.musics}/>
 					{this.craftPlayer()}
-					<button onClick={::this.removeAll}>Remove all musics</button>
+					<button class="rm" onClick={::this.removeAll}>Remove all musics</button>
 				</div>
 			);
 		},
@@ -40,7 +40,7 @@
 			craftPlayer(){
 				if(this.musics.length)
 					return (
-						<audio controls>
+						<audio class="audio" controls>
 							<source src={this.musics[0].path}></source>
 						</audio>
 					);
