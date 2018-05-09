@@ -1,4 +1,7 @@
 .desktopPlayer{
+    width: $viewWidth;
+    height: $viewHeight;
+
     & .audio, & .rm{
         position: absolute;
         bottom: 10px;

@@ -194,13 +194,16 @@ class Music{
         if(!this.hasDb())
             return Promise.reject(this.msg.NO_DB);
 
-        this.getTable().query()
-        .all()
-        .execute()
-        .then(results => results.map(result => result.id))
-        .then(ids => Promise.all(
-            ids.map(id => this.removeFromId(id, false))
-        )).then(_ => Music.trigger(MusicEvents.REMOVE))
+        // this.getTable().query()
+        // .all()
+        // .execute()
+        // .then(results => results.map(result => result.id))
+        // .then(ids => Promise.all(
+        //     ids.map(id => this.removeFromId(id, false))
+        // )).then(_ => Music.trigger(MusicEvents.REMOVE))
+
+        this.getTable()
+        .clear().then(_ => Music.trigger(MusicEvents.REMOVE))
     }
 
     constructor(path, meta){ //Do not use directly

@@ -8,37 +8,44 @@
 
 # themes
 ---
+- &default
+	- accent : "#0e8a80"
+	- background : "#0d121a"
+	- default : "#192433"
+	- text : "#ffffff"
+	- secondary : "#25364d"
+
 - &white_knight
-	- accent : #8f9256
-	- background : #ffffff
-	- default : #a1afbf
-	- text : #000000
-	- secondary : #d9d9d9
+	- accent : "#8f9256"
+	- background : "#ffffff"
+	- default : "#e9ebee" #"#a1afbf"
+	- text : "#000000"
+	- secondary : "#d9d9d9"
 
 - &night_mode
-	- accent : #252752
-	- background : #121212
-	- default : #222121
-	- text : #ffffff
-	- secondary : #13132a
+	- accent : "#252752"
+	- background : "#121212"
+	- default : "#222121"
+	- text : "#ffffff"
+	- secondary : "#13132a"
 
 - &fire_dynamo
-	- accent : #7c2727
-	- background : #4d0202
-	- default : #724646
-	- text : #ffffff
-	- secondary : #993c21
+	- accent : "#7c2727"
+	- background : "#4d0202"
+	- default : "#72464"
+	- text : "#fffff"
+	- secondary : "#993c2"
 
 - &vue
-	- accent : #42b883
-	- background : #42b883
-	- default : #25495e
-	- text : #ffffff
-	- secondary : #25495e
+	- accent : "#42b88"
+	- background : "#42b88"
+	- default : "#25495"
+	- text : "#fffff"
+	- secondary : "#25495"
 
 - &fb
-	- accent : #3b5998
-	- background : #e9ebee
-	- default : #ffffff
-	- text : #000000
-	- secondary : #ffffff
+	- accent : "#3b599"
+	- background : "#e9ebe"
+	- default : "#fffff"
+	- text : "#00000"
+	- secondary : "#fffff"
