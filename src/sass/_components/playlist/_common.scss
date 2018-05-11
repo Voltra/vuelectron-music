@@ -11,7 +11,22 @@
         height: $playlistTableHeight;
 
         & .head, & .body{
-            display: block;
+            position: relative;
+
+            & tr{
+                position: relative;
+
+                &::before{
+                    z-index: $topIndex;
+                    content: "";
+                    position: absolute;
+                    @include trbl(0);
+                }
+
+                & td, & th{                    
+                    @include flexDistribution;
+                }
+            }
         }
     
         & .head{
@@ -20,6 +35,7 @@
 
             & tr{
                 @include playlistSharedTrStyles;
+                height: 100%;
             }
         }
     

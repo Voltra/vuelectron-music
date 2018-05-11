@@ -21,7 +21,7 @@
 						</thead>
 						<tbody class="body" ref="body" v-scrollbar-y data-scrollbar-no-x>
 							{
-								this.rows.map(music => <PlaylistItem key={music} music={music} headers={this.headers}/>)
+								this.rows.map((music, i) => <PlaylistItem active={i == this.activeIndex} key={music} music={music} headers={this.headers}/>)
 							}
 						</tbody>
 					</table>
@@ -30,7 +30,8 @@
 		},
 		data(){
 			return {
-				sortingFunction: (lhs, rhs)=>Object.compare(lhs.title, rhs.title)
+				sortingFunction: (lhs, rhs)=>Object.compare(lhs.title, rhs.title),
+				activeIndex: -1
 			};
 		},
 		props: {
@@ -72,10 +73,17 @@
 		},
 		methods: {
 			updateScrollbars(){
+				this.activeIndex = this.getActiveIndex();
 				this.$nextTick(()=>{
 					this.$refs.body.$scrollbarY.update();
 					this.$refs.container.$scrollbarX.update();
 				});
+			},
+			getActiveIndex(){
+				if(this.musics.length)
+					return Math.floor(Math.random() * this.musics.length) % this.musics.length;
+
+				return -1;
 			}
 		},
 		watch: {
@@ -83,6 +91,8 @@
 		},
 		mounted(){
 			this.updateScrollbars();
+			this.activeIndex = this.getActiveIndex();
+			console.log(this);
 		}
 	};
 </script>

@@ -7,6 +7,7 @@ $fullHeight: 100vh;
 
 $floorIndex: 0;
 $topIndex: 1;
+$supraIndex: 10;
 $overTheTopIndex: 911;
 
 $scrollbarWidth: 5px; //6px
@@ -117,3 +118,24 @@ $playlistCellPadding: 1rem;
         $playlistHeadHeight: calc(#{$playlistTableHeight} / 10);
         $playlistBodyWidth: $playlistHeadWidth;
         $playlistBodyHeight: calc(9 / 10 * #{$playlistTableHeight});
+
+
+
+/*****************************************************\
+    Playlist item
+\*****************************************************/
+$playlistItemWidth: $playlistWidth;
+$playlistItemHeight: calc(40px + (2 * #{$playlistCellPadding}));
+@mixin flexDistribution(){
+    &.play, &.duration, &.year, &.plays{
+        flex: 1;
+    }
+    
+    &.title{
+        flex: 4;
+    }
+
+    &.artist, &.album, &.genre, &.date_added{
+        flex: 2;
+    }
+}

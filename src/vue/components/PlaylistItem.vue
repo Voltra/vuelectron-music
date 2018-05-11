@@ -9,7 +9,7 @@
 				<tr class={this.classes}>
 					{
 						this.musicDatas.map(({property, text, classes}) => (
-							<td class={classes}>{text}</td>
+							<td class={classes} title={text}>{text}</td>
 						))
 					}
 				</tr>
@@ -35,6 +35,78 @@
 				}
 			}
 		},
+		methods: {
+			transformEntry(entry){
+				const copy = {...entry};
+				switch(entry.property){
+					case "duration":
+						copy.text = this.makeDurationFromEntry(entry);
+						break;
+					
+					case "date_added":
+						copy.text = this.makeDateFromEntry(entry);
+						break;
+
+					default:
+						break;
+				}
+
+				return copy;
+			},
+			makeDurationFromEntry(entry){
+				const duration = entry.text;
+				const hours = Math.floor(duration / 3600);
+				const mod3600 = duration % 3600;
+				const minutes = Math.floor(mod3600 / 60);
+				const mod60 = mod3600 % 60;
+				const seconds = Math.ceil(mod60 / 60);
+
+				const hoursStr = `${hours}`.length >= 2 ? hours : `0${hours}`;
+				const toStr = num => `${num}`.length == 2 ? num : `0${num}`;
+				const minutesStr = toStr(minutes);
+				const secondsStr = toStr(seconds);
+
+				return hours ? `${hoursStr}:${minutesStr}:${secondsStr}` : `${minutesStr}:${secondsStr}`;
+			},
+			makeDateFromEntry(entry){
+				const toStr = num => `${num}`.length >= 2 ? num : `0${num}`;
+
+				const date = entry.text;
+				const day = toStr(date.getDate());
+				const month = toStr(date.getMonth() + 1); //Months start go from 0 to 11 for some obscure reason
+				const year = toStr(date.getFullYear());
+
+				return `${day}/${month}/${year}`;
+			},
+			/*sortBy*/headerName(lhs, rhs){
+				const lhsTitle = lhs.property;
+				const rhsTitle = rhs.property;
+				const titles = this.headers.map(({name}) => name);
+				const lhsIndex = titles.indexOf(lhsTitle);
+				const rhsIndex = titles.indexOf(rhsTitle);
+
+				if(lhsIndex < rhsIndex)
+					return -1;
+				else if(lhsIndex === rhsIndex)
+					return 0;
+				else
+					return 1;
+			},
+			addAdditionalClasses(entry){
+				const copy = {...entry};
+
+				switch(entry.property){
+					case "play":
+						copy.classes.push("material-icons");
+						break;
+
+					default:
+						break;
+				}
+
+				return copy;
+			}
+		},
 		computed: {
 			...mapGetters({
 				model: Getters.MUSIC
@@ -54,55 +126,15 @@
 				musicDatas(){
 					const music = this.$props.music;
 					const entries = Object.entries(music.getData());
-					entries.push(["play", ">"]);
+					entries.push(["play", "play_arrow"]);
 
-					return entries
-					.filter(([property]) => !["path"].includes(property))
-					.map(([property, text]) => ({property, text}))
-					.sortBy((lhs, rhs) => {
-						const lhsTitle = lhs.property;
-						const rhsTitle = rhs.property;
-						const titles = this.headers.map(({name}) => name);
-						const lhsIndex = titles.indexOf(lhsTitle);
-						const rhsIndex = titles.indexOf(rhsTitle);
-
-						if(lhsIndex < rhsIndex)
-							return -1;
-						else if(lhsIndex === rhsIndex)
-							return 0;
-						else
-							return 1;
-					}).map(entry => {
-						if(entry.property === "duration"){
-							const duration = entry.text;
-							const hours = Math.floor(duration / 3600);
-							const mod3600 = duration % 3600;
-							const minutes = Math.floor(mod3600 / 60);
-							const mod60 = mod3600 % 60;
-							const seconds = Math.ceil(mod60 / 60);
-
-							const hoursStr = `${hours}`.length >= 2 ? hours : `0${hours}`;
-							const toStr = num => `${num}`.length == 2 ? num : `0${num}`;
-							const minutesStr = toStr(minutes);
-							const secondsStr = toStr(seconds);
-
-							const formattedDuration = hours ? `${hoursStr}:${minutesStr}:${secondsStr}` : `${minutesStr}:${secondsStr}`;
-							entry.text = formattedDuration;
-						}
-
-						if(entry.property === "date_added"){
-							const toStr = num => `${num}`.length >= 2 ? num : `0${num}`;
-
-							const date = entry.text;
-							const day = toStr(date.getDate());
-							const month = toStr(date.getMonth() + 1);
-							const year = toStr(date.getFullYear());
-
-							entry.text = `${day}/${month}/${year}`;
-						}
-
-						return entry;
-					}).map((e, i) => ({...e, classes: this.headers[i].classes}));
+					return entries//[property, text]
+					.filter(([property]) => !["path"].includes(property))//[property, text]
+					.map(([property, text]) => ({property, text}))//{property, text}
+					.sortBy(::this.headerName)//{property, text}
+					.map(::this.transformEntry)//{property, text}
+					.map((e, i) => ({...e, classes: [...this.headers[i].classes], ...this.classes}))//{property, text, classes}
+					.map(::this.addAdditionalClasses)//{property, text, classes}
 
 					//{property, text, classes}
 				}
