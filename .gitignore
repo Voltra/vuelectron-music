@@ -1,6 +1,6 @@
 ####    DIST
 dist/
-index.js
+/index.js
 manifest.json
 assets/js/
 
