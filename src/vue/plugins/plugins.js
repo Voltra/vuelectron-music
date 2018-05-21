@@ -1,5 +1,5 @@
 //LIBS
-//import VueRouter from "vue-router"
+import VueRouter from "vue-router"
 import Vuex from "vuex"
 import AsyncComputedPlugin from "vue-async-computed"
 
@@ -18,7 +18,7 @@ import indexedDBFactory from "@vplugins/indexedDBFactory"
 
 export default {
 	plugins: [
-		//VueRouter,
+		VueRouter,
 		Vuex,
 		AsyncComputedPlugin,
 		LocalStoragePlugin,

@@ -1,5 +1,5 @@
 import Vuex from "vuex"
-import Vue from "vue"
+import Vue from "$vue"
 
 import { state } from "@js/store/state"
 import { getters } from "@js/store/getters"

@@ -6,6 +6,6 @@ tr.playlist__item{
     overflow: hidden;
 
     & > td{
-        @include flexDistribution;
+        @include thtd;
     }
 }

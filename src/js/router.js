@@ -1,4 +1,3 @@
-import Vue from "$vue"
 import VueRouter from "vue-router"
 import { components } from "@js/components"
 import { Routes } from "@js/router.routes"
@@ -12,7 +11,6 @@ const routes = [
     {path: "/", component: Dispatcher}
 ];
 
-Vue.use(VueRouter);
 const router = new VueRouter({
     routes
 });
