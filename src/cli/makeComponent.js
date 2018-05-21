@@ -26,7 +26,7 @@ const grabJSON = uri => fs.readFile(uri, "utf-8").then(JSON.parse);
 /*************************************************\
 	Code
 \*************************************************/
-const configFile = "makeComponent.json";
+const configFile = "./mc.config.json";
 const vueTemplate = `<script>
 	export default {
 		name: "%name%",
@@ -52,7 +52,7 @@ const componentName = args[0];
 const componentRegName = args.length >= 2 ? args[1] : toKebabCase(componentName);
 
 
-grabJSON("./mc.config.json")
+grabJSON(configFile)
 .then(userConfig => {
 	if(typeof userConfig != "object" || userConfig == null || userConfig instanceof Array)
 		throw new Error("Invalid config file");

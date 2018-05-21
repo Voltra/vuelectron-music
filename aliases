@@ -1,2 +1,3 @@
 #!/bin/bash
 alias makeComponent="./makeComponent.exe"
+alias store="./store.exe"
