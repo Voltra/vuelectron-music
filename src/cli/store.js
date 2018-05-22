@@ -59,16 +59,30 @@ const e = {
 };
 
 export default e
-`
+`,
+    reg: {
+        state: "store.state.js",
+        getter: "store.getters.js",
+        mutation: "store.mutations.js",
+        showFullPath: false
+    },
+    exports: {
+        state: "state/index.js",
+        getter: "getters/index.js",
+        mutation: "mutations/index.js",
+        showFullPath: false
+    }
 };
 
 grabJSON(configFile)
 .then(userConfig => {
     const config = merge(defaults, userConfig);
+    const makeAllStr = "Makes a state, a getter and a mutation";
+    const makeAllSettings = makeAllInit(config);
     const args = argv
     .usage("Usage: store <command> [options]")
-    .command("make:@", "Makes a state, a getter and a mutation", makeAllInit(config))
-    .command("make:all", "Makes a state, a getter and a mutation", makeAllInit(config))
+    .command("make:@", makeAllStr, makeAllSettings)
+    .command("make:all", makeAllStr, makeAllSettings)
     .command("make:state", "Makes a state", makeStateInit(config))
     .command("make:getter", "Makes a getter", makeGetterInit(config))
     .command("make:mutation", "Makes a mutation", makeMutationInit(config))
@@ -76,9 +90,16 @@ grabJSON(configFile)
     .alias("h", "help")
     .demandCommand(1, "You need to use a command")
     .argv;
+
+    console.log("");
+    console.log("");
 }).catch(console.error);
 
 class Builder{
+    static from(builder){
+        return new Builder(builder);
+    }
+
     constructor(builder){
         this.builder = builder;
     }
@@ -154,10 +175,6 @@ class Builder{
     }
 }
 
-Builder.from = function(builder){
-    return new Builder(builder);
-}
-
 function makeAllInit(config){
     return {
         handler: makeAll.bind(null, config),
@@ -203,7 +220,7 @@ function makeMutationInit(config){
         handler: makeMutation.bind(null, config),
         builder: build => {
             return Builder.from(build)
-            .withGetterName()
+            .withStateName()
             .withMutationName()
             .withMutationOutput()
             .build();
@@ -212,31 +229,49 @@ function makeMutationInit(config){
 }
 
 function makeState(config, { stateName, stateOutput }){
-    const { root, stateTemplate } = config;
+    const { root, stateTemplate, reg, exports } = config;
     const content = stateTemplate
     .replace(/%stateName%/g, stateName);
 
-    return fs.writeFile(`${root}/${stateOutput}`, content, "utf-8")
-    .then(_ => console.log(`Done: state ${stateName}`));
+    const outputPath = `${root}/${stateOutput}`;
+    const displayPath = reg.showFullPath ? `${root}/${reg.state}` : reg.state;
+    const exportsPath = exports.showFullPath ? `${root}/${exports.state}` : exports.state;
+    return fs.writeFile(outputPath, content, "utf-8")
+    .then(_ => console.log(`Done: state ${stateName}`))
+    .then(_ => console.log(`Don't forget to register ${stateName} in your ${displayPath}`))
+    .then(_ => console.log(`Don't forget to export ${outputPath} in your ${exportsPath}`))
+    .then(_ => console.log(""));
 }
 
 function makeGetter(config, { getterName, getterOutput }){
-    const { root, getterTemplate } = config;
+    const { root, getterTemplate, reg, exports } = config;
     const content = getterTemplate
     .replace(/%getterName%/g, getterName);
     
-    return fs.writeFile(`${root}/${getterOutput}`, content, "utf-8")
-    .then(_ => console.log(`Done: getter ${getterName}`));
+    const outputPath = `${root}/${getterOutput}`;
+    const displayPath = reg.showFullPath ? `${root}/${reg.getter}` : reg.getter;
+    const exportsPath = exports.showFullPath ? `${root}/${exports.getter}` : exports.getter;
+    return fs.writeFile(outputPath, content, "utf-8")
+    .then(_ => console.log(`Done: getter ${getterName}`))
+    .then(_ => console.log(`Don't forget to register ${getterName} in your ${displayPath}`))
+    .then(_ => console.log(`Don't forget to export ${outputPath} in your ${exportsPath}`))
+    .then(_ => console.log(""));
 }
 
 function makeMutation(config, { mutationName, stateName, mutationOutput }){
-    const { root, mutationTemplate } = config;
+    const { root, mutationTemplate, reg, exports } = config;
     const content = mutationTemplate
     .replace(/%mutationName%/g, mutationName)
     .replace(/%stateName%/g, stateName);
 
-    return fs.writeFile(`${root}/${mutationOutput}`, content, "utf-8")
+    const outputPath = `${root}/${mutationOutput}`;
+    const displayPath = reg.showFullPath ? `${root}/${reg.mutation}` : reg.mutation;
+    const exportsPath = exports.showFullPath ? `${root}/${exports.mutation}` : exports.mutation;
+    return fs.writeFile(outputPath, content, "utf-8")
     .then(_ => console.log(`Done: mutation ${mutationName}`))
+    .then(_ => console.log(`Don't forget to register ${mutationName} in your ${displayPath}`))
+    .then(_ => console.log(`Don't forget to export ${outputPath} in your ${exportsPath}`))
+    .then(_ => console.log(""));
 }
 
 function makeAll(config, args){

@@ -1,3 +1,15 @@
 {
-    "root": "src/js/store"
+    "root": "src/js/store",
+    "reg": {
+        "state": "store.state.js",
+        "getter": "store.getters.js",
+        "mutation": "store.mutations.js",
+        "showFullPath": false
+    },
+    "exports": {
+        "state": "state/index.js",
+        "getter": "getters/index.js",
+        "mutation": "mutations/index.js",
+        "showFullPath": true
+    }
 }
