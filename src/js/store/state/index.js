@@ -3,6 +3,7 @@ import currentMusic from "@js/store/state/music/current"
 import dbSchema from "@js/store/state/db/schema"
 import localStorageColors from "@js/store/state/localStorage/colors"
 import sassMetaVariables from "@js/store/state/sass/metaVariables"
+import currentPlaylist from "@js/store/state/music/currentPlaylist"
 
 const state = {
     ...musicModel,

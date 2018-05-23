@@ -2,6 +2,7 @@ import setSchema from "@js/store/mutations/db/setSchema"
 import setDB from "@js/store/mutations/db/setDB"
 import colors from "@js/store/mutations/localStorage/colors"
 import currentMusic from "@js/store/mutations/music/current"
+import currentPlaylist from "@js/store/mutations/music/currentPlaylist"
 
 
 const mutations = {
@@ -9,6 +10,7 @@ const mutations = {
     ...setDB,
     ...colors,
     ...currentMusic,
+    ...currentPlaylist,
 };
 
 export { mutations }

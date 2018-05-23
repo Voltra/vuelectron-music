@@ -3,7 +3,8 @@ const State = {
     MUSIC_MODEL: "musicModel",
     SASS_META_VARIABLES: "sassMetaVariables",
     COLORS_STORAGE: "colorsStorage",
-    CURRENT_MUSIC: "currentMusic"
+    CURRENT_MUSIC: "currentMusic",
+    CURRENT_PLAYLIST: "currentPlaylist"
 };
 
 export {State}
