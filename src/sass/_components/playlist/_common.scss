@@ -22,10 +22,6 @@
                     position: absolute;
                     @include trbl(0);
                 }
-
-                & td, & th{                    
-                    @include thtd;
-                }
             }
         }
     

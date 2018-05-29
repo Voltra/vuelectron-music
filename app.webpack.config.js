@@ -48,7 +48,7 @@ config.resolve.alias["@mutations"] = path.resolve(thisPath, "src/js/store/mutati
 
 config.resolve.alias["$vue"] = "vue/dist/vue.min.js";
 config.resolve.alias["$es-vue"] = "vue/dist/vue.esm.js";
-config.resolve.alias["$store"] = "store/dist/store.modern.min.js";
+config.resolve.alias["$localStorage"] = "store/dist/store.modern.min.js";
 config.resolve.alias["$state"] = path.resolve(thisPath, "src/js/store.state.js");
 config.resolve.alias["$getters"] = path.resolve(thisPath, "src/js/store.getters.js");
 config.resolve.alias["$mutations"] = path.resolve(thisPath, "src/js/store.mutations.js");

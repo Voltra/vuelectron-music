@@ -1,6 +1,6 @@
 import { json } from "@js/urls"
 import Vue from "$vue"
-import Plugins from "@vplugins/plugins"
+import Plugins from "@vplugins"
 import { components, componentsArray } from "@js/components"
 import { router } from "@js/router"
 import { store } from "@js/store"
@@ -37,13 +37,16 @@ import "@css/globals.scss"
 				store,
 				components,
 				created(){
+					//Uses the shared DB as the models' DB
 					this.$store.commit(Mutations.SET_DB, this.$db);
+
+
+					//Defines the schema of the DB
 					this.$store.commit(
 						Mutations.SET_SCHEMA,
 						Object.entries(dbConfig.schema)
 						.map(([table, schema])=>({table, columns: Object.keys(schema.indexes)}))
 						.reduce((schema, {table, columns})=>{
-							//({...schema, ...{[table]: columns}})
 							if(!schema[table])
 								schema[table] = [];
 
@@ -51,25 +54,14 @@ import "@css/globals.scss"
 							return schema;
 						}, {})
 					);
+
+					//Defines the namespace of the localStorage reserved to theming
 					this.$store.commit(
 						Mutations.SET_COLORS_STORAGE,
 						this.$localStorage.namespace("vm").namespace("colors")
 					);
 				},
 				mounted(){
-					/*const {map} = [];//Array.prototype;
-					const makeScrollbarY = e => new PerfectScrollbar(e, {
-						suppressScrollX: true,
-						maxScrollbarLength: 40
-					});
-
-					document.querySelectorAll("[data-scrollbar-y]")
-					::map(makeScrollbarY)
-					.forEach(e => 
-						["resize", "orientationchange"]
-						.forEach(event => window.addEventListener(event, ::e.update))
-					);*/
-
 					removeSpinnerLord();
 				}
 			});

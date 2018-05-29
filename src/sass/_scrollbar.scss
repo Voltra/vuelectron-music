@@ -1,6 +1,8 @@
 .ps{
 	@each $o in (y, x){
 		& > .ps__rail-#{$o}{
+			border-radius: $fullWidth;
+			
 			&, & > .ps__thumb-#{$o}{
 				opacity: 0;
 				transition: opacity $transitionDuration ease-in-out;

@@ -1,0 +1,4 @@
+*:not(.material-icons){
+	box-sizing: border-box;
+	font-family: r;
+}

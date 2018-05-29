@@ -7,11 +7,6 @@
 //$animationDuration: 0.3s;
 //@import "~vue2-animate/src/sass/vue2-animate";
 
-*:not(.material-icons){
-	box-sizing: border-box;
-	font-family: r;
-}
-
 body, #app{
 	width: $fullWidth;
 	height: $fullHeight;

@@ -102,18 +102,11 @@ $playlistWidth: $fullWidth;
 $playlistHeight: 80vh; //TODO: Craft the size
 $playlistCellPadding: 1rem;
 @mixin playlistSharedTrStyles(){
-    // display: flex;
-    display: block;
-    align-items: center;
-    justify-content: center;
-
-    & th, & td{
-        // flex: 1;
-        display: block;
-        float: left;
-        text-align: center;
-        padding: $playlistCellPadding;
-    }
+    display: flex;
+    // display: block;
+    min-width: 100%;
+    width: auto;
+    height: 100%;
 }
     $playlistTableWidth: $playlistWidth;
     $playlistTableHeight: $playlistHeight;
@@ -127,14 +120,15 @@ $playlistCellPadding: 1rem;
 /*****************************************************\
     Playlist item
 \*****************************************************/
-$playlistItemWidth: $playlistWidth;
-$playlistItemHeight: calc(40px + (2 * #{$playlistCellPadding}));
+    $playlistItemCellHeight: 40px;
     $playlistItemCellTranslateY: calc(#{$playlistCellPadding} * 2 / 3);
     $playlistItemPlayCellTranslateY: calc(#{$playlistItemCellTranslateY} / 2);
+$playlistItemWidth: $playlistWidth;
+$playlistItemHeight: calc(#{$playlistItemCellHeight} + (2 * #{$playlistCellPadding}));
 @mixin flexDistribution(){
     $unit: 10vmin;
 
-    &.play, &.duration, &.year, &.plays{
+    &.play, &.duration, &.year{
         // flex: 1*$unit;
         width: 1*$unit;
     }
@@ -144,19 +138,8 @@ $playlistItemHeight: calc(40px + (2 * #{$playlistCellPadding}));
         width: 6*$unit;
     }
 
-    &.artist, &.album, &.genre, &.date_added{
+    &.artist, &.album, &.genre, &.date_added, &.plays{
         // flex: 2*$unit;
         width: 2*$unit;
-    }
-}
-@mixin thtd(){
-    float: left;
-    display: block;
-    @include flexDistribution;
-
-    transform: translateY($playlistItemCellTranslateY);
-
-    &.play{
-        transform: translateY($playlistItemPlayCellTranslateY);
     }
 }

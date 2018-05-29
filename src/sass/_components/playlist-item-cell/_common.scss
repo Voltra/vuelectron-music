@@ -1,0 +1,17 @@
+.cell{
+    display: block;
+    float: left;
+    box-sizing: content-box;
+    text-align: center;
+
+    padding: $playlistCellPadding;
+    @include flexDistribution;
+    height: $playlistItemCellHeight;
+
+
+    & > .content{
+        line-height: $playlistItemCellHeight;
+        vertical-align: middle;
+        user-select: none;
+    }
+}

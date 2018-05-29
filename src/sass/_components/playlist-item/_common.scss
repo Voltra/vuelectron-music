@@ -1,11 +1,7 @@
 tr.playlist__item{
     @include playlistSharedTrStyles;
 
-    @include mmwidth($playlistItemWidth);
+    @include mmwidth(100%);
+    // @include mmwidth($playlistItemWidth);
     @include mmheight($playlistItemHeight);
-    overflow: hidden;
-
-    & > td{
-        @include thtd;
-    }
 }

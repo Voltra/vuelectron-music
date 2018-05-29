@@ -14,11 +14,11 @@ const plugin = {
             bind(el, binding, vnode){
                 const scrollbar = makeScrollbarX(el);
                 el.$scrollbarX = scrollbar;
-                events.forEach(event => el.addEventListener(event, ::scrollbar.update));
+                events.forEach(event => window.addEventListener(event, ::scrollbar.update));
             },
             unbind(el, binding, vnode){
                 const scrollbar = el.$scrollbarX;
-                events.forEach(event => el.removeEventListener(event, ::scrollbar.update));
+                events.forEach(event => window.removeEventListener(event, ::scrollbar.update));
             }
         });
     }

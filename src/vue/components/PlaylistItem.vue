@@ -1,6 +1,8 @@
 <script>
 	import { mapGetters } from "vuex"
 	import { Getters } from "@js/store.getters"
+	import PlaylistItemCell from "@components/PlaylistItemCell"
+	import { td } from "@js/helpers/thtd"
 
 	export default {
 		name: "playlist-item",
@@ -8,8 +10,13 @@
 			return (
 				<tr class={this.classes}>
 					{
+						/*this.musicDatas.map(({property, text, classes}) => (
+							<td class={classes} title={text}>
+								<div class={[...classes, "content"]}>{text}</div>
+							</td>
+						))*/
 						this.musicDatas.map(({property, text, classes}) => (
-							<td class={classes} title={text}>{text}</td>
+							<PlaylistItemCell text={text} classes={classes} type={td}/>
 						))
 					}
 				</tr>
@@ -133,7 +140,7 @@
 					.map(([property, text]) => ({property, text}))//{property, text}
 					.sortBy(::this.headerName)//{property, text}
 					.map(::this.transformEntry)//{property, text}
-					.map((e, i) => ({...e, classes: [...this.headers[i].classes], ...this.classes}))//{property, text, classes}
+					.map((e, i) => ({...e, classes: [...this.headers[i].classes, "item"], ...this.classes, }))//{property, text, classes}
 					.map(::this.addAdditionalClasses)//{property, text, classes}
 
 					//{property, text, classes}

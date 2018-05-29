@@ -1,4 +1,4 @@
-import $ls from "$store"
+import $ls from "$localStorage"
 
 const plugin = {
 	install(Vue){
