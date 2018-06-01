@@ -62,9 +62,11 @@
 		},
 		methods: {
 			renderContent(){
+				const content = this.$props.text;
+				
 				return (
-					<div class={this.contentClasses}>
-						{this.$props.text}
+					<div class={this.contentClasses} title={content}>
+						{content}
 					</div>
 				);
 			}

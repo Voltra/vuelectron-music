@@ -2,27 +2,19 @@
     //position: relative;
     display: block;
 
-    width: $playlistWidth;
+    width: $fullWidth;//$playlistWidth;
     height: $playlistHeight;
 
     & table{
         position: relative;
+        display: block;
+
         width: $playlistTableWidth;
         height: $playlistTableHeight;
 
         & .head, & .body{
             position: relative;
-
-            & tr{
-                position: relative;
-
-                &::before{
-                    z-index: $topIndex;
-                    content: "";
-                    position: absolute;
-                    @include trbl(0);
-                }
-            }
+            display: block;
         }
     
         & .head{
@@ -31,14 +23,12 @@
 
             & tr{
                 @include playlistSharedTrStyles;
-                height: 100%;
             }
         }
     
         & .body{
             width: $playlistBodyWidth;
             height: $playlistBodyHeight;
-            //position: relative;
         }
     }
 }

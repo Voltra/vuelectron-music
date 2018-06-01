@@ -41,6 +41,7 @@ config.resolve.alias["@components"] = path.resolve(thisPath, "src/vue/components
 config.resolve.alias["@vplugins"] = path.resolve(thisPath, "src/vue/plugins/");
 config.resolve.alias["@css"] = path.resolve(thisPath, "src/sass/");
 config.resolve.alias["@img"] = path.resolve(thisPath, "src/rsc/img");
+
 config.resolve.alias["@store"] = path.resolve(thisPath, "src/js/store/");
 config.resolve.alias["@state"] = path.resolve(thisPath, "src/js/store/state/");
 config.resolve.alias["@getters"] = path.resolve(thisPath, "src/js/store/getters/");

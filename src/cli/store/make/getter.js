@@ -2,7 +2,7 @@ const { success, inform, itemify, pathify } = require("../utils");
 const Builder = require("../builder");
 
 
-function makeGetter(config, { getterName, getterOutput }){
+function makeGetter(config, fs, { getterName, getterOutput }){
     const { root, getterTemplate, reg, exports } = config;
     const content = getterTemplate
     .replace(/%getterName%/g, getterName);
@@ -17,9 +17,9 @@ function makeGetter(config, { getterName, getterOutput }){
     .then(_ => console.log(""));
 }
 
-function makeGetterInit(config){
+function makeGetterInit(config, fs){
     return {
-        handler: makeGetter.bind(null, config),
+        handler: makeGetter.bind(null, config, fs),
         builder: build => {
             return Builder.from(build)
             .withGetterName()

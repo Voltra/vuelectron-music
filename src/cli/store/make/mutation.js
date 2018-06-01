@@ -1,7 +1,7 @@
 const { success, inform, itemify, pathify } = require("../utils");
 const Builder = require("../builder");
 
-function makeMutation(config, { mutationName, stateName, mutationOutput }){
+function makeMutation(config, fs, { mutationName, stateName, mutationOutput }){
     const { root, mutationTemplate, reg, exports } = config;
     const content = mutationTemplate
     .replace(/%mutationName%/g, mutationName)
@@ -17,9 +17,9 @@ function makeMutation(config, { mutationName, stateName, mutationOutput }){
     .then(_ => console.log(""));
 }
 
-function makeMutationInit(config){
+function makeMutationInit(config, fs){
     return {
-        handler: makeMutation.bind(null, config),
+        handler: makeMutation.bind(null, config, fs),
         builder: build => {
             return Builder.from(build)
             .withStateName()

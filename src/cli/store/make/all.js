@@ -4,16 +4,16 @@ const { makeMutation } = require("./mutation");
 
 const Builder = require("../builder");
 
-function makeAll(config, args){
-    return makeState(config, args)
-    .then(_ => makeGetter(config, args))
-    .then(_ => makeMutation(config, args));
+function makeAll(config, fs, args){
+    return makeState(config, fs, args)
+    .then(_ => makeGetter(config, fs, args))
+    .then(_ => makeMutation(config, fs, args));
 }
 
 
-function makeAllInit(config){
+function makeAllInit(config, fs){
     return {
-        handler: makeAll.bind(null, config),
+        handler: makeAll.bind(null, config, fs),
         builder: build => {
             return Builder.from(build)
             .withStateName()

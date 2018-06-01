@@ -2,6 +2,9 @@
 	@each $o in (y, x){
 		& > .ps__rail-#{$o}{
 			border-radius: $fullWidth;
+			&, & *{
+				z-index: $scrollbarIndex;
+			}
 			
 			&, & > .ps__thumb-#{$o}{
 				opacity: 0;
@@ -34,6 +37,9 @@
 		//right: $scrollbarSpacing;
 	
 		@include margin-vertical($scrollbarSpacing);
+		// margin-top: $scrollbarMarginTop;
+		// margin-bottom: $scrollbarMarginBottom;
+
 		width: $scrollbarWidth;
 		height: $scrollbarHeight !important;
 		//left: unset !important;

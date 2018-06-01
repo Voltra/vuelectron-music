@@ -7,6 +7,15 @@
 //$animationDuration: 0.3s;
 //@import "~vue2-animate/src/sass/vue2-animate";
 
+*{
+	font-size: $fontSize;
+	letter-spacing: $letterSpacing;
+
+	*.material-icons{
+		font-size: $iconFontSize;
+	}
+}
+
 body, #app{
 	width: $fullWidth;
 	height: $fullHeight;

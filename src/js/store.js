@@ -7,12 +7,15 @@ import { mutations } from "@js/store/mutations"
 
 
 Vue.use(Vuex)
-const { Store } = Vuex;
-const store = new Store({
-    state,
-    mutations,
-    getters
-});
+const makeStore = function(){
+    const { Store } = Vuex;
+    const store = new Store({
+        state,
+        mutations,
+        getters
+    });
+    return { store };
+};
 
 
-export {store}
+export { makeStore }

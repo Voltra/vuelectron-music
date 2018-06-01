@@ -3,7 +3,7 @@
 	import { Getters } from "@js/store.getters"
 	import PlaylistItem from "@components/PlaylistItem"
 	import PlaylistItemCell from "@components/PlaylistItemCell"
-	import { th } from "@js/helpers/thtd"
+	import { th, td } from "@js/helpers/thtd"
 
 	export default {
 		name: "playlist",
@@ -15,7 +15,7 @@
 							<tr>
 								{
 									this.headers.map(({text, classes}) => (
-										<PlaylistItemCell text={text} classes={classes} type={th}/>
+										<PlaylistItemCell key={text} type={th} text={text} classes={classes}/>
 									))
 								}
 							</tr>
@@ -23,7 +23,7 @@
 						<tbody class="body" ref="body" v-scrollbar-y data-scrollbar-no-x>
 							{
 								this.rows.map((music, i) => (
-									<PlaylistItem key={music} active={this.isItemActive(i)} music={music} headers={this.headers}/>
+									<PlaylistItem key={music} type={td} active={this.isItemActive(i)} music={music} headers={this.headers}/>
 								))
 							}
 						</tbody>
@@ -92,6 +92,8 @@
 				this.$nextTick(()=>{
 					this.$refs.body.$scrollbarY.update();
 					this.$refs.container.$scrollbarX.update();
+
+					// this.$refs.container.$scollbarXY.update();
 				});
 			},
 			getActiveIndex(){

@@ -1,9 +1,10 @@
-import dbColumns from "@js/store/getters/db/columns"
-import musicModel from "@js/store/getters/music/model"
-import sassMetaVariables from "@js/store/getters/sass/metaVariables"
-import localStorageColors from "@js/store/getters/localStorage/colors"
-import currentMusic from "@js/store/getters/music/current"
+import dbColumns from "@getters/db/columns"
+import musicModel from "@getters/music/model"
+import sassMetaVariables from "@getters/sass/metaVariables"
+import localStorageColors from "@getters/localStorage/colors"
+import currentMusic from "@getters/music/current"
 import currentPlaylist from "@getters/music/currentPlaylist"
+import loaded from "@getters/misc/loaded"
 
 const getters = {
     ...dbColumns,
@@ -12,6 +13,7 @@ const getters = {
     ...localStorageColors,
     ...currentMusic,
     ...currentPlaylist,
+    ...loaded,
 };
 
 export {getters}

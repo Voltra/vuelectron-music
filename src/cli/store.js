@@ -43,15 +43,15 @@ grabJSON(configFile)
 .then(userConfig => {
     const config = merge(defaults, userConfig);
     const makeAllStr = "Makes a state, a getter and a mutation";
-    const makeAllSettings = makeAllInit(config);
+    const makeAllSettings = makeAllInit(config, fs);
 
     const args = yargs
     .usage("Usage: store <command> [options]")
     .command("make:@", makeAllStr, makeAllSettings)
     .command("make:all", makeAllStr, makeAllSettings)
-    .command("make:state", "Makes a state", makeStateInit(config))
-    .command("make:getter", "Makes a getter", makeGetterInit(config))
-    .command("make:mutation", "Makes a mutation", makeMutationInit(config))
+    .command("make:state", "Makes a state", makeStateInit(config, fs))
+    .command("make:getter", "Makes a getter", makeGetterInit(config, fs))
+    .command("make:mutation", "Makes a mutation", makeMutationInit(config, fs))
     .help("h")
     .alias("h", "help")
     .demandCommand(1, "You need to use a command")

@@ -4,7 +4,8 @@ const State = {
     SASS_META_VARIABLES: "sassMetaVariables",
     COLORS_STORAGE: "colorsStorage",
     CURRENT_MUSIC: "currentMusic",
-    CURRENT_PLAYLIST: "currentPlaylist"
+    CURRENT_PLAYLIST: "currentPlaylist",
+    LOADED: "loaded",
 };
 
 export {State}

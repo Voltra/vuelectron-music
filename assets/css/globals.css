@@ -2,3 +2,7 @@
 	box-sizing: border-box;
 	font-family: r;
 }
+
+*{
+	-webkit-font-smoothing: subpixel-antialiased;
+}

@@ -3,7 +3,7 @@ import Vue from "$vue"
 import Plugins from "@vplugins"
 import { components, componentsArray } from "@js/components"
 import { router } from "@js/router"
-import { store } from "@js/store"
+import { makeStore } from "@js/store"
 import { Mutations } from "@js/store.mutations"
 
 
@@ -26,10 +26,15 @@ import "@css/globals.scss"
 	]).then(([dbConfig])=>{
 		const {plugins, factories} = Plugins;
 		
-		[...plugins, ...componentsArray].forEach(e => Vue.use(e));
+		[...plugins, ...componentsArray].forEach(e => {
+			console.log("Will use: 	", e);
+			Vue.use(e);
+		});
 		return factories["indexedDBFactory"](Vue, dbConfig)
 		.then(_ => Promise.resolve([dbConfig]));
-	}).then(([dbConfig])=>{		
+	}).then(([dbConfig])=>{
+		const { store } = makeStore();
+		
 		const setup = ()=>{			
 			const $vm = new Vue({
 				el: "#app",
@@ -63,7 +68,8 @@ import "@css/globals.scss"
 				},
 				mounted(){
 					removeSpinnerLord();
-				}
+				},
+                watch: {}
 			});
 
 			window.$vm = $vm;

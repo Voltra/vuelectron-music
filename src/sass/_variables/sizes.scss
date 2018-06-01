@@ -8,13 +8,24 @@ $fullHeight: 100vh;
 $floorIndex: 0;
 $topIndex: 1;
 $supraIndex: 10;
+$scrollbarIndex: 11;
 $overTheTopIndex: 911;
 
-$scrollbarWidth: 5px; //6px
-$scrollbarSpacing: 10px;
-$scrollbarLeft: calc(100% - #{$scrollbarSpacing} - #{$scrollbarWidth});
+$fontSize: 13pt;
+$iconFontSize: 24px;
+$letterSpacing: 0.9pt;
+
+
+/*****************************************************\
+    Top Bar
+\*****************************************************/
+$scrollbarWidth: 4px; //6px
+$scrollbarSpacing: 8px;
+$scrollbarMarginTop: $scrollbarSpacing;
+$scrollbarMarginBottom: 2 * $scrollbarMarginTop;
+$scrollbarLeft: calc(100% - (2 * #{$scrollbarSpacing});
 $scrollbarTop: $scrollbarLeft;
-$scrollbarHeight: calc(100% - (2 * #{$scrollbarSpacing}));
+$scrollbarHeight: calc(100% - (#{$scrollbarMarginTop} + #{$scrollbarMarginBottom}));
     $scrollbarThumbWidth: $scrollbarWidth + 6px; //2 * $scrollbarWidth;
     $scrollbarThumbSpacing: calc((#{$scrollbarThumbWidth} - #{$scrollbarWidth}) / 2);
 
@@ -98,22 +109,51 @@ $settingsMenuHeight: $fullHeight;
 /*****************************************************\
     Playlist
 \*****************************************************/
-$playlistWidth: $fullWidth;
+$playlistUnit: 10vmin;
+@mixin flexDistribution($unit: $playlistUnit){
+    // $unit: 10vmin;
+
+    &.play, &.year{
+        // flex: 1*$unit;
+        width: 1*$unit;
+    }
+    
+    &.title{
+        // flex: 4*$unit;
+        width: 6*$unit;
+    }
+
+    &.artist, &.album, &.genre, &.date_added, &.plays, &.duration{
+        // flex: 2*$unit;
+        width: 2*$unit;
+    }
+}
+
+$playlistWidth: 22 * $playlistUnit;//$fullWidth;
 $playlistHeight: 80vh; //TODO: Craft the size
-$playlistCellPadding: 1rem;
+$playlistCellPadding: $fontSize * 3/4;//0.5rem;
 @mixin playlistSharedTrStyles(){
     display: flex;
     // display: block;
     min-width: 100%;
     width: auto;
     height: 100%;
+
+    position: relative;
+
+    &::before{
+        z-index: $topIndex;
+        content: "";
+        position: absolute;
+        @include trbl(0);
+
+        pointer-events: none;
+    }
 }
     $playlistTableWidth: $playlistWidth;
     $playlistTableHeight: $playlistHeight;
         $playlistHeadWidth: $playlistTableWidth;
-        $playlistHeadHeight: calc(#{$playlistTableHeight} / 10);
         $playlistBodyWidth: $playlistHeadWidth;
-        $playlistBodyHeight: calc(9 / 10 * #{$playlistTableHeight});
 
 
 
@@ -125,21 +165,6 @@ $playlistCellPadding: 1rem;
     $playlistItemPlayCellTranslateY: calc(#{$playlistItemCellTranslateY} / 2);
 $playlistItemWidth: $playlistWidth;
 $playlistItemHeight: calc(#{$playlistItemCellHeight} + (2 * #{$playlistCellPadding}));
-@mixin flexDistribution(){
-    $unit: 10vmin;
 
-    &.play, &.duration, &.year{
-        // flex: 1*$unit;
-        width: 1*$unit;
-    }
-    
-    &.title{
-        // flex: 4*$unit;
-        width: 6*$unit;
-    }
-
-    &.artist, &.album, &.genre, &.date_added, &.plays{
-        // flex: 2*$unit;
-        width: 2*$unit;
-    }
-}
+$playlistHeadHeight: $playlistItemHeight;
+$playlistBodyHeight: calc(#{$playlistTableHeight} - #{$playlistHeadHeight});

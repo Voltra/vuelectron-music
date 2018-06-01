@@ -1,7 +1,7 @@
 const { success, inform, itemify, pathify } = require("../utils");
 const Builder = require("../builder");
 
-function makeState(config, { stateName, stateOutput }){
+function makeState(config, fs, { stateName, stateOutput }){
     const { root, stateTemplate, reg, exports } = config;
     const content = stateTemplate
     .replace(/%stateName%/g, stateName);
@@ -16,9 +16,9 @@ function makeState(config, { stateName, stateOutput }){
     .then(_ => console.log(""));
 }
 
-function makeStateInit(config){
+function makeStateInit(config, fs){
     return {
-        handler: makeState.bind(null, config),
+        handler: makeState.bind(null, config, fs),
         builder: build => {
             return Builder.from(build)
             .withStateName()
