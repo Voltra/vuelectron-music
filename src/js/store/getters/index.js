@@ -5,6 +5,8 @@ import localStorageColors from "@getters/localStorage/colors"
 import currentMusic from "@getters/music/current"
 import currentPlaylist from "@getters/music/currentPlaylist"
 import loaded from "@getters/misc/loaded"
+import sortingCriteria from "@getters/music/sortingCriteria"
+import sortAsc from "@getters/music/sortAsc"
 
 const getters = {
     ...dbColumns,
@@ -13,7 +15,9 @@ const getters = {
     ...localStorageColors,
     ...currentMusic,
     ...currentPlaylist,
-    ...loaded,
+	...loaded,
+	...sortingCriteria,
+	...sortAsc,
 };
 
 export {getters}

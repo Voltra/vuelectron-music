@@ -7,18 +7,21 @@
 		render(){
 			if(this.$props.type === th)
 				return (
-					<th class={this.cellClasses}>
+					<th class={this.cellClasses} onClick={::this.onClick}>
 						{this.renderContent()}
 					</th>
 				);
 			
 			return (
-				<td class={this.cellClasses}>
+				<td class={this.cellClasses} onClick={::this.onClick}>
 					{this.renderContent()}
 				</td>
 			);
 		},
 		props: {
+			uniq: {
+				required: true
+			},
 			type: {
 				type: TableCell,
 				required: false,
@@ -36,6 +39,11 @@
 					return e instanceof Array
 					&& e.every(el => typeof el == "string");
 				}
+			},
+			isListenedTo: {
+				required: false,
+				type: Boolean,
+				default: false
 			}
 		},
 		data(){
@@ -69,6 +77,10 @@
 						{content}
 					</div>
 				);
+			},
+			onClick(){
+				if(this.$props.isListenedTo)
+					this.$emit("clicked", this.$props);
 			}
 		}
 	};

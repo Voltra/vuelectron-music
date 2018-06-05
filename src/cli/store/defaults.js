@@ -12,7 +12,7 @@ import { State } from "@js/store.state"
 
 const e = {
     [Getters.%getterName%](state){
-        return null;
+        return state[State.%stateName%];
     }
 };
 

@@ -8,14 +8,24 @@
 	export default {
 		name: "playlist",
 		render(){
+			this.updateScrollbars();
+
 			return (
 				<div class="playlist" ref="container" v-scrollbar-x data-scrollbar-no-y>
 					<table>
 						<thead class="head">
 							<tr>
 								{
-									this.headers.map(({text, classes}) => (
-										<PlaylistItemCell key={text} type={th} text={text} classes={classes}/>
+									this.headers.map(({name, text, classes, shouldListenToEvents}) => (
+										<PlaylistItemCell
+											uniq={name}
+											key={text}
+											type={th}
+											text={text}
+											classes={classes}
+											isListenedTo={shouldListenToEvents}
+											onClicked={::this.sortByHeader}
+										/>
 									))
 								}
 							</tr>
@@ -34,7 +44,9 @@
 		data(){
 			return {
 				sortingFunction: (lhs, rhs)=>Object.compare(lhs.title, rhs.title),
-				activeIndex: -1
+				activeIndex: -1,
+				sortingCriteria: null, //will initially be set to "title",
+				isAscending: false
 			};
 		},
 		props: {
@@ -66,7 +78,8 @@
 						{name: "plays", text: "# of plays", classes},
 					].map(obj => ({
 						...obj,
-						classes: [...obj.classes, obj.name]
+						classes: [...obj.classes, obj.name],
+						shouldListenToEvents: obj.name !== "play"
 					}));
 				},
 				rows(){
@@ -75,6 +88,12 @@
 			}
 		},
 		methods: {
+			sortingFunctionFactory(criteria, asc=true){
+				if(asc)
+					return (lhs, rhs) => Object.compare(lhs[criteria], rhs[criteria]);
+
+				return (lhs, rhs) => Object.compare(rhs[criteria], lhs[criteria]);
+			},
 			isItemActive(i){
 				if(typeof i != "number")
 					throw new TypeError("The given index must be a Number");
@@ -101,6 +120,15 @@
 					return Math.floor(Math.random() * this.musics.length) % this.musics.length;
 
 				return -1;
+			},
+			sortByHeader({ uniq }){
+				if(this.sortingCriteria === uniq){
+					this.isAscending = !this.isAscending;
+					this.sortingFunction = this.sortingFunctionFactory(this.sortingCriteria, this.isAscending);
+				}else{
+					this.sortingFunction = this.sortingFunctionFactory(uniq, true);
+					this.sortingCriteria = uniq;
+				}
 			}
 		},
 		watch: {
@@ -109,6 +137,9 @@
 		mounted(){
 			this.updateScrollbars();
 			this.activeIndex = this.getActiveIndex();
+			this.sortByHeader({
+				uniq: "title"
+			});
 			console.log(this);
 		}
 	};

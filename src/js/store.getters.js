@@ -5,7 +5,9 @@ const Getters = [
     "COLORS_STORAGE",
     "CURRENT_MUSIC",
     "CURRENT_PLAYLIST",
-    "IS_LOADED",
+	"IS_LOADED",
+	"SORTING_CRITERIA",
+	"SORT_ASC",
 ].map(getter => ({
     [getter]: getter
 })).reduce((acc, elem)=>({...acc, ...elem}), {});

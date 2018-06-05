@@ -4,7 +4,8 @@ import colors from "@mutations/localStorage/colors"
 import currentMusic from "@mutations/music/current"
 import currentPlaylist from "@mutations/music/currentPlaylist"
 import loaded from "@mutations/misc/loaded"
-
+import sortingCriteria from "@mutations/music/sortingCriteria"
+import sortAsc from "@mutations/music/sortAsc"
 
 const mutations = {
     ...setSchema,
@@ -12,7 +13,9 @@ const mutations = {
     ...colors,
     ...currentMusic,
     ...currentPlaylist,
-    ...loaded,
+	...loaded,
+	...sortingCriteria,
+	...sortAsc,
 };
 
 export { mutations }

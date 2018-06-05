@@ -8,7 +8,6 @@ import { Mutations } from "@js/store.mutations"
 
 
 import { $json } from "@voltra/json"
-import PerfectScrollbar from "perfect-scrollbar"
 
 import { Music } from "@js/models/Music"
 import removeSpinnerLord from "@js/helpers/removeSpinnerLord"
@@ -26,10 +25,7 @@ import "@css/globals.scss"
 	]).then(([dbConfig])=>{
 		const {plugins, factories} = Plugins;
 		
-		[...plugins, ...componentsArray].forEach(e => {
-			console.log("Will use: 	", e);
-			Vue.use(e);
-		});
+		[...plugins, ...componentsArray].forEach(e => Vue.use(e));
 		return factories["indexedDBFactory"](Vue, dbConfig)
 		.then(_ => Promise.resolve([dbConfig]));
 	}).then(([dbConfig])=>{

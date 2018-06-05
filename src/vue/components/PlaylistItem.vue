@@ -16,7 +16,7 @@
 							</td>
 						))*/
 						this.musicDatas.map(({property, text, classes}) => (
-							<PlaylistItemCell text={text} classes={classes} type={td}/>
+							<PlaylistItemCell uniq={property} text={text} classes={classes} type={td}/>
 						))
 					}
 				</tr>

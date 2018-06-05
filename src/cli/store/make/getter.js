@@ -2,10 +2,11 @@ const { success, inform, itemify, pathify } = require("../utils");
 const Builder = require("../builder");
 
 
-function makeGetter(config, fs, { getterName, getterOutput }){
+function makeGetter(config, fs, { getterName, getterOutput, stateName }){
     const { root, getterTemplate, reg, exports } = config;
     const content = getterTemplate
-    .replace(/%getterName%/g, getterName);
+	.replace(/%getterName%/g, getterName)
+	.replace(/%stateName%/g, stateName);
     
     const outputPath = `${root}/${getterOutput}`;
     const displayPath = reg.showFullPath ? `${root}/${reg.getter}` : reg.getter;
@@ -22,7 +23,8 @@ function makeGetterInit(config, fs){
         handler: makeGetter.bind(null, config, fs),
         builder: build => {
             return Builder.from(build)
-            .withGetterName()
+			.withGetterName()
+			.withStateName()
             .withGetterOutput()
             .buid();
         }

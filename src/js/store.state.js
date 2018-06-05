@@ -5,7 +5,9 @@ const State = {
     COLORS_STORAGE: "colorsStorage",
     CURRENT_MUSIC: "currentMusic",
     CURRENT_PLAYLIST: "currentPlaylist",
-    LOADED: "loaded",
+	LOADED: "loaded",
+	SORTING_CRITERIA: "sortingCriteria",
+	SORT_ASC: "sortAsc",
 };
 
 export {State}

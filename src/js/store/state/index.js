@@ -5,6 +5,8 @@ import localStorageColors from "@state/localStorage/colors"
 import sassMetaVariables from "@state/sass/metaVariables"
 import currentPlaylist from "@state/music/currentPlaylist"
 import loaded from "@state/misc/loaded"
+import sortingCriteria from "@state/music/sortingCriteria"
+import sortAsc from "@state/music/sortAsc"
 
 const state = {
     ...musicModel,
@@ -12,7 +14,9 @@ const state = {
     ...dbSchema,
     ...sassMetaVariables,
     ...localStorageColors,
-    ...loaded,
+	...loaded,
+	...sortingCriteria,
+	...sortAsc,
 };
 
 export {state}
