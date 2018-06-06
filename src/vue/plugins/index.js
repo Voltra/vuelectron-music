@@ -17,21 +17,22 @@ import ScrollBarXY_Plugin from "@vplugins/scrollbar-xy"
 import indexedDBFactory from "@vplugins/indexedDBFactory"
 
 
-export default {
-	plugins: [
-		VueRouter,
-		Vuex,
-		// AsyncComputedPlugin,
-		LocalStoragePlugin,
-		JsonClientPlugin,
-		ElectronBridgePlugin,
-		RequirePlugin,
-		CssVarPlugin,
-		ScrollBarY_Plugin,
-		ScrollBarX_Plugin,
-		ScrollBarXY_Plugin,
-	],
-	factories: {
-		indexedDBFactory,
-	}
-}
+const plugins = [
+	VueRouter,
+	Vuex,
+	// AsyncComputedPlugin,
+	LocalStoragePlugin,
+	JsonClientPlugin,
+	ElectronBridgePlugin,
+	RequirePlugin,
+	CssVarPlugin,
+	ScrollBarY_Plugin,
+	ScrollBarX_Plugin,
+	ScrollBarXY_Plugin,
+];
+
+const factories = {
+	indexedDBFactory,
+};
+
+export { plugins, factories }

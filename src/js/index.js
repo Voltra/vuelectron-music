@@ -1,10 +1,11 @@
 import { json } from "@js/urls"
 import Vue from "$vue"
-import Plugins from "@vplugins"
+import { plugins, factories } from "@vplugins"
 import { components, componentsArray } from "@js/components"
 import { router } from "@js/router"
-import { makeStore } from "@js/store"
+import { storeFactory } from "@js/store"
 import { Mutations } from "@js/store.mutations"
+
 
 
 import { $json } from "@voltra/json"
@@ -23,13 +24,13 @@ import "@css/globals.scss"
 	Promise.all([
 		$json.get(json("/db.json"))
 	]).then(([dbConfig])=>{
-		const {plugins, factories} = Plugins;
+		//const {plugins, factories} = Plugins;
 		
 		[...plugins, ...componentsArray].forEach(e => Vue.use(e));
 		return factories["indexedDBFactory"](Vue, dbConfig)
 		.then(_ => Promise.resolve([dbConfig]));
 	}).then(([dbConfig])=>{
-		const { store } = makeStore();
+		const { store } = storeFactory();
 		
 		const setup = ()=>{			
 			const $vm = new Vue({

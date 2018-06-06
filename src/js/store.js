@@ -7,7 +7,7 @@ import { mutations } from "@js/store/mutations"
 
 
 Vue.use(Vuex)
-const makeStore = function(){
+const storeFactory = function(){
     const { Store } = Vuex;
     const store = new Store({
         state,
@@ -18,4 +18,4 @@ const makeStore = function(){
 };
 
 
-export { makeStore }
+export { storeFactory }

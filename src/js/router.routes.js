@@ -3,4 +3,4 @@ const Routes = {
     PLAYER: "player"
 };
 
-export {Routes}
+export { Routes }
