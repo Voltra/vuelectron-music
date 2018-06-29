@@ -10,6 +10,7 @@ import ColorChanger from "@components/ColorChanger"
 import SettingsMenu from "@components/SettingsMenu"
 import Playlist from "@components/Playlist"
 import PlaylistItem from "@components/PlaylistItem"
+import PlaylistItemCell from "@components/PlaylistItemCell"
 
 
 import "@css/globals"
@@ -27,6 +28,7 @@ const components = {
     SettingsMenu,
     Playlist,
     PlaylistItem,
+    PlaylistItemCell,
 };
 
 const componentsArray = Object.values(components);

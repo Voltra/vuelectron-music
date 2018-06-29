@@ -1,7 +1,6 @@
 ////LIBS
 import VueRouter from "vue-router"
-import Vuex from "vuex"
-// import AsyncComputedPlugin from "vue-async-computed"
+// import Vuex from "vuex"
 
 ////REGULAR PLUGINS
 import LocalStoragePlugin from "@vplugins/localStorage"
@@ -16,12 +15,10 @@ import ScrollBarXY_Plugin from "@vplugins/scrollbar-xy"
 ////FACTORY-BASED PLUGINS
 import indexedDBFactory from "@vplugins/indexedDBFactory"
 
-
 export default {
 	plugins: [
 		VueRouter,
-		Vuex,
-		// AsyncComputedPlugin,
+		// Vuex,
 		LocalStoragePlugin,
 		JsonClientPlugin,
 		ElectronBridgePlugin,

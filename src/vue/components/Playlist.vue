@@ -126,7 +126,8 @@
 					this.isAscending = !this.isAscending;
 					this.sortingFunction = this.sortingFunctionFactory(this.sortingCriteria, this.isAscending);
 				}else{
-					this.sortingFunction = this.sortingFunctionFactory(uniq, true);
+					this.isAscending = true;
+					this.sortingFunction = this.sortingFunctionFactory(uniq, this.isAscending);
 					this.sortingCriteria = uniq;
 				}
 			}

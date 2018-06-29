@@ -1,9 +1,10 @@
 import { json } from "@js/urls"
-import Vue from "$vue"
+// import Vue from "$vue"
+import { Vue } from "@js/vueSetup"
 import Plugins from "@vplugins"
 import { components, componentsArray } from "@js/components"
 import { router } from "@js/router"
-import { makeStore } from "@js/store"
+import { storeFactory } from "@js/store"
 import { Mutations } from "@js/store.mutations"
 
 
@@ -22,14 +23,14 @@ import "@css/globals.scss"
 
 	Promise.all([
 		$json.get(json("/db.json"))
-	]).then(([dbConfig])=>{
+	]).then(([dbConfig]) => {
 		const {plugins, factories} = Plugins;
 		
 		[...plugins, ...componentsArray].forEach(e => Vue.use(e));
 		return factories["indexedDBFactory"](Vue, dbConfig)
 		.then(_ => Promise.resolve([dbConfig]));
-	}).then(([dbConfig])=>{
-		const { store } = makeStore();
+	}).then(([dbConfig]) => {
+		const { store } = storeFactory();
 		
 		const setup = ()=>{			
 			const $vm = new Vue({
@@ -40,7 +41,6 @@ import "@css/globals.scss"
 				created(){
 					//Uses the shared DB as the models' DB
 					this.$store.commit(Mutations.SET_DB, this.$db);
-
 
 					//Defines the schema of the DB
 					this.$store.commit(
@@ -64,8 +64,7 @@ import "@css/globals.scss"
 				},
 				mounted(){
 					removeSpinnerLord();
-				},
-                watch: {}
+				}
 			});
 
 			window.$vm = $vm;
