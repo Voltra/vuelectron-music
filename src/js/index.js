@@ -1,7 +1,7 @@
 import { json } from "@js/urls"
 // import Vue from "$vue"
 import { Vue } from "@js/vueSetup"
-import Plugins from "@vplugins"
+import { plugins, factories } from "@vplugins"
 import { components, componentsArray } from "@js/components"
 import { router } from "@js/router"
 import { storeFactory } from "@js/store"
@@ -23,16 +23,14 @@ import "@css/globals.scss"
 
 	Promise.all([
 		$json.get(json("/db.json"))
-	]).then(([dbConfig]) => {
-		const {plugins, factories} = Plugins;
-		
+	]).then(([dbConfig]) => {		
 		[...plugins, ...componentsArray].forEach(e => Vue.use(e));
 		return factories["indexedDBFactory"](Vue, dbConfig)
 		.then(_ => Promise.resolve([dbConfig]));
 	}).then(([dbConfig]) => {
 		const { store } = storeFactory();
 		
-		const setup = ()=>{			
+		const setup = ()=>{
 			const $vm = new Vue({
 				el: "#app",
 				router,

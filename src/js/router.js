@@ -1,4 +1,4 @@
-import VueRouter from "vue-router"
+import { VueRouter } from "@js/vueSetup"
 import { components } from "@js/components"
 import { Routes } from "@js/router.routes"
 
