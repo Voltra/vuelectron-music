@@ -14,5 +14,4 @@ const storeFactory = function(){
     return { store };
 };
 
-
 export { storeFactory }
