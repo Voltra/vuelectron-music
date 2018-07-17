@@ -130,7 +130,7 @@ $playlistUnit: 10vmin;
 }
 
 $playlistWidth: 22 * $playlistUnit;//$fullWidth;
-$playlistHeight: 80vh; //TODO: Craft the size
+$playlistHeight: 85vh; //80vh;
 $playlistCellPadding: $fontSize * 3/4;//0.5rem;
 @mixin playlistSharedTrStyles(){
     display: flex;
@@ -168,3 +168,19 @@ $playlistItemHeight: calc(#{$playlistItemCellHeight} + (2 * #{$playlistCellPaddi
 
 $playlistHeadHeight: $playlistItemHeight;
 $playlistBodyHeight: calc(#{$playlistTableHeight} - #{$playlistHeadHeight});
+
+
+
+/*****************************************************\
+    Desktop player bar
+\*****************************************************/
+$desktopPlayerBarWidth: $viewWidth;
+$desktopPlayerBarHeight: calc(#{$viewHeight} - #{$playlistHeight});
+
+
+
+/*****************************************************\
+    Player progressbar
+\*****************************************************/
+$playerProgressBarRailHeight: 1vh;
+$playerProgressBarRailMarginTop: calc((100% - #{$playerProgressBarRailHeight}) / 2);

@@ -5,6 +5,7 @@
 	import { MusicEvents } from "@js/models/Music"
 
 	import Playlist from "@components/Playlist"
+	import DesktopPlayerBar from "@components/DesktopPlayerBar"
 
 	export default {
 		name: "desktop-player",
@@ -12,8 +13,9 @@
 			return (
 				<div class="desktopPlayer">
 					<Playlist musics={this.musics}/>
-					{this.craftPlayer()}
-					<button class="rm" onClick={::this.removeAll}>Remove all musics</button>
+					<DesktopPlayerBar playlist={this.musics}/>
+					{/*this.craftPlayer()*/}
+					{/*<button class="rm" onClick={::this.removeAll}>Remove all musics</button>*/}
 				</div>
 			);
 		},

@@ -11,6 +11,8 @@ import SettingsMenu from "@components/SettingsMenu"
 import Playlist from "@components/Playlist"
 import PlaylistItem from "@components/PlaylistItem"
 import PlaylistItemCell from "@components/PlaylistItemCell"
+import DesktopPlayerBar from "@components/DesktopPlayerBar"
+import PlayerProgressBar from "@components/PlayerProgressBar"
 
 
 import "@css/globals"
@@ -29,6 +31,8 @@ const components = {
     Playlist,
     PlaylistItem,
     PlaylistItemCell,
+    DesktopPlayerBar,
+    PlayerProgressBar,
 };
 
 const componentsArray = Object.values(components);

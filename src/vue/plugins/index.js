@@ -1,6 +1,4 @@
 ////LIBS
-// import VueRouter from "vue-router"
-// import Vuex from "vuex"
 
 ////REGULAR PLUGINS
 import LocalStoragePlugin from "@vplugins/localStorage"
@@ -16,8 +14,6 @@ import ScrollBarXY_Plugin from "@vplugins/scrollbar-xy"
 import indexedDBFactory from "@vplugins/indexedDBFactory"
 
 const plugins = [
-	// VueRouter,
-	// Vuex,
 	LocalStoragePlugin,
 	JsonClientPlugin,
 	ElectronBridgePlugin,
@@ -33,21 +29,3 @@ const factories = {
 };
 
 export { plugins, factories }
-
-/*export default {
-	plugins: [
-		// VueRouter,
-		// Vuex,
-		LocalStoragePlugin,
-		JsonClientPlugin,
-		ElectronBridgePlugin,
-		RequirePlugin,
-		CssVarPlugin,
-		ScrollBarY_Plugin,
-		ScrollBarX_Plugin,
-		ScrollBarXY_Plugin,
-	],
-	factories: {
-		indexedDBFactory,
-	}
-}*/

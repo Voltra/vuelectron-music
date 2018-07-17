@@ -1,0 +1,21 @@
+.playerProgressBar{
+    &__rail{
+        background-color: $secondary;
+    }
+
+    &__progress, &__thumb{
+        background-color: $accent;
+
+        &:hover{
+            background-color: $accentDark;
+        }
+    }
+
+    & *:not(&__rail){
+        box-shadow: $rightShadow;
+    }
+
+    &__rail{
+        box-shadow: $heavyRegularShadow;
+    }
+}
