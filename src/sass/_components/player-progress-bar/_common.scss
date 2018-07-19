@@ -5,7 +5,13 @@
         position: relative;
     }
 
-    &, &__rail{
+    /*&, &__rail{
+        // width: 100%;
+        max-width: 100%;
+    }*/
+
+
+    &__rail{
         width: 100%;
     }
 
@@ -15,6 +21,7 @@
 
     &__rail{
         top: $playerProgressBarRailMarginTop;
+        cursor: pointer;
     }
 
     &__progress{
@@ -30,5 +37,16 @@
         transform: translateX(50%);
         width: calc(#{$playerProgressBarRailHeight} * #{2*stripUnit($offset)/100 + 1});
         border-radius: $fullWidth;
+
+        transition: transform 0.2s ease-in-out;
+        cursor: -webkit-grab;
+
+        &:hover, &.active{
+            transform: translateX(50%) scale(1.1);
+        }
+
+        &.active{
+            cursor: -webkit-grabbing;
+        }
     }
 }

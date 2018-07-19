@@ -6,7 +6,7 @@
     &__progress, &__thumb{
         background-color: $accent;
 
-        &:hover{
+        &:hover, &.active{
             background-color: $accentDark;
         }
     }

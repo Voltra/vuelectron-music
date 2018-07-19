@@ -26,22 +26,17 @@
 		methods: {
 			onEvent(event){
 				const { rail } = this.$refs;
-
-				const curX = event.clientX;
-				const railRect = rail.getBoundingClientRect();
-
-				const startX = railRect.left;
-				const endX = railRect.right;
-
-				this.percentage = this.computePercentage(curX, startX, endX);
+				this.percentage = this.computePercentage(event, rail);
 			},
 			startDrag(event){
-				const { wrapper } = this.$refs;
+				const { wrapper, thumb } = this.$refs;
 				wrapper.addEventListener("mousemove", this.handleEvent);
+				thumb.classList.add("active");
 			},
 			endDrag(event){
-				const { wrapper } = this.$refs;
+				const { wrapper, thumb } = this.$refs;
 				wrapper.removeEventListener("mousemove", this.handleEvent);
+				thumb.classList.remove("active");
 			},
 			onMousedown(event){
 				this.onEvent(event);
@@ -51,8 +46,19 @@
 				this.onEvent(event);
 				this.endDrag(event);
 			},
-			computePercentage(pos, begin, end){
-				return pos / (end - begin) * 100;
+			computePercentage(event, element){
+				const elemRect = element.getBoundingClientRect();
+				const { left, width } = elemRect;
+				const { x } = event;
+
+				console.log(`x: ${x}, width: ${width}, left: ${left}`);
+
+				const tmp = (x - left) / width * 100;
+				return tmp < 0
+				? 0
+				: tmp > 100
+					? 100
+					: tmp;
 			}
 		}
 	};
