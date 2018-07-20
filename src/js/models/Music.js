@@ -1,10 +1,6 @@
-//import EventSource from "events"
+import { defaults, msg, events } from "@js/models/ErrorHandling"
 
-const MusicEvents = {
-    UPDATE: "update",
-    INSERT: "insert",
-    REMOVE: "remove"
-}
+const MusicEvents = Object.assign({}, events);
 
 class Music{
     static listeners = Object.values(MusicEvents)
@@ -13,21 +9,21 @@ class Music{
         return acc;
     }, {});
 
-    static defaults = {
+    static defaults = defaults;/*{
         string: "N/A",
         number: 0,
         object: {},
         date: "dd/mm/yyyy",
         year: 0
-    };
+    };*/
 
-    static msg = {
+    static msg = msg;/*{
         NO_DB: "No database connection set up",
         NO_DATA: "No data for this table",
         ALREADY_EXISTS: "There's already a row with this unique column value",
         NOT_FOUND_OR_DUPLICATE: "The requested data either has a duplicate or doesn't exist",
         CANNOT_REMOVE_NOT_INSERTED: "Cannot remove a tuple that has not been inserted"
-    };
+    };*/
 
     static $db = null;
     static tmp_id = "mid";
@@ -85,7 +81,7 @@ class Music{
 
     static hasData(){
         if(!this.hasDb())
-            return Promise.reject(Music.msg.NO_DB);
+            return Promise.reject(this.msg.NO_DB);
 
         return this.getTable()
         .count()
@@ -108,7 +104,7 @@ class Music{
     }
 
     static doesNotExist(path){
-        if(!Music.hasDb())
+        if(!this.hasDb())
             return Promise.reject(this.msg.NO_DB);
 
         return this.getTable().query()
@@ -123,7 +119,7 @@ class Music{
     }
 
     static fromDB(id, isPath = false){
-        if(!Music.hasDb())
+        if(!this.hasDb())
             return Promise.reject(this.msg.NO_DB);
 
         const fromDbResult = result => {
@@ -144,7 +140,7 @@ class Music{
             neo.date_added = result.date_added;
             neo.plays = result.plays;
             neo.__inserted = true;
-            neo[Music.tmp_id] = result[Music.id];
+            neo[this.tmp_id] = result[this.id];
             return neo;
         };
 
@@ -164,7 +160,7 @@ class Music{
             return this.getTable()
             .get(id)
             .then(result => {
-                if(!result || !result[Music.id])
+                if(!result || !result[this.id])
                     return Promise.reject(this.msg.NOT_FOUND_OR_DUPLICATE);
 
                 return Promise.resolve(fromDbResult(result));
@@ -183,7 +179,7 @@ class Music{
         return this.getTable().remove(id)
         .then((...args) => {
             if(shouldTriggerEvents)
-                Music.trigger(MusicEvents.REMOVE);
+                this.trigger(MusicEvents.REMOVE);
 
             return Promise.resolve(...args);
         });
@@ -203,7 +199,7 @@ class Music{
         // )).then(_ => Music.trigger(MusicEvents.REMOVE))
 
         this.getTable()
-        .clear().then(_ => Music.trigger(MusicEvents.REMOVE))
+        .clear().then(_ => this.trigger(MusicEvents.REMOVE))
     }
 
     constructor(path, meta){ //Do not use directly
@@ -241,7 +237,7 @@ class Music{
             genre,
             date_added,
             plays,
-            year
+            year,
         } = this;
 
         return {
@@ -253,7 +249,7 @@ class Music{
             genre,
             date_added,
             plays,
-            year
+            year,
         };
     }
 

@@ -9,7 +9,7 @@ import { Mutations } from "@js/store.mutations"
 
 import { $json } from "@voltra/json"
 
-import { Music } from "@js/models/Music"
+import { Music, Playlist, PlaylistMusic } from "@js/models"
 import removeSpinnerLord from "@js/helpers/removeSpinnerLord"
 import installPrototypeExtensions from "@js/helpers/prototypes"
 
@@ -19,6 +19,8 @@ import "@css/globals.scss"
 (()=>{
 	installPrototypeExtensions();
 	self.Music = Music;
+	self.Playlist = Playlist;
+	self.PlaylistMusic = PlaylistMusic;
 
 	Promise.all([
 		$json.get(json("/db.json"))
