@@ -26,7 +26,8 @@
 		},
 		render(){
 			return (
-				<PhotoshopColorPicker style="margin: auto;" head={this.title} value={this.color} onOk={::this.onOk} onCancel={::this.onCancel} onInput={::this.onInput}/>
+				<PhotoshopColorPicker style="margin: auto;" head={this.title} value={this.color} hasResetButton={true} 
+				onOk={::this.onOk} onCancel={::this.onCancel} onInput={::this.onInput} onReset={::this.onReset}/>
 			);
 		},
 		watch: {
@@ -66,6 +67,9 @@
 			onInput(newColor){
 				const color = (newColor.a && newColor.a != 1.0) ? newColor.rgba : newColor.hex;
 				this.color = color;
+			},
+			onReset(){
+				this.created();
 			},
 			saveInPersistantStorage(value){
 				const darkened = this.darken(value);

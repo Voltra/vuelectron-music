@@ -56,7 +56,8 @@
                         }
                     }
 
-                    &:nth-child(2){
+                    //TODO: Check this (everyone from the 2nd)
+                    &:nth-child(n+2){
                         background-color: $default;
                     }
                 }
