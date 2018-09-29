@@ -15,6 +15,21 @@
 				"date_added": {},
 				"plays": {}
 			}
+		},
+		"playlists": {
+			"key": {"keyPath": "id", "autoIncrement": true},
+			"indexes": {
+				"name": {"unique": true},
+				"date_created": {}
+			}
+		},
+		"playlistMusics": {
+			"key": {"keyPath": "id", "autoIncrement": true},
+			"indexes": {
+				"pid": {},
+				"mid": {},
+				"date_added": {}
+			}
 		}
 	}
 }

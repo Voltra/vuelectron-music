@@ -168,3 +168,20 @@ $playlistItemHeight: calc(#{$playlistItemCellHeight} + (2 * #{$playlistCellPaddi
 
 $playlistHeadHeight: $playlistItemHeight;
 $playlistBodyHeight: calc(#{$playlistTableHeight} - #{$playlistHeadHeight});
+
+
+
+
+/*****************************************************\
+    Desktop player bar
+\*****************************************************/
+$desktopPlayerBarWidth: $viewWidth;
+$desktopPlayerBarHeight: calc(#{$viewHeight} - #{$playlistHeight});
+
+
+
+/*****************************************************\
+    Player progressbar
+\*****************************************************/
+$playerProgressBarRailHeight: 1vh;
+$playerProgressBarRailMarginTop: calc((100% - #{$playerProgressBarRailHeight}) / 2);
