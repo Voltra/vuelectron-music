@@ -26,7 +26,7 @@ function makeGetterInit(config, fs){
 			.withGetterName()
 			.withStateName()
             .withGetterOutput()
-            .buid();
+            .build();
         }
     };
 }

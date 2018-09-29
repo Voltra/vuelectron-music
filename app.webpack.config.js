@@ -47,6 +47,7 @@ config.resolve.alias["@state"] = path.resolve(thisPath, "src/js/store/state/");
 config.resolve.alias["@getters"] = path.resolve(thisPath, "src/js/store/getters/");
 config.resolve.alias["@mutations"] = path.resolve(thisPath, "src/js/store/mutations/");
 
+config.resolve.alias["$sassMeta"] = path.resolve(thisPath, "src/sass/_variables/metas.scss");
 config.resolve.alias["$vue"] = "vue/dist/vue.min.js";
 config.resolve.alias["$es-vue"] = "vue/dist/vue.esm.js";
 config.resolve.alias["$localStorage"] = "store/dist/store.modern.min.js";

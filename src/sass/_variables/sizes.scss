@@ -129,7 +129,7 @@ $playlistUnit: 10vmin;
     }
 }
 
-$playlistWidth: 22 * $playlistUnit;//$fullWidth;
+$playlistWidth: /*22*/16 * $playlistUnit;//$fullWidth;
 $playlistHeight: 80vh; //TODO: Craft the size
 $playlistCellPadding: $fontSize * 3/4;//0.5rem;
 @mixin playlistSharedTrStyles(){

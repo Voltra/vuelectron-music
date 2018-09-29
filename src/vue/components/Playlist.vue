@@ -10,8 +10,10 @@
 		render(){
 			this.updateScrollbars();
 
+            //ref:container v-scrollbar-x data-scrollbar-no-y
+            //ref:body  v-scrollbar-y data-scrollbar-no-x
 			return (
-				<div class="playlist" ref="container" v-scrollbar-x data-scrollbar-no-y>
+				<div class="playlist" ref="container" data-stealth-scrollbar v-scrollbar-x data-scrollbar-no-y>
 					<table>
 						<thead class="head">
 							<tr>
@@ -30,7 +32,7 @@
 								}
 							</tr>
 						</thead>
-						<tbody class="body" ref="body" v-scrollbar-y data-scrollbar-no-x>
+						<tbody class="body" ref="body"  data-stealth-scrollbar v-scrollbar-y data-scrollbar-no-x>
 							{
 								this.rows.map((music, i) => (
 									<PlaylistItem key={music} type={td} active={this.isItemActive(i)} music={music} headers={this.headers}/>
@@ -72,10 +74,10 @@
 						{name: "duration", text: "duration", classes},
 						{name: "artist", text: "artist", classes},
 						{name: "album", text: "album", classes},
-						{name: "year", text: "year", classes},
+//						{name: "year", text: "year", classes},
 						{name: "genre", text: "genre", classes},
-						{name: "date_added", text: "date added", classes},
-						{name: "plays", text: "# of plays", classes},
+						/*{name: "date_added", text: "date added", classes},
+						{name: "plays", text: "# of plays", classes},*/
 					].map(obj => ({
 						...obj,
 						classes: [...obj.classes, obj.name],

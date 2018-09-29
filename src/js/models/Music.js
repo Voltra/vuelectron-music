@@ -239,9 +239,9 @@ class Music{
             artist,
             album,
             genre,
-            date_added,
+            /*date_added,
             plays,
-            year
+            year,*/
         } = this;
 
         return {
@@ -251,9 +251,9 @@ class Music{
             artist,
             album,
             genre,
-            date_added,
+            /*date_added,
             plays,
-            year
+            year,*/
         };
     }
 

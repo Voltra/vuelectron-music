@@ -112,3 +112,11 @@
 		}
 	}
 }
+
+.ps{
+    &[data-stealth-scrollbar]{
+        & [class^="ps"]{
+            opacity: 0;
+        }
+    }
+}

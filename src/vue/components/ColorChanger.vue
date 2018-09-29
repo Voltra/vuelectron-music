@@ -41,6 +41,12 @@
 			})
 		},
 		methods: {
+            reset(soft = true){
+                this.color = soft
+                ? this.localStorage.get(this.cssVar) || this.$cssVar(this.cssVar) || "#fff"
+                : this.sass[this.cssVar];
+                this.backupColor = this.color;
+            },
 			darken(newValue){
 				return Color(newValue.trim()).darken(
 					parseFloat(this.sass.darkenAmount) / 20
@@ -69,7 +75,8 @@
 				this.color = color;
 			},
 			onReset(){
-				this.created();
+				this.reset(false);
+                this.onOk();
 			},
 			saveInPersistantStorage(value){
 				const darkened = this.darken(value);
@@ -78,8 +85,7 @@
 			}
 		},
 		created(){
-			this.color = this.localStorage.get(this.cssVar) || this.$cssVar(this.cssVar) || "#fff";
-			this.backupColor = this.color;
+			this.reset();
 		},
 		beforeDestroy(){
 			this.updateCssVar(this.backupColor);
