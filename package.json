@@ -20,7 +20,7 @@
     "buildVersion": "0.0.1"
   },
   "scripts": {
-    "setup": "npm i && npm up && npm run build-g",
+    "setup": "npm i && npm run build-g",
     "start": "electron .",
     "build:cli": "bash ./cli.build",
     "build-g": "npm run build-e && npm run build",
@@ -59,8 +59,9 @@
     "clean-webpack-plugin": "^0.1.19",
     "compass-mixins": "^0.12.10",
     "cross-env": "^5.2.0",
+    "cryptiles": "^4.1.2",
     "css-loader": "^0.28.11",
-    "electron": "^1.8.7",
+    "electron": "^1.8.8",
     "electron-builder": "^20.20.4",
     "file-loader": "^1.1.11",
     "hoek": "^5.0.3",
