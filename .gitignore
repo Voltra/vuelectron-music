@@ -3,7 +3,7 @@ dist/
 /index.js
 manifest.json
 assets/js/
-
+*.exe
 
 
 ####    GIT Backups
