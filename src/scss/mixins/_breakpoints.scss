@@ -1,0 +1,25 @@
+@use "../variables/sizes" as *;
+
+@mixin desktop {
+	$selector: &;
+
+	@at-root {
+		@media all and (min-width: $breakpoint) {
+			#{$selector} {
+				@content;
+			}
+		}
+	}
+}
+
+@mixin mobile {
+	$selector: &;
+
+	@at-root {
+		@media all and (max-width: $breakpoint), all and (orientation: portrait) {
+			#{$selector} {
+				@content;
+			}
+		}
+	}
+}

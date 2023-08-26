@@ -1,6 +1,0 @@
-../../node_modules/.bin/pkg -t node8-win,node8-linux -o ../../store  store.js -c ../../package.json
-pushd .
-cd ../..
-mv store-linux store
-mv store-win.exe store.exe
-popd

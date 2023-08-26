@@ -1,0 +1,69 @@
+@use "./colors" as colors;
+@use "../functions/colors" as fnColors;
+
+/*****************************************************\
+    Globals
+\*****************************************************/
+
+$darkPalette: (
+	bg: fnColors.darkenColor("bg"),
+	default: fnColors.darkenColor("default"),
+	accent: fnColors.darkenColor("accent"),
+	secondary: fnColors.darkenColor("secondary")
+);
+
+:root{
+	@each $var, $color in colors.$palette{
+		--#{$var}: #{$color};
+	}
+
+	@each $var, $color in $darkPalette{
+		--#{$var}-dark: #{$color};
+	}
+}
+
+
+
+/*****************************************************\
+    Palette
+\*****************************************************/
+$bg: var(--bg, fnColors.getColor("bg"));
+$default: var(--default, fnColors.getColor("default"));
+$accent: var(--accent, fnColors.getColor("accent"));
+$secondary: var(--secondary, fnColors.getColor("secondary"));
+
+$bgDark: var(--bg-dark, fnColors.getColor("bg", $darkPalette));
+$defaultDark: var(--default-dark, fnColors.getColor("default", $darkPalette));
+$accentDark: var(--accent-dark, fnColors.getColor("accent", $darkPalette));
+$secondaryDark: var(--secondary-dark, fnColors.getColor("secondary", $darkPalette));
+
+
+
+/*****************************************************\
+    Additionals
+\*****************************************************/
+$white: var(--white, fnColors.getColor("whiteColor"));
+$black: var(--black, fnColors.getColor("blackColor"));
+
+
+
+/*****************************************************\
+    Shadows
+\*****************************************************/
+$shadow: fnColors.shadow();
+$leftShadow: fnColors.shadow(-2px, 0, 2px, 0, 0.35);
+$rightShadow: fnColors.shadow(2px, 0, 2px, 0, 0.35);
+$regularShadow: fnColors.shadow(0, 1px, 2px, 0, 0.35);
+$bottomShadow: fnColors.shadow(0, 2px, 2px, 0, 0.35);
+$topShadow: fnColors.shadow(2px, 0, 2px, 0, 0.35);
+
+$heavyShadow: fnColors.shadow(0, 0, 0.2vh, 0.4vh, 0.69);
+$heavyLeftShadow: fnColors.shadow(-2px, 0, 2px, 0, 0.69);
+$heavyRightShadow: fnColors.shadow(2px, 0, 2px, 0, 0.69);
+$heavyRegularShadow: fnColors.shadow(0, 1px, 2px, 0, 0.69);
+
+$dropShadow: fnColors.dropShadow();
+$leftDropShadow: fnColors.dropShadow(-2px, 0, 2px, 0.35);
+$rightDropShadow: fnColors.dropShadow(2px, 0, 2px, 0.35);
+$regularDropShadow: fnColors.dropShadow(0, 1px, 2px, 0.35);
+$regularDropShadowAlt: fnColors.dropShadow(0, 1px, 2px, 0.35, fnColors.getColor('whiteColor'));

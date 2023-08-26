@@ -1,7 +1,0 @@
-tr.playlist__item{
-    @include playlistSharedTrStyles;
-
-    @include mmwidth(100%);
-    // @include mmwidth($playlistItemWidth);
-    @include mmheight($playlistItemHeight);
-}

@@ -1,0 +1,11 @@
+@mixin mmwidth($size){
+	min-width: $size;
+	max-width: $size;
+	width: $size;
+}
+
+@mixin mmheight($size){
+	min-height: $size;
+	max-height: $size;
+	height: $size;
+}

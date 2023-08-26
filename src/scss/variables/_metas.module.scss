@@ -1,0 +1,19 @@
+@use "./colors";
+@use "./metas";
+
+
+:export{
+	transitionDuration: metas.$transitionDuration;
+	darkenAmount: colors.$darkenAmount;
+
+	bg: #0d121a;
+	default: #192433;
+	accent: #0e8a80;
+	secondary: #25364d;
+	white: white;
+	/*
+	bgDark: getColor("bg", $darkPalette);
+	defaultDark: getColor("default", $darkPalette);
+	accentDark: getColor("accent", $darkPalette);
+	secondaryDark: getColor("secondary", $darkPalette);*/
+}

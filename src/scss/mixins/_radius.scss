@@ -1,0 +1,29 @@
+@use "../variables/sizes" as *;
+
+@mixin borderRadius($size: $fullWidth){
+	border-radius: $size;
+}
+
+@mixin topRadius($size: $fullWidth){
+	border-top-left-radius: $size;
+	border-top-right-radius: $size;
+}
+
+@mixin rightRadius($size: $fullWidth){
+	border-top-right-radius: $size;
+	border-bottom-right-radius: $size;
+}
+
+@mixin bottomRadius($size: $fullWidth){
+	border-bottom-left-radius: $size;
+	border-bottom-right-radius: $size;
+}
+
+@mixin leftRadius($size: $fullWidth){
+	border-top-left-radius: $size;
+	border-bottom-left-radius: $size;
+}
+
+@mixin borderRadii($tl: 0, $tr: 0, $bl: 0, $br: 0){
+	border-radius: $tl $tr $br $bl;
+}

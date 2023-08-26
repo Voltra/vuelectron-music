@@ -1,4 +1,0 @@
-pushd .
-cd src/cli
-find . -name "*.build" -type f -exec {} \;
-popd

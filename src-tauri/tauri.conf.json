@@ -1,0 +1,71 @@
+{
+	"build": {
+		"beforeDevCommand": "npm run dev",
+		"beforeBuildCommand": "npm run build",
+		"devPath": "http://localhost:1420",
+		"distDir": "../dist",
+		"withGlobalTauri": false
+	},
+	"package": {
+		"productName": "vuelectron-music",
+		"version": "0.0.0"
+	},
+	"tauri": {
+		"allowlist": {
+			"all": false,
+			"dialog": {
+				"open": true
+			},
+			"fs": {
+				"all": true
+			},
+			"globalShortcut": {
+				"all": true
+			},
+			"path": {
+				"all": true
+			},
+			"shell": {
+				"all": false,
+				"open": true
+			},
+			"window": {
+				"all": false,
+				"center": true,
+				"maximize": true,
+				"unmaximize": true,
+				"minimize": true,
+				"unminimize": true,
+				"close": true,
+				"startDragging": true
+			}
+		},
+		"bundle": {
+			"active": true,
+			"targets": "all",
+			"identifier": "fr.voltra.vuelectron-music",
+			"icon": [
+				"icons/32x32.png",
+				"icons/128x128.png",
+				"icons/128x128@2x.png",
+				"icons/icon.icns",
+				"icons/icon.ico"
+			]
+		},
+		"security": {
+			"csp": null
+		},
+		"windows": [
+			{
+				"fullscreen": false,
+				"resizable": true,
+				"maximized": true,
+				"title": "vuelectron-music",
+				"width": 800,
+				"height": 600,
+				"decorations": false,
+				"fileDropEnabled": true
+			}
+		]
+	}
+}

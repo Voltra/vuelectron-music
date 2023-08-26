@@ -1,0 +1,37 @@
+@use "../variables/colors";
+
+//  A function that retrieve the color associated to its name in the given palette
+//  @param {String} $key - The desired color (key)
+//  @param {Map} [$palette] $colorMap - The map of colors to retrieve the color from
+//  @return {Color}
+@function getColor($key, $colorMap: colors.$palette){
+	@return map-get($colorMap, $key);
+}
+
+//  A function that darkens a color
+//  @param {String} $color - The color to darken
+//  @param {Number} [2] $amount - The darken amount
+//  @param {Map} [$palette] $colorMap - The map of colors to retrieve the color from
+//  @return {Color}
+@function darkenColor($color, $amount: colors.$darkenAmount, $colorMap: colors.$palette){
+	@return darken(getColor($color, $colorMap), $amount);
+}
+
+//  A function that makes a shadow
+//  @param {Number} [0] $x - The x-offset
+//  @param {Number} [0] $y - The y-offset
+//  @param {Number} [0] $blur - The blur amount
+//  @param {Number} [0] $spread - The spread amount
+//  @param {Number} [0.15] $opa - The opacity of the shadow
+//  @param {Color} [black] $color - The color of the shadow
+@function shadow($x: 0, $y: 0, $blur: 0.2vh, $spread: 0.4vh, $opa: 0.15, $color: getColor("blackColor")){
+	@return $x $y $blur $spread rgba($color, $opa);
+}
+
+@function dropShadow($x: 0, $y: 0, $blur: 0.2vh, $opa: 0.15, $color: getColor("blackColor")){
+	@return $x $y $blur rgba($color, $opa);
+}
+
+@function textShadow($x: 0, $y: 0, $blur: 0.2vh, $opa: 0.15, $color: getColor("blackColor")){
+	@return dropShadow($x, $y, $blur, $opa, $color);
+}

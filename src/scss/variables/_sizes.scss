@@ -1,0 +1,187 @@
+/*****************************************************\
+    Globals
+\*****************************************************/
+$breakpoint: 768px;
+$fullWidth: 100vw;
+$fullHeight: 100vh;
+
+$floorIndex: 0;
+$topIndex: 1;
+$supraIndex: 10;
+$scrollbarIndex: 11;
+$overTheTopIndex: 911;
+
+$fontSize: 13pt;
+$iconFontSize: 24px;
+$letterSpacing: 0.9pt;
+
+
+/*****************************************************\
+    Top Bar
+\*****************************************************/
+$scrollbarWidth: 4px; //6px
+$scrollbarSpacing: 8px;
+$scrollbarMarginTop: $scrollbarSpacing;
+$scrollbarMarginBottom: 2 * $scrollbarMarginTop;
+$scrollbarLeft: calc(100% - (2 * #{$scrollbarSpacing}));
+$scrollbarTop: $scrollbarLeft;
+$scrollbarHeight: calc(100% - (#{$scrollbarMarginTop} + #{$scrollbarMarginBottom}));
+$scrollbarThumbWidth: $scrollbarWidth + 6px; //2 * $scrollbarWidth;
+$scrollbarThumbSpacing: calc((#{$scrollbarThumbWidth} - #{$scrollbarWidth}) * 0.5);
+
+
+
+/*****************************************************\
+    Top Bar
+\*****************************************************/
+$topBarWidth: $fullWidth;
+$topBarHeight: 40px; //3vmax;
+$topBarDragHandleWidth: calc(#{$topBarWidth} - (4 * #{$topBarHeight}));
+$topBarDragHandleHeight: $topBarHeight;
+
+
+
+/*****************************************************\
+    Top Bar Buttons
+\*****************************************************/
+$topBarButtonWidth: $topBarHeight;
+$topBarButtonHeight: $topBarButtonWidth;
+$topBarButtonFontSize: $topBarHeight * 0.5;
+$topBarButtonMarginH: calc((#{$topBarButtonWidth} - #{$topBarButtonFontSize}) * 0.5);
+$topBarButtonMarginV: calc((#{$topBarButtonHeight} - #{$topBarButtonFontSize}) * 0.5);
+
+
+
+/*****************************************************\
+    View
+\*****************************************************/
+$viewWidth: $fullWidth;
+$viewHeight: calc(#{$fullHeight} - #{$topBarHeight});
+
+
+
+/*****************************************************\
+    DragDrop
+\*****************************************************/
+$dragDropWidth: $viewWidth;
+$dragDropHeight: $viewHeight;
+$dragDropWrapperFactor: 0.9;
+$dragDropWrapperWidth: calc(#{$dragDropWrapperFactor} * #{$dragDropWidth});
+$dragDropWrapperHeight: calc(#{$dragDropWrapperFactor} * #{$dragDropHeight});
+
+$dragDropWrapperSpacingFactor: (1 - $dragDropWrapperFactor) * 0.5;
+$dragDropWrapperSpacingV: calc(#{$dragDropHeight} * #{$dragDropWrapperSpacingFactor});
+$dragDropWrapperSpacingH: calc(#{$dragDropWidth} * #{$dragDropWrapperSpacingFactor});
+
+$dragDropBorderSize: 3px;
+$dragDropBorderRadius: 10vh;
+
+$dragDropInnerFactor: $dragDropWrapperFactor;
+$dragDropInnerWidth: calc(#{$dragDropWrapperWidth} * #{$dragDropInnerFactor});
+$dragDropInnerHeight: calc(#{$dragDropWrapperHeight} * #{$dragDropInnerFactor});
+
+$dragDropInnerSpacingFactor: (1 - $dragDropInnerFactor) * 0.5;
+$dragDropInnerSpacingV: calc(#{$dragDropWrapperWidth} * #{$dragDropInnerSpacingFactor});
+$dragDropInnerSpacingH: calc(#{$dragDropWrapperHeight} * #{$dragDropInnerSpacingFactor});
+
+$dragDropIconHeightFactor: 0.8;
+$dragDropTextHeightFactor: 1 - $dragDropIconHeightFactor;
+$dragDropIconHeight: calc(#{$dragDropInnerHeight} * #{$dragDropIconHeightFactor});
+$dragDropTextHeight: calc(#{$dragDropInnerHeight} * #{$dragDropTextHeightFactor});
+
+
+$dragDropFontSize: 5vmin;
+$dragDropIconFontSize: calc(#{$dragDropIconHeight} * 0.5);
+
+$dragDropIconSpacingV: calc(#{$dragDropIconFontSize} * 0.5);
+$dragDropTextSpacingV: calc(#{$dragDropFontSize} * 0.5);
+
+
+
+/*****************************************************\
+    Settings menu
+\*****************************************************/
+$settingsMenuWidth: $fullWidth;
+$settingsMenuHeight: calc(#{$fullHeight} - #{$topBarHeight});
+
+
+
+/*****************************************************\
+    Playlist
+\*****************************************************/
+$playlistUnit: 10vmin;
+@mixin flexDistribution($unit: $playlistUnit){
+	// $unit: 10vmin;
+
+	&.play, &.year{
+		// flex: 1*$unit;
+		width: 1*$unit;
+	}
+
+	&.title{
+		// flex: 4*$unit;
+		width: 6*$unit;
+	}
+
+	&.artist, &.album, &.genre, &.date_added, &.plays, &.duration{
+		// flex: 2*$unit;
+		width: 2*$unit;
+	}
+}
+
+$playlistWidth: /*22*/16 * $playlistUnit;//$fullWidth;
+$playlistHeight: 80vh; //TODO: Craft the size
+$playlistCellPadding: $fontSize * 0.75;//0.5rem;
+@mixin playlistSharedTrStyles(){
+	display: flex;
+	// display: block;
+	min-width: 100%;
+	width: auto;
+	height: 100%;
+
+	position: relative;
+
+	&::before{
+		z-index: $topIndex;
+		content: "";
+		position: absolute;
+		@include trbl(0);
+
+		pointer-events: none;
+	}
+}
+$playlistTableWidth: $playlistWidth;
+$playlistTableHeight: $playlistHeight;
+$playlistHeadWidth: $playlistTableWidth;
+$playlistBodyWidth: $playlistHeadWidth;
+
+
+
+/*****************************************************\
+    Playlist item
+\*****************************************************/
+$playlistItemCellHeight: 40px;
+$playlistItemCellTranslateY: calc(#{$playlistCellPadding} * 2 / 3);
+$playlistItemPlayCellTranslateY: calc(#{$playlistItemCellTranslateY} * 0.5);
+$playlistItemWidth: $playlistWidth;
+$playlistItemHeight: calc(#{$playlistItemCellHeight} + (2 * #{$playlistCellPadding}));
+
+$playlistHeadHeight: $playlistItemHeight;
+$playlistBodyHeight: calc(#{$playlistTableHeight} - #{$playlistHeadHeight});
+
+
+
+
+/*****************************************************\
+    Desktop player bar
+\*****************************************************/
+$desktopPlayerBarWidth: $viewWidth;
+$desktopPlayerBarHeight: calc(#{$viewHeight} - #{$playlistHeight});
+
+
+
+/*****************************************************\
+    Player progressbar
+\*****************************************************/
+$playerProgressBarRailHeight: 1vh;
+$playerProgressBarRailMarginTop: calc((100% - #{$playerProgressBarRailHeight}) * 0.5);

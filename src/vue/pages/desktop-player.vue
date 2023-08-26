@@ -1,0 +1,3 @@
+<template>
+	Desktop Player
+</template>

@@ -1,0 +1,30 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+
+//$animationDuration: 0.3s;
+//@import "~vue2-animate/src/sass/vue2-animate";
+
+*{
+	font-size: $fontSize;
+	letter-spacing: $letterSpacing;
+	-webkit-font-smoothing: subpixel-antialiased;
+
+	*.material-icons{
+		font-size: $iconFontSize;
+	}
+}
+
+*:not(.material-icons){
+	box-sizing: border-box;
+	font-family: r;
+}
+
+body, #app{
+	width: $fullWidth;
+	height: $fullHeight;
+	overflow: hidden;
+
+	background-color: $bg;
+	color: $white;
+}
+
