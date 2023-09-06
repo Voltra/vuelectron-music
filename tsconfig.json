@@ -33,7 +33,10 @@
 		"src/**/*.ts",
 		"src/**/*.d.ts",
 		"src/**/*.tsx",
-		"src/**/*.vue"
+		"src/**/*.vue",
+		"auto-imports.d.ts",
+		"src/vue/typed-router.d.ts",
+		"node_modules/unplugin-auto-import/auto-imports.d.ts"
 	],
 	"references": [
 		{

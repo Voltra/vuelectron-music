@@ -8,14 +8,15 @@
 	font-size: $fontSize;
 	letter-spacing: $letterSpacing;
 	-webkit-font-smoothing: subpixel-antialiased;
+	box-sizing: border-box;
 
 	*.material-icons{
 		font-size: $iconFontSize;
 	}
 }
 
-*:not(.material-icons){
-	box-sizing: border-box;
+:root,
+html {
 	font-family: r;
 }
 

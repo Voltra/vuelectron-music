@@ -145,14 +145,14 @@ $playlistCellPadding: $fontSize * 0.75;//0.5rem;
 		z-index: $topIndex;
 		content: "";
 		position: absolute;
-		@include trbl(0);
+		inset: 0;
 
 		pointer-events: none;
 	}
 }
 $playlistTableWidth: $playlistWidth;
 $playlistTableHeight: $playlistHeight;
-$playlistHeadWidth: $playlistTableWidth;
+$playlistHeadWidth: 100%;
 $playlistBodyWidth: $playlistHeadWidth;
 
 

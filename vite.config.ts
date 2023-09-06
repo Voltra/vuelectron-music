@@ -14,7 +14,12 @@ export default defineConfig(async (env) => ({
 		}),
 		Vue(),
 		AutoImport({
+			dts: true,
+			eslintrc: {
+				enabled: true,
+			},
 			imports: [
+				"vue",
 				VueRouterAutoImports,
 			],
 		}),

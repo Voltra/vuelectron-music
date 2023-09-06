@@ -1,5 +1,5 @@
 <template>
-	<article class="dragdrop">
+	<main class="dragdrop">
 		<div
 			:class="wrapperClasses"
 			ref="dropZone"
@@ -18,20 +18,30 @@
 				</h1>
 			</div>
 		</div>
-	</article>
+	</main>
 </template>
 
 <script setup lang="ts">
 	import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue";
 	import { afterTransition } from "@/js/modules/transitions";
 	import { pickFiles } from "@/js/modules/tauri/files";
-	import { FileLike, getFilesFromDropEvent } from "@/js/modules/dragAndDrop";
+	import type { FileLike } from "@/js/modules/dragAndDrop";
 	import { cleanupAfterDrop, dragDropEvents } from "@/js/modules/dragAndDrop/events.ts";
 	import { asSequence } from "sequency";
 	import { useDragAndDrop } from "@/js/modules/dragAndDrop/useDragAndDrop.ts";
+	import { parseMusic } from "@/js/modules/music/meta";
+	import { db } from "@/js/modules/db";
+	import { useCurrentPlaylist } from "@/vue/stores/currentPlaylist";
+
+	definePage({
+		name: "dragDrop",
+	});
 
 	const iconText = "file_download";
 	const description = "Drag and drop your music files";
+
+	const currentPlaylist = useCurrentPlaylist();
+	const router = useRouter();
 
 	const state = reactive({
 		dragging: false,
@@ -67,12 +77,19 @@
 		state.dragging = !state.dragging;
 	};
 
-	const addFiles = (files: FileLike[]) => {
-		const filePaths = asSequence(files)
+	const addFiles = async (files: FileLike[]) => {
+		const promises = asSequence(files)
 			.map(file => file.path)
+			.map(parseMusic)
 			.toArray();
 
-		console.log(filePaths);
+		const songs = await Promise.all(promises);
+
+		await db.musics.bulkPut(songs);
+
+		currentPlaylist.setSongs(songs);
+
+		return router.push({ name: "desktopPlayer" });
 	};
 
 	const onClick = (e: MouseEvent) => {

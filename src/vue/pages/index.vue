@@ -4,25 +4,18 @@
 
 <script setup lang="ts">
 	import { onMounted } from "vue";
-	import { useRouter } from "vue-router/auto";
 
 	const router = useRouter();
 
 	const goPlayer = () => {
-		router.push("/desktop-player");
+		router.push({ name: "desktopPlayer" });
 	};
 
 	const goDragAndDrop = () => {
-		router.push("/drag-drop");
+		router.push({ name: "dragDrop" });
 	};
 
-	const hasPlaylists = false;
-
 	onMounted(() => {
-		if (hasPlaylists) {
-			goPlayer();
-		} else {
-			goDragAndDrop();
-		}
+		goDragAndDrop();
 	});
 </script>

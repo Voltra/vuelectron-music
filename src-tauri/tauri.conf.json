@@ -25,6 +25,10 @@
 			"path": {
 				"all": true
 			},
+			"protocol": {
+				"all": true,
+				"asset": true
+			},
 			"shell": {
 				"all": false,
 				"open": true
@@ -53,7 +57,7 @@
 			]
 		},
 		"security": {
-			"csp": null
+			"csp": "default-src 'self' https://asset.localhost asset:"
 		},
 		"windows": [
 			{
