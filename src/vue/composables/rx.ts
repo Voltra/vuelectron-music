@@ -11,23 +11,33 @@ export const watchExtractedObservable = <T, E>(source: WatchSource<Nullable<T>>,
 
 	watch(source, (value) => {
 		subscription?.unsubscribe();
-		const observable = extractor(value);
-		subscription = observable.subscribe({
-			next: callback,
-		});
+
+		if (typeof value !== "undefined" && value !== null) {
+			const observable = extractor(value);
+			subscription = observable.subscribe({
+				next: callback,
+			});
+		} else {
+			subscription = undefined;
+		}
 	});
 
 	onBeforeUnmount(() => subscription?.unsubscribe());
 };
 
-export const useExtractedObservable = <T, E, I = undefined>(source: WatchSource<Nullable<T>>, extractor: (value: NonNullable<T>) => Observable<E>, options?: UseObservableOptions<I> = undefined) => {
+export const useExtractedObservable = <T, E, I = undefined>(source: WatchSource<Nullable<T>>, extractor: (value: NonNullable<T>) => Observable<E>, options: UseObservableOptions<I> = undefined) => {
 	const subject = new Subject<E>();
 	let subscription: Subscription|undefined;
 
 	watch(source, (value) => {
 		subscription?.unsubscribe();
-		const observable = extractor(value);
-		subscription = observable.subscribe(subject);
+
+		if (typeof value !== "undefined" && value !== null) {
+			const observable = extractor(value);
+			subscription = observable.subscribe(subject);
+		} else {
+			subscription = undefined;
+		}
 	});
 
 	onBeforeUnmount(() => {

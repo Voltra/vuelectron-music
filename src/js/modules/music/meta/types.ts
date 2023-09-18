@@ -22,6 +22,11 @@ export interface MusicMeta {
 	duration: DurationString | "";
 
 	/**
+	 * The duration of the song in seconds
+	 */
+	durationSeconds: number;
+
+	/**
 	 * The comma-separated list of the song's genres
 	 */
 	genre: string;

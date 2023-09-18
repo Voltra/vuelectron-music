@@ -8,7 +8,7 @@ export class Database extends Dexie {
 	constructor() {
 		super("vuelectron-music");
 
-		this.version(1).stores({
+		this.version(2).stores({
 			musics: musicDexieSchema,
 		});
 

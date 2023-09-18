@@ -64,8 +64,13 @@ export class AudioPlayer {
 		this.audio.src = newSrc;
 
 		if (play) {
-			this.audio.load();
-			return this.play();
+			try {
+				this.audio.load();
+			} catch(e) {
+				console.error(e);
+			}
+
+			await this.play();
 		}
 	}
 

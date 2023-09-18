@@ -6,5 +6,5 @@ export interface Music extends Model, MusicMeta {
 	id: string;
 }
 
-export const musicDexieSchema = `${modelDexieSchema}, path, title, artist, duration, genre, album`;
+export const musicDexieSchema = `${modelDexieSchema}, path, title, artist, duration, durationSeconds, genre, album`;
 

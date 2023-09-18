@@ -18,7 +18,7 @@
 
 			<tbody class="_body" ref="body" data-stealth-scrollbar v-scrollbar-y>
 				<PlaylistItem
-					v-for="music in rows"
+					v-for="music in songs"
 					:playing="playing"
 					:key="music.id"
 					:music="music"
@@ -34,11 +34,10 @@
 <script setup lang="ts">
 	import { ScrollableHtmlElement, vScrollbarX, vScrollbarY } from "@/vue/directives/scrollbars";
 	import { Music } from "@/js/modules/db";
-	import { computed, onMounted, reactive, ref } from "vue";
+	import { onMounted, reactive, ref, watch } from "vue";
 	import { Nullable, TableCell } from "@/types";
 	import PlaylistItemCell from "@/vue/components/Playlist/PlaylistItemCell.vue";
 	import PlaylistItem from "@/vue/components/Playlist/PlaylistItem.vue";
-	import { asSequence } from "sequency";
 
 	const container = ref<ScrollableHtmlElement>();
 	const body = ref<ScrollableHtmlElement>();
@@ -56,20 +55,15 @@
 
 	const props = defineProps<PlaylistProps>();
 
-	defineEmits<{
+	const emit = defineEmits<{
 		(eventName: "toggleMusic", music: Music): void;
+		(eventName: "sort", sortFn: (lhs: Music, rhs: Music) => number): void;
 	}>();
 
 	const state = reactive({
 		sortingFunction: (lhs: Music, rhs: Music) => lhs.title.localeCompare(rhs.title),
 		sortingCriteria: "title" as keyof Music,
 		isSortAscending: false,
-	});
-
-	const rows = computed(() => {
-		return asSequence(props.songs)
-			.sortedWith(state.sortingFunction)
-			.toArray();
 	});
 
 	const headerClasses = [] as string[];
@@ -92,8 +86,8 @@
 
 	const sortingFunctionFactory = (criteria: keyof Music, asc = true) => {
 		return asc
-			? (lhs: Music, rhs: Music) => lhs[criteria].localeCompare(rhs[criteria])
-			: (lhs: Music, rhs: Music) => rhs[criteria].localeCompare(lhs[criteria]);
+			? (lhs: Music, rhs: Music) => lhs[criteria].toString().localeCompare(rhs[criteria].toString())
+			: (lhs: Music, rhs: Music) => rhs[criteria].toString().localeCompare(lhs[criteria].toString());
 	};
 
 	const updateScrollbars = () => {
@@ -115,6 +109,12 @@
 
 		state.sortingFunction = sortingFunctionFactory(uniq, state.isSortAscending);
 	};
+
+	watch(() => state.sortingFunction, () => {
+		emit("sort", state.sortingFunction);
+	}, {
+		immediate: true,
+	});
 
 	onMounted(() => {
 		updateScrollbars();

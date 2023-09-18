@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { Music } from "@/js/modules/db";
 import { shuffleArray } from "@/js/utils/array.ts";
 import { Nullable } from "@/types.ts";
+import { asSequence } from "sequency";
 
 export const useCurrentPlaylist = defineStore("currentPlaylist", {
 	state() {
@@ -30,5 +31,12 @@ export const useCurrentPlaylist = defineStore("currentPlaylist", {
 		shuffle() {
 			this.songs = shuffleArray(this.songs);
 		},
+		applySort(sortingFn: (lhs: Music, rhs: Music) => number) {
+			this.setSongs(
+				asSequence(this.songs)
+					.sortedWith(sortingFn)
+					.toArray()
+			);
+		}
 	},
 });

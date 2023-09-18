@@ -1,9 +1,11 @@
 import { usePlayer } from "@/js/modules/player/usePlayer";
 import { useCurrentPlaylist } from "@/vue/stores/currentPlaylist";
 import { Music } from "@/js/modules/db";
-import { watchExtractedObservable } from "@/vue/composables/rx.ts";
+import { usePreferences } from "@/vue/stores/preferences.ts";
 
-export const usePlaylistController = (player: ReturnType<typeof usePlayer>, playlist: ReturnType<typeof useCurrentPlaylist>, { passive = false } = {}) => {
+export const usePlaylistController = (player: ReturnType<typeof usePlayer>, playlist: ReturnType<typeof useCurrentPlaylist>) => {
+	const preferences = usePreferences();
+
 	const getPlayer = () => player.value!;
 
 	const toggleMusic = async (music: Music) => {
@@ -19,6 +21,14 @@ export const usePlaylistController = (player: ReturnType<typeof usePlayer>, play
 		}
 	};
 
+	const togglePlay = async () => {
+		if (playlist.activeId) {
+			return getPlayer().togglePlay();
+		} else {
+			return toggleMusic(playlist.songs[0]);
+		}
+	};
+
 	const playNext = async () => {
 		if (!playlist.activeId) {
 			const music = playlist.songs[0];
@@ -27,20 +37,25 @@ export const usePlaylistController = (player: ReturnType<typeof usePlayer>, play
 				play: true,
 			})
 		} else {
-			//TODO: Use preferences and loop settings to know how to handle this case (might become multiple cases)
+			const activeIndex = playlist.songs.findIndex(music => music.id === playlist.activeId)!;
+			const nextIndex = preferences.loopStrategy.chooseNextSong(playlist.songs, activeIndex);
 
-			const currentIndex = playlist.songs.findIndex(song => playlist.activeId === song.id);
-			const nextIndex = (currentIndex + 1) % playlist.songs.length;
-			return toggleMusic(playlist.songs[nextIndex]);
+			if (nextIndex === activeIndex) {
+				await getPlayer().seek(0);
+				return getPlayer().play();
+			}
+
+			if (typeof nextIndex === "number") {
+				return toggleMusic(playlist.songs[nextIndex]);
+			} else {
+				return getPlayer().pause();
+			}
 		}
 	};
 
-	if (!passive) {
-		watchExtractedObservable(player, _ => _.reachEnd$, playNext);
-	}
-
 	return {
 		toggleMusic,
+		togglePlay,
 		playNext,
 	};
 };
