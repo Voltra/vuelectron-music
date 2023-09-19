@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-	import {computed} from "vue";
+	import { computed } from "vue";
 
 	export interface TopBarButtonProps {
 		text: string;
@@ -41,7 +41,8 @@
 </script>
 
 <style lang="scss">
-	@use "../../../scss/variables" as *;
+	@use "@/scss/variables" as *;
+	@use "@/scss/mixins" as *;
 
 	._button {
 		width: $topBarButtonWidth;
@@ -93,7 +94,7 @@
 
 		& > ._text {
 			user-select: none;
-			font-size: $topBarButtonFontSize;
+			font-size: rem($topBarButtonFontSize);
 			margin: $topBarButtonMarginV $topBarButtonMarginH;
 		}
 	}

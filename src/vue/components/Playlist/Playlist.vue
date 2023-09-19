@@ -53,7 +53,7 @@
 		songs: Music[];
 	}
 
-	const props = defineProps<PlaylistProps>();
+	defineProps<PlaylistProps>();
 
 	const emit = defineEmits<{
 		(eventName: "toggleMusic", music: Music): void;
@@ -63,7 +63,7 @@
 	const state = reactive({
 		sortingFunction: (lhs: Music, rhs: Music) => lhs.title.localeCompare(rhs.title),
 		sortingCriteria: "title" as keyof Music,
-		isSortAscending: false,
+		isSortAscending: true,
 	});
 
 	const headerClasses = [] as string[];

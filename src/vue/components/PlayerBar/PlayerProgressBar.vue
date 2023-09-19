@@ -86,7 +86,7 @@
 	@use "@/scss/mixins" as *;
 
 	.playerProgressBar {
-		height: 100%;
+		//height: 100%;
 
 		&,
 		._rail,
@@ -104,7 +104,7 @@
 		._thumb {
 			background-color: $accent;
 
-			&:hover, &.-active{
+			&:hover, &.-active {
 				background-color: $accentDark;
 			}
 		}
@@ -122,28 +122,33 @@
 		}
 
 		._thumb {
-			$offset: 25%;
+			//$offset: 25%;
+			$size: 17px;
 
 			position: absolute;
-			right: 0;
-			@include tb(-1 * $offset);
-			transform: translateX(50%);
-			width: calc(#{$playerProgressBarRailHeight} * (2 * #{stripUnit($offset)} / 100 + 1));
+			//right: 0;
+			top: 50%;
+			left: calc(100% - #{$size * 0.5});
+			transform: translateY(-50%);
+			//width: calc(#{$playerProgressBarRailHeight} * (2 * #{stripUnit($offset)} / 100 + 1));
+			width: $size;
+			height: $size;
 			border-radius: $fullWidth;
+			z-index: 2;
 
 			transition: transform 0.2s ease-in-out;
 			cursor: grab;
 
-			&:hover, &.active{
-				transform: translateX(50%) scale(1.1);
+			&:hover, &.active {
+				transform: translateY(-50%) scale(1.1);
 			}
 
-			&.active{
+			&.active {
 				cursor: grabbing;
 			}
 		}
 
-		:not(&__rail){
+		:not(&__rail) {
 			box-shadow: $rightShadow;
 		}
 	}

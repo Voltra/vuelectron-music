@@ -1,0 +1,13 @@
+@mixin _flex($display, $justify, $align) {
+	display: $display;
+	justify-content: $justify;
+	align-items: $align;
+}
+
+@mixin flexCentered($display: flex) {
+	@include _flex($display, center, center);
+}
+
+@mixin flexSpread($display: flex, $align: center) {
+	@include _flex($display, space-between, $align);
+}

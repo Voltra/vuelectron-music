@@ -6,14 +6,14 @@
 			</button>
 		</div>
 		<div class="_part -main">
-			<h2>
+			<h2 class="_title">
 				{{ songName }}
 			</h2>
-			<PlayerProgressBar @progress="player?.seek($event)"/>
-			<div class="">
-				<span>{{ startTime }}</span>
+			<PlayerProgressBar class="_progress" @progress="player?.seek($event)"/>
+			<div class="_time">
+				<span class="_timeCode">{{ startTime }}</span>
 				<span>{{ artist }}</span>
-				<span>{{ endTime }}</span>
+				<span class="_timeCode">{{ endTime }}</span>
 			</div>
 		</div>
 		<div class="_part -side">
@@ -46,8 +46,9 @@
 
 	const startTime = computed(() => {
 		if (playlist.currentMusic) {
+			console.log(playlist.currentMusic);
 			return formatMusicDuration(
-				Math.round(playlist.currentMusic!.durationSeconds * progressNum.value!)
+				Math.round(playlist.currentMusic!.durationSeconds * (progressNum.value ?? 0))
 			);
 		} else {
 			return "0:00";
@@ -67,6 +68,7 @@
 
 <style lang="scss" scoped>
 	@use "@/scss/variables" as *;
+	@use "@/scss/mixins" as *;
 
 	.desktopPlayerBar {
 		display: flex;
@@ -121,15 +123,41 @@
 							position: absolute;
 							top: -3px;
 							right: -3px;
-							font-size: 8px;
+							font-size: rem(8px);
 						}
 					}
 				}
 			}
 
 			&.-main {
+				@include flexCentered;
+
+				align-items: stretch;
+				flex-flow: column;
+
 				width: $mainWidth;
 			}
+		}
+
+		._title {
+			@include flexCentered;
+
+			font-size: rem(20px);
+		}
+
+		._progress {
+			$spacing: 14px;
+
+			margin-top: $spacing;
+			margin-bottom: $spacing;
+		}
+
+		._time {
+			@include flexSpread;
+		}
+
+		._timeCode {
+			font-size: rem(14px);
 		}
 	}
 </style>
