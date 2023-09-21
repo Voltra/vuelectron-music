@@ -3,6 +3,10 @@ import { DurationString } from "@/js/modules/music/meta/types.ts";
 const pad = (num: number, maxLen = 2) => num.toString().padStart(maxLen, "0");
 
 export const formatMusicDuration = (durationInSeconds: number): DurationString => {
+	if (!isFinite(durationInSeconds)) {
+		return "--:--";
+	}
+
 	/*const hours = Math.floor(duration / 3600);
 				const mod3600 = duration % 3600;
 				const minutes = Math.floor(mod3600 / 60);

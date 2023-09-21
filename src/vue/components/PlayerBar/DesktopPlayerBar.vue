@@ -9,7 +9,14 @@
 			<h2 class="_title">
 				{{ songName }}
 			</h2>
-			<PlayerProgressBar class="_progress" @progress="player?.seek($event)"/>
+
+			<PlayerProgressBar
+				class="_progress"
+				:active="isActive"
+				:duration="duration"
+				@progress="player?.seek($event)"
+			/>
+
 			<div class="_time">
 				<span class="_timeCode">{{ startTime }}</span>
 				<span>{{ artist }}</span>
@@ -46,14 +53,14 @@
 
 	const startTime = computed(() => {
 		if (playlist.currentMusic) {
-			console.log(playlist.currentMusic);
 			return formatMusicDuration(
-				Math.round(playlist.currentMusic!.durationSeconds * (progressNum.value ?? 0))
+				Math.round(playlist.currentMusic!.durationSeconds * (progressNum.value ?? 0)),
 			);
 		} else {
 			return "0:00";
 		}
 	});
+	const duration = computed(() => playlist.currentMusic?.durationSeconds ?? 0);
 	const endTime = computed(() => playlist.currentMusic?.duration ?? "--:--");
 	const songName = computed(() => playlist.currentMusic?.title ?? "");
 	const artist = computed(() => playlist.currentMusic?.artist ?? "");
@@ -62,6 +69,7 @@
 		"-active": preferences.isLooping,
 		"-single": preferences.loopingSingle,
 	}));
+	const isActive = computed(() => !!playlist.currentMusic);
 
 	const playIcon = computed(() => player.value?.isPlaying.value ? "pause" : "play_arrow");
 </script>
@@ -136,6 +144,12 @@
 				flex-flow: column;
 
 				width: $mainWidth;
+
+				&:hover {
+					:deep(._tooltip) {
+						opacity: 1;
+					}
+				}
 			}
 		}
 
