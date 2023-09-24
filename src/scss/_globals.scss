@@ -20,6 +20,8 @@ body, #app{
 	width: $fullWidth;
 	height: $fullHeight;
 	overflow: hidden;
+	position: relative;
+	overscroll-behavior: none;
 
 	background-color: $bg;
 	color: $white;

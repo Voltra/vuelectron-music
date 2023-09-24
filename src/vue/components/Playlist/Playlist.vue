@@ -1,5 +1,5 @@
 <template>
-	<section class="playlist" ref="container" data-stealth-scrollbar v-scrollbar-x>
+	<section class="playlist" ref="container" v-scrollbar-x>
 		<table class="_table">
 			<thead class="_head">
 				<tr>
@@ -16,7 +16,7 @@
 				</tr>
 			</thead>
 
-			<tbody class="_body" ref="body" data-stealth-scrollbar v-scrollbar-y>
+			<tbody class="_body" ref="body" v-scrollbar-y>
 				<PlaylistItem
 					v-for="music in songs"
 					:playing="playing"

@@ -1,13 +1,16 @@
 import PerfectScrollbar from "perfect-scrollbar";
+import { bindMethods } from "@/js/utils/object.ts";
 
 const events = ["resize", "orientationchange"];
 
-export class  Scrollbar {
+export class Scrollbar {
 	protected scrollbar?: PerfectScrollbar;
 
-	constructor(protected el: HTMLElement, protected options: Partial<PerfectScrollbar.Options> = {}) {}
+	constructor(protected el: HTMLElement, protected options: Partial<PerfectScrollbar.Options> = {}) {
+		bindMethods(this, ["update", "init", "destroy"]);
+	}
 
-	update = () => {
+	update() {
 		this.scrollbar?.update();
 	}
 
@@ -29,6 +32,6 @@ export class  Scrollbar {
 			window.removeEventListener(event, this.update);
 		});
 
-		this.scrollbar.destroy();
+		this.scrollbar?.destroy();
 	}
 }

@@ -7,18 +7,18 @@ export class ScrollbarY extends Scrollbar {
 	constructor(el: HTMLElement, options: Partial<PerfectScrollbar.Options> = {}) {
 		super(el, {
 			...options,
-			suppressScrollY: true,
+			suppressScrollX: true,
 		});
 	}
 
-	public init() {
+	override init() {
 		super.init();
 
 		this.el.setAttribute(attribute, "true");
 	}
 
 
-	public destroy() {
+	override destroy() {
 		this.el.removeAttribute(attribute);
 
 		super.destroy();

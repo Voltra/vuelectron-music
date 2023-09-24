@@ -11,14 +11,14 @@ export class ScrollbarX extends Scrollbar {
 		});
 	}
 
-	public init() {
+	override init() {
 		super.init();
 
 		this.el.setAttribute(attribute, "true");
 	}
 
 
-	public destroy() {
+	override destroy() {
 		this.el.removeAttribute(attribute);
 
 		super.destroy();

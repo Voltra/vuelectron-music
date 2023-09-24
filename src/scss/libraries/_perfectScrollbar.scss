@@ -119,7 +119,7 @@
 
 .ps {
 	&[data-stealth-scrollbar] {
-		& [class^="ps"] {
+		& > [class^="ps"] {
 			opacity: 0;
 		}
 	}

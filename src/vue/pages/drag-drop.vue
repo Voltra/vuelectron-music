@@ -45,11 +45,13 @@
 
 	const state = reactive({
 		dragging: false,
+		loading: false,
 	});
 
 	const wrapperClasses = computed(() => ({
 		_wrapper: true,
 		"-dragging": state.dragging,
+		"-loading": state.loading,
 	}));
 
 	const dropZone = ref<HTMLElement | null>(null);
@@ -60,6 +62,14 @@
 
 	const stopDragging = () => {
 		state.dragging = false;
+	};
+
+	const startLoading = () => {
+		state.loading = true;
+	};
+
+	const stopLoading = () => {
+		state.loading = true;
 	};
 
 	const cleanupEvent = (e?: Event) => {
@@ -78,18 +88,24 @@
 	};
 
 	const addFiles = async (files: FileLike[]) => {
-		const promises = asSequence(files)
-			.map(file => file.path)
-			.map(parseMusic)
-			.toArray();
+		startLoading();
 
-		const songs = await Promise.all(promises);
+		try {
+			const promises = asSequence(files)
+				.map(file => file.path)
+				.map(parseMusic)
+				.toArray();
 
-		await db.musics.bulkPut(songs);
+			const songs = await Promise.all(promises);
 
-		currentPlaylist.setSongs(songs);
+			await db.musics.bulkPut(songs);
 
-		return router.push({ name: "desktopPlayer" });
+			currentPlaylist.setSongs(songs);
+
+			return router.push({ name: "desktopPlayer" });
+		} finally {
+			stopLoading();
+		}
 	};
 
 	const onClick = (e: MouseEvent) => {
@@ -116,7 +132,7 @@
 
 				const files = paths.map(path => ({ path }));
 
-				addFiles(files);
+				await addFiles(files);
 			} finally {
 				stopDragging();
 			}
@@ -200,6 +216,15 @@
 				}
 			}
 
+			&.-loading {
+				cursor: wait;
+
+				& > * {
+					opacity: 0.5;
+					scale: 0.9;
+				}
+			}
+
 			& > ._inner {
 				position: relative;
 				width: $dragDropInnerWidth;
@@ -216,7 +241,7 @@
 					user-select: none;
 					text-align: center;
 					display: block;
-					transition: margin $transitionDuration ease-in-out;
+					transition: all $transitionDuration ease-in-out;
 				}
 
 				& > ._icon {
