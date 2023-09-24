@@ -1,18 +1,19 @@
 <template>
 	<nav class="desktopPlayerBar">
-		<div class="_part -side">
+		<div class="_part -side -left">
 			<button class="material-icons" @click="playlistController.playSequentiallyPrev">
-				chevron_left
+				navigate_before
 			</button>
 
-			<button class="material-icons" @click="playlistController.togglePlay">
+			<button class="material-icons -play" @click="playlistController.togglePlay">
 				{{ playIcon }}
 			</button>
 
 			<button class="material-icons" @click="playlistController.playSequentiallyNext">
-				chevron_right
+				navigate_next
 			</button>
 		</div>
+
 		<div class="_part -main">
 			<h2 class="_title">
 				{{ songName }}
@@ -31,7 +32,8 @@
 				<span class="_timeCode">{{ endTime }}</span>
 			</div>
 		</div>
-		<div class="_part -side">
+
+		<div class="_part -side -right">
 			<button class="material-icons" @click="playlist.shuffle">
 				shuffle
 			</button>
@@ -112,7 +114,7 @@
 		}
 
 		& > ._part {
-			$sideWidth: 12.5%;
+			$sideWidth: 10%;
 			$mainWidth: 100% - 2*$sideWidth;
 
 			height: 100%;
@@ -138,16 +140,30 @@
 
 					&.-single {
 						&::after {
+							@include flexCentered;
 							content: "1";
 							background-color: $accent;
 							color: $white;
 							border-radius: 20px;
-							padding: 4px;
+							padding: 4px 6.66px;
 							position: absolute;
-							top: -3px;
-							right: -3px;
-							font-size: rem(8px);
+							letter-spacing: -0.5px;
+							top: 0;
+							right: 0;
+							font-size: rem(12px);
+							font-family: r;
+							transform: translate3d(25%, -25%, 0);
 						}
+					}
+				}
+
+				& > * {
+					@include horizontalMargin(rem(6px));
+
+					font-size: rem(32px);
+
+					&.-play {
+						font-size: rem(36px);
 					}
 				}
 			}

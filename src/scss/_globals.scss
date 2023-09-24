@@ -5,19 +5,15 @@
 //@import "~vue2-animate/src/sass/vue2-animate";
 
 *{
-	font-size: $fontSize;
 	letter-spacing: $letterSpacing;
 	-webkit-font-smoothing: subpixel-antialiased;
 	box-sizing: border-box;
-
-	.material-icons{
-		font-size: $iconFontSize;
-	}
 }
 
 :root,
 html {
 	font-family: r;
+	font-size: $fontSize;
 }
 
 body, #app{
@@ -29,3 +25,6 @@ body, #app{
 	color: $white;
 }
 
+.material-icons{
+	font-size: $iconFontSize;
+}
