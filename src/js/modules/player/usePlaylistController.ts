@@ -72,7 +72,7 @@ export const usePlaylistController = (player: ReturnType<typeof usePlayer>, play
 	 */
 	const playSequentiallyNext = async () => {
 		playlist.moveToSequentiallyNextSong();
-		return getPlayer().playMusic(playlist.currentMusic, {
+		return getPlayer().playMusic(playlist.currentMusic!, {
 			play: true,
 		});
 	};
@@ -82,16 +82,43 @@ export const usePlaylistController = (player: ReturnType<typeof usePlayer>, play
 	 */
 	const playSequentiallyPrev = async () => {
 		playlist.moveToSequentiallyPreviousSong();
-		return getPlayer().playMusic(playlist.currentMusic, {
+		return getPlayer().playMusic(playlist.currentMusic!, {
 			play: true,
 		});
 	};
 
+	const toggleMute = () => {
+		preferences.toggleMute();
+
+		const player = getPlayer();
+
+		if (preferences.soundMuted) {
+			player.mute();
+		} else {
+			player.unmute();
+		}
+	};
+
+	const setVolume = (volume: number) => {
+		const player = getPlayer();
+
+		player.unmute();
+		preferences.unmute();
+
+		player.setVolume(volume);
+		preferences.setVolume(volume);
+	};
+
 	return {
+		// Music
 		toggleMusic,
 		togglePlay,
 		playNext,
 		playSequentiallyNext,
 		playSequentiallyPrev,
+
+		// Volume
+		toggleMute,
+		setVolume,
 	};
 };

@@ -1,5 +1,5 @@
 <template>
-	<div :class="classes" ref="wrapper" @mouseleave="endDrag" @mouseup="onMouseUp">
+	<div class="playerVolumeBar" ref="wrapper" @mouseleave="endDrag" @mouseup="onMouseUp">
 		<div class="_rail" ref="rail" @click="onMouseEvent">
 			<div class="_progress" ref="progress" :style="styles" @mousedown="onMouseDown" @mouseup="onMouseUp">
 				<div class="_thumb" ref="thumb" @mousedown="onMouseDown" @mouseup="onMouseUp"></div>
@@ -17,11 +17,13 @@
 </template>
 
 <script setup lang="ts">
+	import { useCurrentPlaylistController } from "@/js/modules/player";
 	import { computed, reactive, ref } from "vue";
-	import { usePlayer } from "@/js/modules/player";
-	import { watchExtractedObservable } from "@/vue/composables/rx.ts";
 	import { useMouseInElement } from "@vueuse/core";
-	import { formatMusicDuration } from "@/js/modules/music/meta";
+	import { usePreferences } from "@/vue/stores/preferences";
+
+	const preferences = usePreferences();
+	const playlistController = useCurrentPlaylistController();
 
 	const wrapper = ref<HTMLElement>();
 	const rail = ref<HTMLElement>();
@@ -39,89 +41,53 @@
 		tooltipArrow,
 	});
 
-	const props = defineProps<{
-		active: boolean,
-		duration: number,
-	}>();
-
-	const emit = defineEmits<{
-		(eventName: "progress", percentage: number): void;
-	}>();
-
-	const player = usePlayer();
-	watchExtractedObservable(player, _ => _.progress$, snapshot => {
-		state.percentage = snapshot * 100;
+	const state = reactive({
+		dragEnterDepth: 0,
 	});
 
 	const tooltipState = reactive(useMouseInElement(wrapper, { handleOutside: true }));
 
-	const state = reactive({
-		percentage: 0,
-		dragEnterDepth: 0,
-	});
 
-	const classes = computed(() => ({
-		playerProgressBar: true,
-		"-inactive": !props.active,
-	}));
-	const styles = computed(() => `width: ${state.percentage}%;`);
+	const styles = computed(() => `top: ${100 * (1 - preferences.volume)}%; height: ${100 * preferences.volume}%;`);
 
 	const tooltipPercent = computed(() => {
-		const percentage = Math.min(1, Math.max(0, tooltipState.elementX / tooltipState.elementWidth));
+		const percentage = Math.min(1, Math.max(0, 1 - (tooltipState.elementY / tooltipState.elementHeight)));
 
 		return isFinite(percentage) ? percentage : 0;
 	});
-	const tooltipStyles = computed(() => `left: ${100 * tooltipPercent.value}%;`);
-	const tooltipText = computed(() => formatMusicDuration(props.duration * tooltipPercent.value));
+	const tooltipStyles = computed(() => `bottom: ${100 * tooltipPercent.value}%;`);
+	const tooltipText = computed(() => `${(100 * tooltipPercent.value).toFixed(0)}%`);
 
 	const computePercentage = (e: MouseEvent, el: HTMLElement) => {
 		const elemRect = el.getBoundingClientRect();
-		const { left, width } = elemRect;
-		const { x } = e;
+		const { top, height } = elemRect;
+		const { y } = e;
 
-		// console.log(`x: ${x}, width: ${width}, left: ${left}`);
-
-		const tmp = (x - left) / width * 100;
+		const tmp = 100 - (Math.abs(y - top) / height * 100);
 		return Math.min(100, Math.max(0, tmp));
 	};
 
 	const updatePercentage = (percentage: number) => {
-		state.percentage = percentage;
-		emit("progress", percentage / 100);
+		percentage = isFinite(percentage) ? percentage : 0;
+		playlistController.setVolume(percentage / 100);
 	};
 
 	const onMouseEvent = (e: MouseEvent) => {
-		if (!props.active) {
-			return;
-		}
-
 		const percentage = computePercentage(e, refs.rail!);
 		updatePercentage(percentage);
 	};
 
 	const startDrag = () => {
-		if (!props.active) {
-			return;
-		}
-
 		refs.wrapper!.addEventListener("mousemove", onMouseEvent);
 		refs.rail!.classList.add("-active");
 	};
 
 	const endDrag = () => {
-		if (!props.active) {
-			return;
-		}
-
 		refs.rail!.classList.remove("-active");
 		refs.wrapper!.removeEventListener("mousemove", onMouseEvent);
 	};
 
 	const onMouseDown = (e: MouseEvent) => {
-		if (!props.active) {
-			return;
-		}
-
 		onMouseEvent(e);
 
 		if (state.dragEnterDepth === 0) {
@@ -131,10 +97,6 @@
 	};
 
 	const onMouseUp = (e: MouseEvent) => {
-		if (!props.active) {
-			return;
-		}
-
 		state.dragEnterDepth -= 1;
 		state.dragEnterDepth = Math.max(state.dragEnterDepth, 0);
 
@@ -150,11 +112,31 @@
 	@use "@/scss/variables" as *;
 	@use "@/scss/mixins" as *;
 
-	.playerProgressBar {
-		height: 100%;
+	.playerVolumeBar {
+		$spacing: rem(10px);
 
-		&.-inactive {
-			pointer-events: none;
+		height: rem(150px);
+		background: $bgDark;
+		filter: $dropShadow;
+
+		&::before,
+		&::after {
+			position: absolute;
+			display: block;
+			width: 100%;
+			content: "";
+			height: $spacing;
+			background: inherit;
+		}
+
+		&::before {
+			top: 0;
+			transform: translateY(-100%);
+		}
+
+		&::after {
+			bottom: 0;
+			transform: translateY(100%);
 		}
 
 		&:hover {
@@ -172,7 +154,7 @@
 
 		._rail,
 		._progress {
-			height: $playerProgressBarRailHeight;
+			width: $playerProgressBarRailHeight;
 		}
 
 		._progress,
@@ -185,15 +167,16 @@
 		}
 
 		._rail {
-			top: $playerProgressBarRailMarginTop;
+			left: $playerProgressBarRailMarginTop;
 			cursor: pointer;
-			width: 100%;
+			height: 100%;
 			background-color: $secondary;
 			box-shadow: $heavyRegularShadow;
 		}
 
 		._progress {
-			width: 100%;
+			height: 100%;
+			bottom: 0;
 		}
 
 		._thumb {
@@ -202,9 +185,9 @@
 
 			position: absolute;
 			//right: 0;
-			top: 50%;
-			left: calc(100% - #{$size * 0.5});
-			transform: translateY(-50%);
+			left: 50%;
+			top: -$size * 0.5;
+			transform: translateX(-50%);
 			//width: calc(#{$playerProgressBarRailHeight} * (2 * #{stripUnit($offset)} / 100 + 1));
 			width: $size;
 			height: $size;
@@ -215,7 +198,7 @@
 			cursor: grab;
 
 			&:hover, &.active {
-				transform: translateY(-50%) scale(1.1);
+				transform: translateX(-50%) scale(1.1);
 			}
 
 			&.active {
@@ -227,12 +210,13 @@
 			$color: $accent;
 
 			position: absolute;
-			top: 0;
 			z-index: 3;
+			font-size: rem(10px);
+			font-family: r;
 			width: max-content;
 			background: $color;
 			padding: rem(10px);
-			transform: translateY(calc(-100% - 16px)) translateX(-50%);
+			transform: translateX(calc(-100% - 16px)) translateY(50%);
 			border-radius: rem(4px);
 			opacity: 0;
 			pointer-events: none;
@@ -242,17 +226,14 @@
 				$size: 8px;
 				position: absolute;
 				bottom: 0;
-				left: 50%;
+				right: 0;
 				border: $size solid transparent;
-				border-top-color: $color;
+				border-left-color: $color;
 				width: $size;
 				height: $size;
-				transform: translateY(100%) translateX(-50%);
+				transform: translateY(-50%) translateX(96%);
 			}
 		}
-
-		//:not(&__rail) {
-		//	box-shadow: $rightShadow;
-		//}
 	}
 </style>
+

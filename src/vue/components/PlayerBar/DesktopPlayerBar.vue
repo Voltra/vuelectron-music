@@ -41,6 +41,13 @@
 			<button :class="loopClasses" @click="preferences.nextMode">
 				{{ preferences.loopIcon }}
 			</button>
+
+			<button class="material-icons -volume" @click="playlistController.toggleMute">
+				{{ preferences.volumeIcon }}
+
+
+				<VolumeBar class="_volumeBar" @click.stop.prevent/>
+			</button>
 		</div>
 	</nav>
 </template>
@@ -54,6 +61,7 @@
 	import { usePlaylistController } from "@/js/modules/player/usePlaylistController.ts";
 	import { useExtractedObservable } from "@/vue/composables/rx.ts";
 	import { formatMusicDuration } from "@/js/modules/music/meta";
+	import VolumeBar from "@/vue/components/PlayerBar/VolumeBar.vue";
 
 	const playlist = useCurrentPlaylist();
 	const player = usePlayer();
@@ -211,6 +219,28 @@
 
 		._timeCode {
 			font-size: rem(14px);
+		}
+
+		._volumeBar {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			transform: translateY(calc(-100% - #{rem(10px)}));
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity $transitionDuration ease-in-out;
+		}
+
+		.material-icons.-volume {
+			position: relative;
+
+			&:hover {
+				& > ._volumeBar {
+					opacity: 1;
+					pointer-events: auto;
+				}
+			}
 		}
 	}
 </style>

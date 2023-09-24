@@ -1,2 +1,5 @@
 export * from "./definePlayer"
-export * from "./usePlayer.ts"
+export * from "./usePlayer"
+export * from "./usePlaylistController"
+export * from "./useCurrentPlaylistController"
+export * from "./syncPlayerControls"

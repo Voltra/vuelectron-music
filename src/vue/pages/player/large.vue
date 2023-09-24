@@ -18,6 +18,7 @@
 	import { usePlayer } from "@/js/modules/player";
 	import { usePlaylistController } from "@/js/modules/player/usePlaylistController";
 	import { syncPlayerControls } from "@/js/modules/player/syncPlayerControls";
+	import { usePreferences } from "@/vue/stores/preferences.ts";
 
 	definePage({
 		name: "desktopPlayer",
@@ -27,6 +28,7 @@
 	const currentPlaylist = useCurrentPlaylist();
 	const player = usePlayer();
 	const playlistController = usePlaylistController(player, currentPlaylist);
+	const preferences = usePreferences();
 
 	const isPlaying = computed(() => player.value?.isPlaying?.value ?? false);
 
@@ -36,5 +38,9 @@
 		if (newValue.length === 0) {
 			router.push("/drag-drop");
 		}
+	});
+
+	onMounted(() => {
+		playlistController.setVolume(preferences.volume);
 	});
 </script>
