@@ -3,6 +3,7 @@ import { Music } from "@/js/modules/db";
 import { shuffleArray } from "@/js/utils/array.ts";
 import { Nullable } from "@/types.ts";
 import { asSequence } from "sequency";
+import { modulo } from "@/js/utils/math.ts";
 
 export const useCurrentPlaylist = defineStore("currentPlaylist", {
 	state() {
@@ -14,6 +15,10 @@ export const useCurrentPlaylist = defineStore("currentPlaylist", {
 	getters: {
 		currentMusic(): Nullable<Music> {
 			return this.songs.find(({ id }) => id === this.activeId);
+		},
+		currentMusicIndex(): Nullable<number> {
+			const index = this.songs.findIndex(({ id }) => id === this.activeId);
+			return index < 0 ? null : index;
 		},
 	},
 	actions: {
@@ -37,6 +42,24 @@ export const useCurrentPlaylist = defineStore("currentPlaylist", {
 					.sortedWith(sortingFn)
 					.toArray()
 			);
-		}
+		},
+		moveToSequentiallyPreviousSong() {
+			const index = this.currentMusicIndex;
+			if (typeof index !== "number") {
+				return this.setActiveSong(this.songs[this.songs.length - 1]);
+			}
+
+			const newIndex = modulo(index - 1, this.songs.length);
+			return this.setActiveSong(this.songs[newIndex]);
+		},
+		moveToSequentiallyNextSong() {
+			const index = this.currentMusicIndex;
+			if (typeof index !== "number") {
+				return this.setActiveSong(this.songs[0]);
+			}
+
+			const newIndex = modulo(index + 1, this.songs.length);
+			return this.setActiveSong(this.songs[newIndex]);
+		},
 	},
 });

@@ -1,8 +1,16 @@
 <template>
 	<nav class="desktopPlayerBar">
 		<div class="_part -side">
+			<button class="material-icons" @click="playlistController.playSequentiallyPrev">
+				chevron_left
+			</button>
+
 			<button class="material-icons" @click="playlistController.togglePlay">
 				{{ playIcon }}
+			</button>
+
+			<button class="material-icons" @click="playlistController.playSequentiallyNext">
+				chevron_right
 			</button>
 		</div>
 		<div class="_part -main">
@@ -11,7 +19,7 @@
 			</h2>
 
 			<PlayerProgressBar
-				class="_progress"
+				:class="progressClasses"
 				:active="isActive"
 				:duration="duration"
 				@progress="player?.seek($event)"
@@ -64,12 +72,17 @@
 	const endTime = computed(() => playlist.currentMusic?.duration ?? "--:--");
 	const songName = computed(() => playlist.currentMusic?.title ?? "");
 	const artist = computed(() => playlist.currentMusic?.artist ?? "");
+	const isActive = computed(() => !!playlist.currentMusic);
+
 	const loopClasses = computed(() => ({
 		"material-icons": true,
 		"-active": preferences.isLooping,
 		"-single": preferences.loopingSingle,
 	}));
-	const isActive = computed(() => !!playlist.currentMusic);
+	const progressClasses = computed(() => ({
+		_progress: true,
+		"-disabled": !isActive.value,
+	}));
 
 	const playIcon = computed(() => player.value?.isPlaying.value ? "pause" : "play_arrow");
 </script>
@@ -79,6 +92,8 @@
 	@use "@/scss/mixins" as *;
 
 	.desktopPlayerBar {
+		$spacing: 14px;
+
 		display: flex;
 		justify-content: space-between;
 		align-items: stretch;
@@ -143,31 +158,39 @@
 				align-items: stretch;
 				flex-flow: column;
 
+				position: relative;
 				width: $mainWidth;
 
 				&:hover {
 					:deep(._tooltip) {
 						opacity: 1;
 					}
+
+					._progress.-disabled :deep(._tooltip) {
+						opacity: 0;
+					}
 				}
 			}
+		}
+
+		._title,
+		._time {
+			position: absolute;
+			width: 100%;
 		}
 
 		._title {
 			@include flexCentered;
 
 			font-size: rem(20px);
-		}
-
-		._progress {
-			$spacing: 14px;
-
-			margin-top: $spacing;
+			transform: translateY(-100%);
 			margin-bottom: $spacing;
 		}
 
 		._time {
 			@include flexSpread;
+			transform: translateY(100%);
+			margin-top: $spacing;
 		}
 
 		._timeCode {

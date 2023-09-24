@@ -8,19 +8,28 @@ export const usePlaylistController = (player: ReturnType<typeof usePlayer>, play
 
 	const getPlayer = () => player.value!;
 
+	/**
+	 * Toggle the play state of the given music (plays the music if it wasn't the active song)
+	 * @param music
+	 */
 	const toggleMusic = async (music: Music) => {
+		const player = getPlayer();
+
 		if (playlist.activeId === music.id) {
-			return getPlayer().togglePlay();
+			return player.togglePlay();
 		} else {
 			// const wasPlaying = player.value?.isPlaying.value ?? !currentPlaylist.activeId;
 
 			playlist.setActiveSong(music);
-			return getPlayer().playMusic(music, {
+			return player.playMusic(music, {
 				play: true,
-			})
+			});
 		}
 	};
 
+	/**
+	 * Toggle the play state of the currently active music (plays the first music if there were none)
+	 */
 	const togglePlay = async () => {
 		if (playlist.activeId) {
 			return getPlayer().togglePlay();
@@ -29,33 +38,60 @@ export const usePlaylistController = (player: ReturnType<typeof usePlayer>, play
 		}
 	};
 
+	/**
+	 * Play the next song according to the loop strategy
+	 */
 	const playNext = async () => {
+		const player = getPlayer();
+
 		if (!playlist.activeId) {
 			const music = playlist.songs[0];
 			playlist.setActiveSong(music);
-			return getPlayer().playMusic(music, {
+			return player.playMusic(music, {
 				play: true,
-			})
-		} else {
-			const activeIndex = playlist.songs.findIndex(music => music.id === playlist.activeId)!;
-			const nextIndex = preferences.loopStrategy.chooseNextSong(playlist.songs, activeIndex);
-
-			if (nextIndex === activeIndex) {
-				await getPlayer().seek(0);
-				return getPlayer().play();
-			}
-
-			if (typeof nextIndex === "number") {
-				return toggleMusic(playlist.songs[nextIndex]);
-			} else {
-				return getPlayer().pause();
-			}
+			});
 		}
+
+		const activeIndex = playlist.currentMusicIndex!;
+		const nextIndex = preferences.loopStrategy.chooseNextSong(playlist.songs, activeIndex);
+
+		if (nextIndex === activeIndex) {
+			player.seek(0);
+			return player.play();
+		}
+
+		if (typeof nextIndex === "number") {
+			return toggleMusic(playlist.songs[nextIndex]);
+		}
+
+		return player.pause();
+	};
+
+	/**
+	 * Play the next song in sequential (and circular) order
+	 */
+	const playSequentiallyNext = async () => {
+		playlist.moveToSequentiallyNextSong();
+		return getPlayer().playMusic(playlist.currentMusic, {
+			play: true,
+		});
+	};
+
+	/**
+	 * Play the previous song in sequential (and circular) order
+	 */
+	const playSequentiallyPrev = async () => {
+		playlist.moveToSequentiallyPreviousSong();
+		return getPlayer().playMusic(playlist.currentMusic, {
+			play: true,
+		});
 	};
 
 	return {
 		toggleMusic,
 		togglePlay,
 		playNext,
+		playSequentiallyNext,
+		playSequentiallyPrev,
 	};
 };

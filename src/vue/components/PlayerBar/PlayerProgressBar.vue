@@ -4,12 +4,14 @@
 			<div class="_progress" ref="progress" :style="styles" @mousedown="onMouseDown" @mouseup="onMouseUp">
 				<div class="_thumb" ref="thumb" @mousedown="onMouseDown" @mouseup="onMouseUp"></div>
 			</div>
-		</div>
-		<div class="_tooltip" ref="tooltip" :style="tooltipStyles">
-					<span>
-						{{ tooltipText }}
-					</span>
-			<span class="_tooltipArrow" ref="tooltipArrow"></span>
+
+
+			<div class="_tooltip" ref="tooltip" :style="tooltipStyles">
+			<span>
+				{{ tooltipText }}
+			</span>
+				<span class="_tooltipArrow" ref="tooltipArrow"></span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -55,6 +57,7 @@
 
 	const state = reactive({
 		percentage: 0,
+		dragEnterDepth: 0,
 	});
 
 	const classes = computed(() => ({
@@ -115,11 +118,30 @@
 	};
 
 	const onMouseDown = (e: MouseEvent) => {
+		if (!props.active) {
+			return;
+		}
+
 		onMouseEvent(e);
-		startDrag();
+
+		if (state.dragEnterDepth === 0) {
+			state.dragEnterDepth += 1;
+			startDrag();
+		}
+
 	};
 	const onMouseUp = (e: MouseEvent) => {
-		endDrag();
+		if (!props.active) {
+			return;
+		}
+
+		state.dragEnterDepth -= 1;
+		state.dragEnterDepth = Math.max(state.dragEnterDepth, 0);
+
+		if (state.dragEnterDepth === 0) {
+			endDrag();
+		}
+
 		onMouseEvent(e);
 	};
 </script>
@@ -129,7 +151,7 @@
 	@use "@/scss/mixins" as *;
 
 	.playerProgressBar {
-		//height: 100%;
+		height: 100%;
 
 		&.-inactive {
 			pointer-events: none;
@@ -138,7 +160,6 @@
 		&:hover {
 			._tooltip {
 				opacity: 1;
-				pointer-events: auto;
 			}
 		}
 
