@@ -23,7 +23,7 @@
 
 	const props = withDefaults(defineProps<ColorPickerProps>(), {
 		hideResetButton: false,
-	})
+	});
 
 	const colorObj = computed(() => new TinyColor(props.color));
 

@@ -9,11 +9,12 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, onBeforeUnmount, onMounted, reactive, watch } from "vue";
+	import { computed, onBeforeUnmount, onMounted, reactive } from "vue";
 	import { getCssVar, setCssVar } from "@/js/modules/cssVar";
 	import { useSassMetaVariables } from "@/vue/stores/sassMetaVariables";
 	import ColorPicker from "./ColorPicker.vue";
 	import type { AppColor } from "@/js/modules/theme";
+	import { palette } from "@/js/modules/theme/palette.ts";
 
 	export interface ColorPickerProps {
 		title: string;
@@ -47,33 +48,27 @@
 		updateCssVar(newColor);
 	};
 
-	// watch(() => state.color, () => {
-	// 	emitChange(state.color);
-	// });
-	//
-	// watch(() => state.backupColor, () => {
-	// 	emitChange(state.backupColor);
-	// });
-
 	const reset = (soft = true) => {
-		//TODO: Complete the soft reset part
-
 		state.color = soft ? (
 			getCssVar(props.cssVar)
 			|| "#ffffff"
-		) : sassMeta[props.cssVar];
+		) : palette[props.cssVar]; //sassMeta[props.cssVar];
 
 		state.backupColor = state.color;
+
+		sassMeta.setColor(props.cssVar, state.color);
 	};
 
 	const onOk = () => {
 		state.backupColor = state.color;
-		sassMeta.setColor(props.cssVar, state.color);
+		sassMeta.setColor(props.cssVar, state.backupColor);
+		emitChange(state.backupColor);
 	};
 
 	const onCancel = () => {
 		state.color = state.backupColor;
-		sassMeta.setColor(props.cssVar, state.backupColor);
+		sassMeta.setColor(props.cssVar, state.color);
+		emitChange(state.color);
 	};
 
 	const onReset = () => {

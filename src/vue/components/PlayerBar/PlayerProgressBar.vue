@@ -106,6 +106,7 @@
 
 		refs.wrapper!.addEventListener("mousemove", onMouseEvent);
 		refs.rail!.classList.add("-active");
+		refs.thumb!.classList.add("-dragging");
 	};
 
 	const endDrag = () => {
@@ -113,6 +114,7 @@
 			return;
 		}
 
+		refs.thumb!.classList.remove("-dragging");
 		refs.rail!.classList.remove("-active");
 		refs.wrapper!.removeEventListener("mousemove", onMouseEvent);
 	};
@@ -214,11 +216,15 @@
 			transition: transform 0.2s ease-in-out;
 			cursor: grab;
 
-			&:hover, &.active {
+			&:hover, &.-active {
 				transform: translateY(-50%) scale(1.1);
 			}
 
-			&.active {
+			&.-active {
+				cursor: grabbing;
+			}
+
+			&.-dragging {
 				cursor: grabbing;
 			}
 		}

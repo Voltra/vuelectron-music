@@ -51,7 +51,7 @@
 
 		background-color: $secondary;
 
-		box-shadow: $regularShadow;
+		box-shadow: $heavyRegularShadow;
 
 		&, & > .ps__thumb-y {
 			cursor: pointer;
@@ -82,7 +82,7 @@
 		top: $scrollbarTop !important;
 
 		background-color: $secondary;
-		box-shadow: $regularShadow;
+		box-shadow: $heavyRegularShadow;
 
 		height: $scrollbarWidth;
 

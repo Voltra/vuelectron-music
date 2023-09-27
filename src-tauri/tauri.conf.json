@@ -54,6 +54,9 @@
 				"icons/128x128@2x.png",
 				"icons/icon.icns",
 				"icons/icon.ico"
+			],
+			"resources": [
+				"icons/"
 			]
 		},
 		"security": {
@@ -68,7 +71,18 @@
 				"width": 800,
 				"height": 600,
 				"decorations": false,
-				"fileDropEnabled": true
+				"fileDropEnabled": true,
+				"label": "main",
+				"visible": false
+			},
+			{
+				"width": 460,
+				"height": 200,
+				"center": true,
+				"decorations": false,
+				"resizable": false,
+				"label": "splashscreen",
+				"url": "splashscreen.html"
 			}
 		]
 	}

@@ -10,8 +10,14 @@
 	import TopBar from "./vue/components/TopBar/TopBar.vue";
 	import { onMounted } from "vue";
 	import { removeSpinnerLord } from "./js/modules/spinnerLord";
+	import { useSassMetaVariables } from "@/vue/stores/sassMetaVariables.ts";
+	import { invoke } from "@tauri-apps/api";
 
-	onMounted(() => {
+	onMounted(async () => {
+		useSassMetaVariables(); // Refresh
+
+		await invoke("close_splashscreen");
+
 		removeSpinnerLord();
 	});
 </script>

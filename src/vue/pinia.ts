@@ -3,7 +3,11 @@ import persistStatePlugin from "pinia-plugin-persistedstate";
 
 const pinia = createPinia();
 
-pinia.use(persistStatePlugin);
+const plugins = [
+	persistStatePlugin,
+];
+
+plugins.forEach(plugin => pinia.use(plugin));
 
 export {
 	pinia,
