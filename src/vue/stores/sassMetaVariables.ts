@@ -34,7 +34,7 @@ export const useSassMetaVariables = defineStore("sassMetaVariables", {
 	state(): SassMetaVariables {
 		return {
 			...sassMetaVariables,
-		};
+		} as unknown as SassMetaVariables;
 	},
 	getters: {
 		darkenPercentage(state) {

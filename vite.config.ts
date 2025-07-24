@@ -11,6 +11,9 @@ export default defineConfig(async (env) => ({
 		VueRouter({
 			routesFolder: "./src/vue/pages",
 			dts: "./src/vue/typed-router.d.ts",
+			extendRoute(route) {
+				route.props = true;
+			},
 		}),
 		Vue(),
 		AutoImport({

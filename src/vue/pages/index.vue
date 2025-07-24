@@ -7,9 +7,9 @@
 
 	const router = useRouter();
 
-	const goPlayer = () => {
+	/*const goPlayer = () => {
 		router.push({ name: "desktopPlayer" });
-	};
+	};*/
 
 	const goDragAndDrop = () => {
 		router.push({ name: "dragDrop" });

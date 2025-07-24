@@ -7,6 +7,15 @@ export enum TableCell {
 	TD,
 }
 
-export type MethodNames<Obj extends object> = ({
-	[K in keyof Obj]: Obj[K] extends ((...args: any[]) => any) ? K : never;
-})[keyof Obj];
+/*export type MethodNames<Obj> = ({
+	[K in keyof Obj]: Obj[K] extends ((...args: unknown[]) => unknown) ? K : never;
+})[keyof Obj];*/
+
+export type IsStrictlyAny<T> = (T extends never ? true : false) extends false ? false : true;
+/** Extract the union of literal method names in T
+ */
+export type MethodNames<T> = {
+	[P in keyof T]: IsStrictlyAny<T[P]> extends true ? never // Plain property of type any (not method)
+		: T[P] extends (...args: any[]) => any ? P // a function (method)
+			: never;
+}[keyof T];

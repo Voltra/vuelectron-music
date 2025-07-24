@@ -1,10 +1,7 @@
-import {
-	createRouter,
-	createWebHistory,
-} from "vue-router/auto";
-import { RouteRecordRaw } from "vue-router/auto";
+import { createRouter, createWebHistory, /*RouteRecordRaw*/ } from "vue-router/auto";
+import { routes } from "vue-router/auto-routes";
 
-const decorateRoutes = (routes: RouteRecordRaw[]) => {
+/*const decorateRoutes = (routes: RouteRecordRaw[]) => {
 	routes.forEach(route => {
 		route.props = true;
 
@@ -14,9 +11,9 @@ const decorateRoutes = (routes: RouteRecordRaw[]) => {
 	});
 
 	return routes;
-};
+};*/
 
 export const router = createRouter({
+	routes,
 	history: createWebHistory(),
-	extendRoutes: decorateRoutes,
 });

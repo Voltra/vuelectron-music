@@ -5,5 +5,5 @@ export const pickDir = async (): Promise<string|null> => {
 		directory: true,
 	});
 
-	return selected;
+	return Array.isArray(selected) ? selected[0] : selected;
 };

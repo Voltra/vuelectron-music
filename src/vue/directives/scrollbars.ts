@@ -13,33 +13,33 @@ export type ScrollbarDirective = Directive<ScrollableHtmlElement, undefined|Part
 export const vScrollbarXY: ScrollbarDirective = {
 	mounted(el, binding) {
 		el.$scrollbar = new Scrollbar(el, binding.value || {});
-		el.$scrollbar.init();
-		el.$scrollbar.update();
+		el.$scrollbar!.init();
+		el.$scrollbar!.update();
 	},
 	beforeUnmount(el) {
-		el.$scrollbar.destroy();
+		el.$scrollbar?.destroy();
 	},
 };
 
 export const vScrollbarX: ScrollbarDirective = {
 	mounted(el, binding) {
 		el.$scrollbar = new ScrollbarX(el, binding.value || {});
-		el.$scrollbar.init();
-		el.$scrollbar.update();
+		el.$scrollbar!.init();
+		el.$scrollbar!.update();
 	},
 	beforeUnmount(el) {
-		el.$scrollbar.destroy();
+		el.$scrollbar?.destroy();
 	},
 };
 
 export const vScrollbarY: ScrollbarDirective = {
 	mounted(el, binding) {
 		el.$scrollbar = new ScrollbarY(el, binding.value || {});
-		el.$scrollbar.init();
-		el.$scrollbar.update();
+		el.$scrollbar!.init();
+		el.$scrollbar!.update();
 	},
 	beforeUnmount(el) {
-		el.$scrollbar.destroy();
+		el.$scrollbar?.destroy();
 	},
 };
 

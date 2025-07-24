@@ -3,4 +3,4 @@ import { AppTheme } from "@/js/modules/theme/index.ts";
 
 export const palette: AppTheme = Object.freeze({
 	...sassMetaVariables,
-});
+} as unknown as AppTheme);

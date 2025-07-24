@@ -1,13 +1,12 @@
 import Base64 from "crypto-js/enc-base64";
 import sha256 from "crypto-js/sha256";
 import { Music } from "@/js/modules/db";
-import * as musicMetadata from "music-metadata-browser";
-import { IOptions } from "music-metadata-browser";
+import * as musicMetadata from "music-metadata-browser"; // -browser
+import type { IOptions } from "music-metadata-browser"; // -browser
 import { filePathToUrl } from "@/js/modules/tauri/files";
 import { formatMusicDuration } from "@/js/modules/music/meta/duration.ts";
 import { MusicMeta } from "@/js/modules/music/meta/types.ts";
 import { asSequence } from "sequency";
-import { compare } from "compary/lib/Comparator";
 
 export const metaToMusic = (musicMeta: MusicMeta): Music => ({
 	...musicMeta,
@@ -20,6 +19,7 @@ export const parseMusicMeta = async (filePath: string, options: Partial<IOptions
 	const url = filePathToUrl(filePath);
 
 	const meta = await musicMetadata.fetchFromUrl(url, options);
+	// const meta = await parseFile(filePath, options);
 
 	const title = meta.common.title
 		|| asSequence(Object.entries(meta.native))

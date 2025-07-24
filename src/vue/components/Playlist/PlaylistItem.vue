@@ -80,9 +80,9 @@
 	const musicCells = computed(() => {
 		return asSequence<PlaylistItemProps["headers"][number]>(props.headers)
 			.map(header => header.name)
-			.map(key => [key, props.music[key] ?? ""] as const)
+			.map(key => [key, (props.music as Cell)[key] ?? ""] as const)
 			.map(([property, text]) => ({ property, text } as const))
-			.sortedBy(getHeaderIndex)
+			.sortedBy(({ property }) => getHeaderIndex(property))
 			.mapIndexed((i, val) => ({
 				...val,
 				classes: props.headers[i].classes.concat("item")

@@ -59,9 +59,9 @@
 	import { useCurrentPlaylist } from "@/vue/stores/currentPlaylist.ts";
 	import { usePreferences } from "@/vue/stores/preferences.ts";
 	import { usePlaylistController } from "@/js/modules/player/usePlaylistController.ts";
-	import { useExtractedObservable } from "@/vue/composables/rx.ts";
 	import { formatMusicDuration } from "@/js/modules/music/meta";
 	import VolumeBar from "@/vue/components/PlayerBar/VolumeBar.vue";
+	import { useExtractedObservable } from "@vueuse/rxjs";
 
 	const playlist = useCurrentPlaylist();
 	const player = usePlayer();

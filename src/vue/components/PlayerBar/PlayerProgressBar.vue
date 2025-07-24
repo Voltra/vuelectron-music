@@ -19,9 +19,9 @@
 <script setup lang="ts">
 	import { computed, reactive, ref } from "vue";
 	import { usePlayer } from "@/js/modules/player";
-	import { watchExtractedObservable } from "@/vue/composables/rx.ts";
 	import { useMouseInElement } from "@vueuse/core";
 	import { formatMusicDuration } from "@/js/modules/music/meta";
+	import { watchExtractedObservable } from "@vueuse/rxjs";
 
 	const wrapper = ref<HTMLElement>();
 	const rail = ref<HTMLElement>();
