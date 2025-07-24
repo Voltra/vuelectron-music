@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8"/>
-		<link rel="icon" href="./icon.ico"/>
+		<link rel="icon" href="/icon.ico"/>
 		<meta
 			name="viewport"
 			content="width=device-width, height=device-height, initial-scale=0.1, maximum-scale=5.0, minimum-scale=0.86, interactive-widget=overlays-content"
@@ -21,20 +21,50 @@
 				padding: 0;
 				width: 100%;
 				height: 100%;
+				user-select: none;
+				pointer-events: none;
+				font-size: 16px;
+				overflow: hidden;
 			}
 
 			.splashscreen {
+				position: relative;
 				background: var(--bg, #0d121a);
 				display: flex;
 				justify-content: center;
 				align-items: center;
+			}
+
+			.splashscreen img {
+				padding: 1rem;
+			}
+
+			.splashscreen::after {
+				content: "";
+				position: absolute;
+				display: block;
+				bottom: 0;
+				width: 105%;
+				left: -2.5%;
+				right: -2.5%;
+				height: 0.4rem;
+				border-radius: 0 0 1em 1em;
+				transform: skewX(-45deg);
+				background:
+					linear-gradient(var(--accent, #0e8a80) 0 0) left -2em top 0/2em 1.5em no-repeat
+					var(--default, #192433);
+				animation: loadSplashscreen 1s infinite linear;
+			}
+
+			@keyframes loadSplashscreen {
+				100% {background-position: right -2em top 0}
 			}
 		</style>
 	</head>
 
 	<body>
 		<main class="splashscreen">
-			<img src="asset://icon.ico" alt="Vuelectron Music" width="200" height="200" />
+			<img src="/icon.ico" alt="Vuelectron Music" width="200" height="200" />
 		</main>
 	</body>
 </html>

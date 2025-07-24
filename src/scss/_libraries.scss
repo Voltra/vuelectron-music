@@ -1,2 +1,2 @@
-@import "./libraries/perfectScrollbar";
-@import "./libraries/spinnerLord";
+@use "./libraries/perfectScrollbar" as *;
+@use "./libraries/spinnerLord" as *;

@@ -30,6 +30,7 @@
 		"global-shortcut:allow-register-all",
 		"global-shortcut:allow-unregister",
 		"global-shortcut:allow-unregister-all",
-		"shell:default"
+		"shell:default",
+		"log:default"
 	]
 }

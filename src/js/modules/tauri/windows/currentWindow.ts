@@ -1,6 +1,6 @@
-import {getCurrent} from "@tauri-apps/api/webviewWindow";
+import {getCurrentWebviewWindow} from "@tauri-apps/api/webviewWindow";
 
-export const getCurrentWindow = () => getCurrent();
+export const getCurrentWindow = () => getCurrentWebviewWindow();
 
 export const closeCurrentWindow = () => getCurrentWindow().close();
 

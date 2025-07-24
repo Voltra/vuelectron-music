@@ -11,12 +11,12 @@ import TopBar from "./vue/components/TopBar/TopBar.vue";
 import {onMounted} from "vue";
 import {removeSpinnerLord} from "./js/modules/spinnerLord";
 import {useSassMetaVariables} from "@/vue/stores/sassMetaVariables.ts";
-import {invoke} from "@tauri-apps/api";
+import {setup} from "@/js/modules/tauri";
 
 onMounted(async () => {
 	useSassMetaVariables(); // Refresh
 
-	await invoke("close_splashscreen");
+	await setup();
 
 	removeSpinnerLord();
 });

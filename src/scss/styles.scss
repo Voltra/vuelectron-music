@@ -1,5 +1,5 @@
-@import "setup/reset";
-@import "setup/clearFloat";
-@import "setup/fontLoader";
-@import "./globals";
-@import "./libraries";
+@use "./setup/reset" as *;
+@use "setup/clearFloat" as *;
+@use "setup/fontLoader" as *;
+@use "./globals" as *;
+@use "./libraries" as *;

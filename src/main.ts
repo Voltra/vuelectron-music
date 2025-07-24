@@ -6,13 +6,19 @@ import "./scss/styles.scss";
 import App from "./App.vue";
 import {pinia} from "@/vue/pinia";
 import {router} from "@/vue/router";
-import {setup} from "@/js/modules/tauri";
+import {biLogger, setup} from "@/js/modules/tauri";
 
-await setup(async () => {
-	const app = createApp(App)
+(async () => {
+	biLogger.log("before");
 
-	app.use(pinia);
-	app.use(router);
+	// await setup(async () => {
+		const app = createApp(App)
 
-	app.mount("#app");
-});
+		app.use(pinia);
+		app.use(router);
+
+		app.mount("#app");
+	// });
+
+	biLogger.log("after");
+})();

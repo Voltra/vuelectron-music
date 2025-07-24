@@ -1,11 +1,13 @@
 @use "../variables/colors";
+@use "sass:color";
+@use "sass:map";
 
 //  A function that retrieve the color associated to its name in the given palette
 //  @param {String} $key - The desired color (key)
 //  @param {Map} [$palette] $colorMap - The map of colors to retrieve the color from
 //  @return {Color}
 @function getColor($key, $colorMap: colors.$palette) {
-	@return map-get($colorMap, $key);
+	@return map.get($colorMap, $key);
 }
 
 //  A function that darkens a color
@@ -14,7 +16,8 @@
 //  @param {Map} [$palette] $colorMap - The map of colors to retrieve the color from
 //  @return {Color}
 @function darkenColor($color, $amount: colors.$darkenAmount, $colorMap: colors.$palette) {
-	@return darken(getColor($color, $colorMap), $amount);
+	//@return darken(getColor($color, $colorMap), $amount);
+	@return color.adjust(getColor($color, $colorMap), $lightness: -1% * $amount);
 }
 
 //  A function that makes a shadow

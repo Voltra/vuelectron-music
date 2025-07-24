@@ -18,8 +18,8 @@ export const useDragAndDrop = ({
 	const unlisten = ref<null | (() => void)>(null);
 
 	onMounted(async () => {
-		unlisten.value = await getCurrentWindow().onFileDropEvent(event => {
-			if (event.payload.type === "hover") {
+		unlisten.value = await getCurrentWindow().onDragDropEvent(event => {
+			if (event.payload.type === "enter") {
 				onHover();
 			} else if (event.payload.type === "drop") {
 				onDrop(event.payload.paths);
