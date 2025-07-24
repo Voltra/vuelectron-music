@@ -1,12 +1,12 @@
 import Base64 from "crypto-js/enc-base64";
 import sha256 from "crypto-js/sha256";
-import { Music } from "@/js/modules/db";
+import {Music} from "@/js/modules/db";
 import * as musicMetadata from "music-metadata-browser"; // -browser
-import type { IOptions } from "music-metadata-browser"; // -browser
-import { filePathToUrl } from "@/js/modules/tauri/files";
-import { formatMusicDuration } from "@/js/modules/music/meta/duration.ts";
-import { MusicMeta } from "@/js/modules/music/meta/types.ts";
-import { asSequence } from "sequency";
+import type {IOptions} from "music-metadata-browser"; // -browser
+import {filePathToUrl} from "@/js/modules/tauri/files";
+import {formatMusicDuration} from "@/js/modules/music/meta/duration.ts";
+import {MusicMeta} from "@/js/modules/music/meta/types.ts";
+import {asSequence} from "sequency";
 
 export const metaToMusic = (musicMeta: MusicMeta): Music => ({
 	...musicMeta,

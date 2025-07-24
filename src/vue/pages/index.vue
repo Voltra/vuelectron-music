@@ -1,21 +1,21 @@
 <template>
-	<div class="dispatcher" />
+	<div class="dispatcher"/>
 </template>
 
-<script setup lang="ts">
-	import { onMounted } from "vue";
+<script lang="ts" setup>
+import {onMounted} from "vue";
 
-	const router = useRouter();
+const router = useRouter();
 
-	/*const goPlayer = () => {
-		router.push({ name: "desktopPlayer" });
-	};*/
+/*const goPlayer = () => {
+	router.push({ name: "desktopPlayer" });
+};*/
 
-	const goDragAndDrop = () => {
-		router.push({ name: "dragDrop" });
-	};
+const goDragAndDrop = () => {
+	router.push({name: "dragDrop"});
+};
 
-	onMounted(() => {
-		goDragAndDrop();
-	});
+onMounted(() => {
+	goDragAndDrop();
+});
 </script>

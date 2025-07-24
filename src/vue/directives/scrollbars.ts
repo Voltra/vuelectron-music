@@ -1,14 +1,14 @@
-import { Directive } from "vue";
-import { Scrollbar } from "@/js/modules/scrollbars";
-import { ScrollbarX } from "@/js/modules/scrollbars/ScrollbarX.ts";
-import { ScrollbarY } from "@/js/modules/scrollbars/ScrollbarY.ts";
+import {Directive} from "vue";
+import {Scrollbar} from "@/js/modules/scrollbars";
+import {ScrollbarX} from "@/js/modules/scrollbars/ScrollbarX.ts";
+import {ScrollbarY} from "@/js/modules/scrollbars/ScrollbarY.ts";
 import type PerfectScrollbar from "perfect-scrollbar";
 
 export interface ScrollableHtmlElement extends HTMLElement {
 	$scrollbar?: Scrollbar;
 }
 
-export type ScrollbarDirective = Directive<ScrollableHtmlElement, undefined|Partial<PerfectScrollbar.Options>>;
+export type ScrollbarDirective = Directive<ScrollableHtmlElement, undefined | Partial<PerfectScrollbar.Options>>;
 
 export const vScrollbarXY: ScrollbarDirective = {
 	mounted(el, binding) {

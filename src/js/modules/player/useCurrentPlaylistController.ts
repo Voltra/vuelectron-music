@@ -1,6 +1,6 @@
-import { useCurrentPlaylist } from "@/vue/stores/currentPlaylist";
-import { usePlayer } from "./usePlayer";
-import { usePlaylistController } from "./usePlaylistController";
+import {useCurrentPlaylist} from "@/vue/stores/currentPlaylist";
+import {usePlayer} from "./usePlayer";
+import {usePlaylistController} from "./usePlaylistController";
 
 export const useCurrentPlaylistController = () => {
 	const player = usePlayer();

@@ -1,4 +1,4 @@
-import { getCurrent } from "@tauri-apps/api/window";
+import {getCurrent} from "@tauri-apps/api/webviewWindow";
 
 export const getCurrentWindow = () => getCurrent();
 

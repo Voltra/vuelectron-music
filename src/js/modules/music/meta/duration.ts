@@ -1,4 +1,4 @@
-import { DurationString } from "@/js/modules/music/meta/types.ts";
+import {DurationString} from "@/js/modules/music/meta/types.ts";
 
 const pad = (num: number, maxLen = 2) => num.toString().padStart(maxLen, "0");
 
@@ -14,8 +14,8 @@ export const formatMusicDuration = (durationInSeconds: number): DurationString =
 				const seconds = Math.ceil(mod60 / 60);*/
 
 	const hours = Math.floor(durationInSeconds / 3600);
-	const minutes = Math.floor((durationInSeconds - hours*3600) / 60);
-	const seconds = Math.floor(durationInSeconds - minutes*60 - hours*3600);
+	const minutes = Math.floor((durationInSeconds - hours * 3600) / 60);
+	const seconds = Math.floor(durationInSeconds - minutes * 60 - hours * 3600);
 
 	const secondsStr = pad(seconds);
 

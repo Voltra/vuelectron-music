@@ -1,4 +1,4 @@
-import { MethodNames } from "@/types";
+import {MethodNames} from "@/types";
 
 const bindMethod = <Obj extends object, Key extends MethodNames<Obj>>(obj: Obj, methodName: Key) => {
 	obj[methodName] = obj[methodName].bind(obj);

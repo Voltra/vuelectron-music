@@ -2,7 +2,7 @@
 @use "./metas";
 
 
-:export{
+:export {
 	transitionDuration: metas.$transitionDuration;
 	darkenAmount: colors.$darkenAmount;
 

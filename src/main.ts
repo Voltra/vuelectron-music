@@ -1,16 +1,18 @@
 import "./polyfills";
 
-import { createApp } from "vue";
+import {createApp} from "vue";
 import "./styles.css";
 import "./scss/styles.scss";
 import App from "./App.vue";
-import { pinia } from "@/vue/pinia";
-import { router } from "@/vue/router";
+import {pinia} from "@/vue/pinia";
+import {router} from "@/vue/router";
+import {setup} from "@/js/modules/tauri";
 
+await setup(async () => {
+	const app = createApp(App)
 
-const app = createApp(App)
+	app.use(pinia);
+	app.use(router);
 
-app.use(pinia);
-app.use(router);
-
-app.mount("#app");
+	app.mount("#app");
+});

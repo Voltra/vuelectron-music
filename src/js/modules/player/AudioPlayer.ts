@@ -1,7 +1,7 @@
-import { Ref, ref } from "vue";
-import { Nullable } from "@/types";
-import { fromEvent, map, Observable, skip, tap } from "rxjs";
-import { Music } from "@/js/modules/db";
+import {Ref, ref} from "vue";
+import {Nullable} from "@/types";
+import {fromEvent, map, Observable, skip, tap} from "rxjs";
+import {Music} from "@/js/modules/db";
 
 export interface ChangeTrackOptions {
 	/**
@@ -66,7 +66,7 @@ export class AudioPlayer {
 		if (play) {
 			try {
 				this.audio.load();
-			} catch(e) {
+			} catch (e) {
 				console.error(e);
 			}
 
@@ -77,7 +77,7 @@ export class AudioPlayer {
 	async playMusic(music: Music, {
 		play = true,
 	}: Partial<ChangeTrackOptions> = {}) {
-		return this.changeTrack(music.path, { play });
+		return this.changeTrack(music.path, {play});
 	}
 
 	async togglePlay() {

@@ -1,46 +1,46 @@
 <template>
 	<main class="desktopPlayer">
 		<Playlist
-			:playing="isPlaying"
 			:activeId="currentPlaylist.activeId"
+			:playing="isPlaying"
 			:songs="currentPlaylist.songs"
-			@toggleMusic="playlistController.toggleMusic"
 			@sort="currentPlaylist.applySort"
+			@toggleMusic="playlistController.toggleMusic"
 		/>
 		<DesktopPlayerBar/>
 	</main>
 </template>
 
-<script setup lang="ts">
-	import { useCurrentPlaylist } from "@/vue/stores/currentPlaylist";
-	import DesktopPlayerBar from "@/vue/components/PlayerBar/DesktopPlayerBar.vue";
-	import Playlist from "@/vue/components/Playlist/Playlist.vue";
-	import { usePlayer } from "@/js/modules/player";
-	import { usePlaylistController } from "@/js/modules/player/usePlaylistController";
-	import { syncPlayerControls } from "@/js/modules/player/syncPlayerControls";
-	import { usePreferences } from "@/vue/stores/preferences.ts";
+<script lang="ts" setup>
+import {useCurrentPlaylist} from "@/vue/stores/currentPlaylist";
+import DesktopPlayerBar from "@/vue/components/PlayerBar/DesktopPlayerBar.vue";
+import Playlist from "@/vue/components/Playlist/Playlist.vue";
+import {usePlayer} from "@/js/modules/player";
+import {usePlaylistController} from "@/js/modules/player/usePlaylistController";
+import {syncPlayerControls} from "@/js/modules/player/syncPlayerControls";
+import {usePreferences} from "@/vue/stores/preferences.ts";
 
-	definePage({
-		name: "desktopPlayer",
-	});
+definePage({
+	name: "desktopPlayer",
+});
 
-	const router = useRouter();
-	const currentPlaylist = useCurrentPlaylist();
-	const player = usePlayer();
-	const playlistController = usePlaylistController(player, currentPlaylist);
-	const preferences = usePreferences();
+const router = useRouter();
+const currentPlaylist = useCurrentPlaylist();
+const player = usePlayer();
+const playlistController = usePlaylistController(player, currentPlaylist);
+const preferences = usePreferences();
 
-	const isPlaying = computed(() => player.value?.isPlaying?.value ?? false);
+const isPlaying = computed(() => player.value?.isPlaying?.value ?? false);
 
-	syncPlayerControls(player, playlistController);
+syncPlayerControls(player, playlistController);
 
-	watch(() => currentPlaylist.songs, newValue => {
-		if (newValue.length === 0) {
-			router.push("/drag-drop");
-		}
-	});
+watch(() => currentPlaylist.songs, newValue => {
+	if (newValue.length === 0) {
+		router.push("/drag-drop");
+	}
+});
 
-	onMounted(() => {
-		playlistController.setVolume(preferences.volume);
-	});
+onMounted(() => {
+	playlistController.setVolume(preferences.volume);
+});
 </script>

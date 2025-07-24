@@ -2,37 +2,37 @@
 	<div class="app">
 		<TopBar/>
 
-		<RouterView />
+		<RouterView/>
 	</div>
 </template>
 
-<script setup lang="ts">
-	import TopBar from "./vue/components/TopBar/TopBar.vue";
-	import { onMounted } from "vue";
-	import { removeSpinnerLord } from "./js/modules/spinnerLord";
-	import { useSassMetaVariables } from "@/vue/stores/sassMetaVariables.ts";
-	import { invoke } from "@tauri-apps/api";
+<script lang="ts" setup>
+import TopBar from "./vue/components/TopBar/TopBar.vue";
+import {onMounted} from "vue";
+import {removeSpinnerLord} from "./js/modules/spinnerLord";
+import {useSassMetaVariables} from "@/vue/stores/sassMetaVariables.ts";
+import {invoke} from "@tauri-apps/api";
 
-	onMounted(async () => {
-		useSassMetaVariables(); // Refresh
+onMounted(async () => {
+	useSassMetaVariables(); // Refresh
 
-		await invoke("close_splashscreen");
+	await invoke("close_splashscreen");
 
-		removeSpinnerLord();
-	});
+	removeSpinnerLord();
+});
 </script>
 
 <style lang="scss">
-	@use "@/scss/variables" as *;
+@use "@/scss/variables" as *;
 
-	.app {
-		width: $fullWidth;
-		height: $fullHeight;
-		overflow: hidden;
-		-webkit-app-region: drag;
+.app {
+	width: $fullWidth;
+	height: $fullHeight;
+	overflow: hidden;
+	-webkit-app-region: drag;
 
-		& > * {
-			-webkit-app-region: no-drag;
-		}
+	& > * {
+		-webkit-app-region: no-drag;
 	}
+}
 </style>

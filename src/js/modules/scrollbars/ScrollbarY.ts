@@ -1,4 +1,4 @@
-import { Scrollbar } from "@/js/modules/scrollbars/Scrollbar.js";
+import {Scrollbar} from "@/js/modules/scrollbars/Scrollbar.js";
 import type PerfectScrollbar from "perfect-scrollbar";
 
 const attribute = "data-scrollbar-no-x";

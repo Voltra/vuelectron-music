@@ -12,16 +12,15 @@ $darkPalette: (
 	secondary: fnColors.darkenColor("secondary")
 );
 
-:root{
-	@each $var, $color in colors.$palette{
+:root {
+	@each $var, $color in colors.$palette {
 		--#{$var}: #{$color};
 	}
 
-	@each $var, $color in $darkPalette{
+	@each $var, $color in $darkPalette {
 		--#{$var}-dark: #{$color};
 	}
 }
-
 
 
 /*****************************************************\
@@ -38,13 +37,11 @@ $accentDark: var(--accent-dark, fnColors.getColor("accent", $darkPalette));
 $secondaryDark: var(--secondary-dark, fnColors.getColor("secondary", $darkPalette));
 
 
-
 /*****************************************************\
     Additionals
 \*****************************************************/
 $white: var(--white, fnColors.getColor("whiteColor"));
 $black: var(--black, fnColors.getColor("blackColor"));
-
 
 
 /*****************************************************\

@@ -4,7 +4,7 @@
 //$animationDuration: 0.3s;
 //@import "~vue2-animate/src/sass/vue2-animate";
 
-*{
+* {
 	letter-spacing: $letterSpacing;
 	-webkit-font-smoothing: subpixel-antialiased;
 	box-sizing: border-box;
@@ -16,7 +16,7 @@ html {
 	font-size: $fontSize;
 }
 
-body, #app{
+body, #app {
 	width: $fullWidth;
 	height: $fullHeight;
 	overflow: hidden;
@@ -27,6 +27,6 @@ body, #app{
 	color: $white;
 }
 
-.material-icons{
+.material-icons {
 	font-size: $iconFontSize;
 }

@@ -1,4 +1,4 @@
-import { match } from "ts-pattern";
+import {match} from "ts-pattern";
 
 export enum LoopMode {
 	NONE = "Not repeating",

@@ -1,4 +1,6 @@
-export type DurationString = `${string}:${string}:${string}` | `${string}:${string}`;
+export type DurationString =
+	`${string}:${string}:${string}`
+	| `${string}:${string}`;
 
 export interface MusicMeta {
 	/**

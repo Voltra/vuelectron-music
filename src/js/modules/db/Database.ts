@@ -1,6 +1,6 @@
 import Dexie from "dexie";
-import { ModelTable } from "@/js/modules/db/ModelTable";
-import { Music, musicDexieSchema } from "@/js/modules/db/models";
+import {ModelTable} from "@/js/modules/db/ModelTable";
+import {Music, musicDexieSchema} from "@/js/modules/db/models";
 
 export class Database extends Dexie {
 	public readonly musics!: ModelTable<Music>;

@@ -1,7 +1,7 @@
-import { usePlayer } from "@/js/modules/player/usePlayer";
-import { useCurrentPlaylist } from "@/vue/stores/currentPlaylist";
-import { Music } from "@/js/modules/db";
-import { usePreferences } from "@/vue/stores/preferences.ts";
+import {usePlayer} from "@/js/modules/player/usePlayer";
+import {useCurrentPlaylist} from "@/vue/stores/currentPlaylist";
+import {Music} from "@/js/modules/db";
+import {usePreferences} from "@/vue/stores/preferences.ts";
 
 export const usePlaylistController = (player: ReturnType<typeof usePlayer>, playlist: ReturnType<typeof useCurrentPlaylist>) => {
 	const preferences = usePreferences();

@@ -1,4 +1,4 @@
-import { Music } from "@/js/modules/db";
+import {Music} from "@/js/modules/db";
 
 export abstract class AbstractLoopStrategy {
 	/**
@@ -6,5 +6,5 @@ export abstract class AbstractLoopStrategy {
 	 * @param activeIndex - The ID of the active song (precondition 0 <= activeIndex < songs.length)
 	 * @return the index of the next song to play
 	 */
-	public abstract chooseNextSong(songs: Music[], activeIndex: number): number|undefined;
+	public abstract chooseNextSong(songs: Music[], activeIndex: number): number | undefined;
 }

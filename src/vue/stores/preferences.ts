@@ -1,7 +1,9 @@
-import { defineStore } from "pinia";
-import { LoopMode, loopModeIcon, nextLoopMode } from "@/js/modules/player/loop";
-import { AbstractLoopStrategy } from "@/js/modules/player/loop/strategy/AbstractLoopStrategy.ts";
-import { getLoopStrategy } from "@/js/modules/player/loop/strategy";
+import {defineStore} from "pinia";
+import {LoopMode, loopModeIcon, nextLoopMode} from "@/js/modules/player/loop";
+import {
+	AbstractLoopStrategy
+} from "@/js/modules/player/loop/strategy/AbstractLoopStrategy.ts";
+import {getLoopStrategy} from "@/js/modules/player/loop/strategy";
 
 export interface AppPreferences {
 	loopMode: LoopMode;

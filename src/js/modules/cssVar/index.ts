@@ -5,7 +5,7 @@ export const getCssVar = (name: string) => {
 	return getComputedStyle(document.documentElement).getPropertyValue(varName);
 };
 
-export const setCssVar = (name: string, value: string|number) => {
+export const setCssVar = (name: string, value: string | number) => {
 	const varName = asCssVarName(name);
 	document.documentElement.style.setProperty(varName, `${value}`);
 };

@@ -1,5 +1,8 @@
-import { createRouter, createWebHistory, /*RouteRecordRaw*/ } from "vue-router/auto";
-import { routes } from "vue-router/auto-routes";
+import {
+	createRouter,
+	createWebHistory, /*RouteRecordRaw*/
+} from "vue-router/auto";
+import {routes} from "vue-router/auto-routes";
 
 /*const decorateRoutes = (routes: RouteRecordRaw[]) => {
 	routes.forEach(route => {

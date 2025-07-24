@@ -1,5 +1,5 @@
 export interface Model {
-	id: number|string;
+	id: number | string;
 }
 
 export const modelDexieSchema = "++id";

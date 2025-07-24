@@ -1,5 +1,5 @@
 import PerfectScrollbar from "perfect-scrollbar";
-import { bindMethods } from "@/js/utils/object.ts";
+import {bindMethods} from "@/js/utils/object.ts";
 
 const events = ["resize", "orientationchange"];
 

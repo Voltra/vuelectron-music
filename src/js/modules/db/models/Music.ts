@@ -1,6 +1,6 @@
-import { Model, modelDexieSchema } from "@/js/modules/db/Model.ts";
+import {Model, modelDexieSchema} from "@/js/modules/db/Model.ts";
 
-import type { MusicMeta } from "@/js/modules/music/meta/types";
+import type {MusicMeta} from "@/js/modules/music/meta/types";
 
 export interface Music extends Model, MusicMeta {
 	id: string;

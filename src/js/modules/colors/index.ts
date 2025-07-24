@@ -1,4 +1,4 @@
-import { TinyColor } from "@ctrl/tinycolor";
+import {TinyColor} from "@ctrl/tinycolor";
 
 export const mixColors = (lhs: string, rhs: string, rhsAmount: number) => {
 	const amount = rhsAmount <= 1 ? rhsAmount * 100 : rhsAmount;

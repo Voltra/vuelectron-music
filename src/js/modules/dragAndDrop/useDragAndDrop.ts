@@ -1,5 +1,5 @@
-import { onBeforeUnmount, onMounted, ref } from "vue";
-import { getCurrentWindow } from "@/js/modules/tauri";
+import {onBeforeUnmount, onMounted, ref} from "vue";
+import {getCurrentWindow} from "@/js/modules/tauri";
 
 export interface UseDragAndDropOptions {
 	onHover: () => void;
@@ -8,10 +8,13 @@ export interface UseDragAndDropOptions {
 }
 
 export const useDragAndDrop = ({
-	onHover = () => {},
-	onDrop = () => {},
-	onCancel = () => {},
-}: Partial<UseDragAndDropOptions> = {}) => {
+								   onHover = () => {
+								   },
+								   onDrop = () => {
+								   },
+								   onCancel = () => {
+								   },
+							   }: Partial<UseDragAndDropOptions> = {}) => {
 	const unlisten = ref<null | (() => void)>(null);
 
 	onMounted(async () => {

@@ -2,66 +2,30 @@
 	"build": {
 		"beforeDevCommand": "npm run dev",
 		"beforeBuildCommand": "npm run build",
-		"devPath": "http://localhost:1420",
-		"distDir": "../dist",
-		"withGlobalTauri": false
+		"frontendDist": "../dist",
+		"devUrl": "http://localhost:1420"
 	},
-	"package": {
-		"productName": "vuelectron-music",
-		"version": "0.0.0"
+	"bundle": {
+		"active": true,
+		"targets": "all",
+		"resources": [
+			"icons/"
+		],
+		"icon": [
+			"icons/32x32.png",
+			"icons/128x128.png",
+			"icons/128x128@2x.png",
+			"icons/icon.icns",
+			"icons/icon.ico"
+		]
 	},
-	"tauri": {
-		"allowlist": {
-			"all": false,
-			"dialog": {
-				"open": true
-			},
-			"fs": {
-				"all": true
-			},
-			"globalShortcut": {
-				"all": true
-			},
-			"path": {
-				"all": true
-			},
-			"protocol": {
-				"all": true,
-				"asset": true
-			},
-			"shell": {
-				"all": false,
-				"open": true
-			},
-			"window": {
-				"all": false,
-				"center": true,
-				"maximize": true,
-				"unmaximize": true,
-				"minimize": true,
-				"unminimize": true,
-				"close": true,
-				"startDragging": true
-			}
-		},
-		"bundle": {
-			"active": true,
-			"targets": "all",
-			"identifier": "fr.voltra.vuelectron-music",
-			"icon": [
-				"icons/32x32.png",
-				"icons/128x128.png",
-				"icons/128x128@2x.png",
-				"icons/icon.icns",
-				"icons/icon.ico"
-			],
-			"resources": [
-				"icons/"
-			]
-		},
-		"security": {
-			"csp": "default-src 'self' https://asset.localhost asset:"
-		},
+	"productName": "vuelectron-music",
+	"mainBinaryName": "vuelectron-music",
+	"version": "0.0.0",
+	"identifier": "fr.voltra.vuelectron-music",
+	"plugins": {},
+	"app": {
+		"withGlobalTauri": false,
 		"windows": [
 			{
 				"fullscreen": false,
@@ -71,9 +35,11 @@
 				"width": 800,
 				"height": 600,
 				"decorations": false,
-				"fileDropEnabled": true,
+				//        "fileDropEnabled": true,
+				"dragDropEnabled": true,
 				"label": "main",
-				"visible": false
+				"visible": false,
+				"useHttpsScheme": true
 			},
 			{
 				"width": 460,
@@ -82,8 +48,12 @@
 				"decorations": false,
 				"resizable": false,
 				"label": "splashscreen",
-				"url": "splashscreen.html"
+				"url": "splashscreen.html",
+				"useHttpsScheme": true
 			}
-		]
+		],
+		"security": {
+			"csp": "default-src 'self' https://asset.localhost asset:; connect-src ipc: http://ipc.localhost"
+		}
 	}
 }

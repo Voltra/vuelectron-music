@@ -1,8 +1,8 @@
 import sassMetaVariables from "@/scss/variables/_metas.module.scss";
-import { defineStore } from "pinia";
-import { AppColor, AppTheme } from "@/js/modules/theme";
-import { darken } from "@/js/modules/colors";
-import { setCssVar } from "@/js/modules/cssVar";
+import {defineStore} from "pinia";
+import {AppColor, AppTheme} from "@/js/modules/theme";
+import {darken} from "@/js/modules/colors";
+import {setCssVar} from "@/js/modules/cssVar";
 
 export interface SassMetaVariables extends AppTheme {
 	// General
@@ -13,7 +13,7 @@ export interface SassMetaVariables extends AppTheme {
 export const useSassMetaVariables = defineStore("sassMetaVariables", {
 	persist: {
 		debug: true,
-		afterRestore({ store }) {
+		afterRestore({store}) {
 			const updateVar = (cssVar: keyof AppTheme) => {
 				const cssVarDark = `${cssVar}-dark`;
 				const darkened = store.darken(store[cssVar]);
