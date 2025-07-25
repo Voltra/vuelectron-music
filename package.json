@@ -49,6 +49,7 @@
 		"@types/vue-color": "^2.4.8",
 		"@vitejs/plugin-vue": "^6.0.0",
 		"sass": "^1.89.2",
+		"tauri-plugin-drpc": "^1.0.3",
 		"typescript": "^5.5.4",
 		"unplugin-auto-import": "^19.3.0",
 		"unplugin-vue-router": "^0.14.0",

@@ -11,14 +11,16 @@ import TopBar from "./vue/components/TopBar/TopBar.vue";
 import {onMounted} from "vue";
 import {removeSpinnerLord} from "./js/modules/spinnerLord";
 import {useSassMetaVariables} from "@/vue/stores/sassMetaVariables.ts";
-import {setup} from "@/js/modules/tauri";
+import {biLogger, boot} from "@/js/modules/tauri";
 
 onMounted(async () => {
+	biLogger.log("Before");
 	useSassMetaVariables(); // Refresh
 
-	await setup();
+	await boot();
 
 	removeSpinnerLord();
+	biLogger.log("After");
 });
 </script>
 

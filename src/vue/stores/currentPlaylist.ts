@@ -4,6 +4,7 @@ import {shuffleArray} from "@/js/utils/array.ts";
 import {Nullable} from "@/types.ts";
 import {asSequence} from "sequency";
 import {modulo} from "@/js/utils/math.ts";
+import {updateDiscordActivity} from "@/js/modules/tauri";
 
 export const useCurrentPlaylist = defineStore("currentPlaylist", {
 	state() {
@@ -28,6 +29,7 @@ export const useCurrentPlaylist = defineStore("currentPlaylist", {
 
 			if (hasSong) {
 				this.activeId = id;
+				updateDiscordActivity(song).catch(console.error);
 			}
 		},
 		setSongs(songs: Music[]) {

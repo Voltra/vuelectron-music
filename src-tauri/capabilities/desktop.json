@@ -9,6 +9,8 @@
 		"main"
 	],
 	"permissions": [
-		"global-shortcut:default"
+		"global-shortcut:default",
+		"drpc:default",
+		"log:default"
 	]
 }

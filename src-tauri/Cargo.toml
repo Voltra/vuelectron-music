@@ -21,6 +21,7 @@ tauri-plugin-dialog = "2"
 tauri-plugin-fs = "2"
 tokio = "1.46.1"
 tauri-plugin-log = "2"
+tauri-plugin-drpc = "0.1.6"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
