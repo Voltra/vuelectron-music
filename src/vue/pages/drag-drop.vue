@@ -29,12 +29,13 @@ import type {FileLike} from "@/js/modules/dragAndDrop";
 import {
 	cleanupAfterDrop,
 	dragDropEvents
-} from "@/js/modules/dragAndDrop/events.ts";
+} from "@/js/modules/dragAndDrop/events";
 import {asSequence} from "sequency";
-import {useDragAndDrop} from "@/js/modules/dragAndDrop/useDragAndDrop.ts";
+import {useDragAndDrop} from "@/js/modules/dragAndDrop/useDragAndDrop";
 import {parseMusic} from "@/js/modules/music/meta";
 import {db} from "@/js/modules/db";
 import {useCurrentPlaylist} from "@/vue/stores/currentPlaylist";
+import {biLogger} from "@/js/modules/tauri";
 
 definePage({
 	name: "dragDrop",
@@ -61,18 +62,22 @@ const dropZone = ref<HTMLElement | null>(null);
 
 const startDragging = () => {
 	state.dragging = true;
+	biLogger.debug("startDragging");
 };
 
 const stopDragging = () => {
 	state.dragging = false;
+	biLogger.debug("stopDragging");
 };
 
 const startLoading = () => {
 	state.loading = true;
+	biLogger.debug("startLoading");
 };
 
 const stopLoading = () => {
 	state.loading = true;
+	biLogger.debug("stopLoading");
 };
 
 const cleanupEvent = (e?: Event) => {
@@ -88,6 +93,7 @@ const toggleDragging = (e: Event) => {
 	cleanupEvent(e);
 
 	state.dragging = !state.dragging;
+	biLogger.debug("toggleDragging");
 };
 
 const addFiles = async (files: FileLike[]) => {
@@ -226,6 +232,23 @@ useDragAndDrop({
 				opacity: 0.5;
 				scale: 0.9;
 			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				display: block;
+				bottom: 2rem;
+				width: 80%;
+				left: 10%;
+				right: 10%;
+				height: 0.4rem;
+				border-radius: 0 0 1em 1em;
+				transform: skewX(-45deg);
+				background:
+					linear-gradient($accent 0 0) left -2em top 0/2em 1.5em no-repeat
+					$default;
+				animation: dragdropLoading 1s infinite linear;
+			}
 		}
 
 		& > ._inner {
@@ -260,5 +283,9 @@ useDragAndDrop({
 			}
 		}
 	}
+}
+
+@keyframes dragdropLoading {
+	100% {background-position: right -2em top 0}
 }
 </style>

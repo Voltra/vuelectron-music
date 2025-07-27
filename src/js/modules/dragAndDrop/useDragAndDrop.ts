@@ -19,9 +19,9 @@ export const useDragAndDrop = ({
 
 	onMounted(async () => {
 		unlisten.value = await getCurrentWindow().onDragDropEvent(event => {
-			if (event.payload.type === "enter") {
+			if (["enter", "over"].includes(event.payload.type)) {
 				onHover();
-			} else if (event.payload.type === "drop") {
+			} else if ("drop" === event.payload.type) {
 				onDrop(event.payload.paths);
 			} else {
 				onCancel();
